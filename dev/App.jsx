@@ -4,6 +4,9 @@ import { Router, Route, browserHistory } from 'react-router'
 import Home from './components/Home'
 
 class App extends Component {
+
+  static displayName = 'CowHub'
+
   render() {
     return (
       <Router history={browserHistory}>
@@ -11,6 +14,7 @@ class App extends Component {
       </Router>
     )
   }
+
 }
 
 export default App
