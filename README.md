@@ -64,7 +64,7 @@ npm install
 We are only working with the development environment locally, so the below should work out of the box.
 
 ```bash
-node app-dev-server.js
+npm run dev
 ```
 
 Opening the `index.html` file available in public will now render the application.

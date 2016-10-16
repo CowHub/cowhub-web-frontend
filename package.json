@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "env NODE_ENV=production webpack --config webpack.prod.config.js"
+    "build": "env NODE_ENV=production webpack --config webpack.prod.config.js",
+    "dev": "env NODE_ENV=development node app-dev-server.js"
   },
   "author": "",
   "license": "ISC",
