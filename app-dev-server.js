@@ -11,6 +11,10 @@ const compiler = webpack(config);
 
 const PORT = 10204;
 
+app.get('/', (req, res, next) => {
+  res.sendFile(path.join(__dirname, '/public/index-dev.html'))
+});
+
 app.use(require('webpack-dev-middleware')(compiler, {
   publicPath: config.output.publicPath,
   inline: true,
