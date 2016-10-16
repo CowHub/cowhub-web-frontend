@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { Component } from 'react'
+import { Router, Route, browserHistory } from 'react-router'
 
-export default class App extends React.Component {
-  static displayName = 'Movie List';
+import Home from './components/Home'
 
+class App extends Component {
   render() {
     return (
-      <div>
-        Module loaded!
-      </div>
-    );
+      <Router history={browserHistory}>
+        <Route path='/' component={Home} />
+      </Router>
+    )
   }
-};
+}
+
+export default App
