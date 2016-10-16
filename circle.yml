@@ -1,3 +1,10 @@
 test:
   override:
     - npm run build
+
+deployment:
+  production:
+    branch: master
+    commands:
+      - cp public/index.html dist/
+      - aws s3 sync dist s3://cowhub-web-frontend/ --delete --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers --storage-class REDUCED_REDUNDANCY
