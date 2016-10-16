@@ -67,4 +67,4 @@ We are only working with the development environment locally, so the below shoul
 npm run dev
 ```
 
-Opening the `index.html` file available in public will now render the application.
+Opening the [root](http://localhost:10204/) will now render the application.
