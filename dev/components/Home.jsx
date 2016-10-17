@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router'
 
 class Home extends Component {
 
@@ -7,7 +8,8 @@ class Home extends Component {
   render() {
     return (
       <div>
-        Home page for CowHub!
+        Home page for CowHub! <br/>
+        <Link to='/login'>Login</Link> <Link to='/signup'>Sign Up</Link>
       </div>
     );
   }
