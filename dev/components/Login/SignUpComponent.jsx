@@ -13,8 +13,12 @@ class SignUpComponent extends Component {
     }
 
     return (
-      <div>
-        <Link to='/'>Home</Link> <Link to='/login'>Login</Link>
+      <div className="form">
+
+      <ul className="tab-group">
+        <li className="tab"><Link to='/login'>Login</Link></li>
+        <li className="tab active"><Link to='/signup'>SignUp</Link></li>
+      </ul>
 
         <h1>Sign Up for Free</h1>
 
@@ -53,6 +57,9 @@ class SignUpComponent extends Component {
         <button type="submit" className="button button-block">Get Started</button>
 
         </form>
+        <Link to='/'>Home</Link>
+
+
       </div>
     );
   }
