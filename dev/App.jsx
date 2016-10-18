@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
-import { Router, Route, browserHistory } from 'react-router'
+import { Router, IndexRoute, Route, browserHistory } from 'react-router'
 
-import Home from './components/Home'
-import Login from './components/Login'
-import SignUp from './components/SignUp'
+import HomeComponent from './components/HomeComponent'
+
+// Login
+import LoginComponent from './components/Login/LoginComponent'
+import SignUpComponent from './components/Login/SignUpComponent'
 
 
 class App extends Component {
@@ -13,9 +15,9 @@ class App extends Component {
   render() {
     return (
       <Router history={browserHistory}>
-        <Route path='/' component={Home} />
-        <Route path='/login' component={Login} />
-        <Route path='/signup' component={SignUp} />
+        <Route path='/' component={HomeComponent} />
+        <Route path='login' component={LoginComponent} />
+        <Route path='signup' component={SignUpComponent} />
       </Router>
 
     )

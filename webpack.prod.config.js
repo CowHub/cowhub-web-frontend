@@ -6,33 +6,6 @@ var options = require("./webpack.dev.config");
 
 options.entry = [ options.entry[options.entry.length - 1] ];
 
-options.module.loaders = [
-  {
-    test: /\.jsx?$/,
-    exclude: /(node_modules)/,
-    loader: "babel-loader"
-  },
-  {
-    test: /\.woff[0-9A-Za-z]*$/,
-    loader: require.resolve('file-loader'),
-    query: {
-      name: 'fonts/[name].[ext]'
-    }
-  },
-  {
-    test: /\.json$/,
-    loader: "json-loader"
-  },
-  {
-    test: /\.css$/,
-    loader: ExtractTextPlugin.extract(options._cssloader)
-  },
-  {
-    test: /\.scss$/,
-    loader: ExtractTextPlugin.extract("css-loader!sass-loader!postcss-loader")
-  }
-]
-
 options.plugins = [
   new webpack.optimize.OccurenceOrderPlugin(),
   new webpack.DefinePlugin({

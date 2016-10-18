@@ -5,12 +5,7 @@ var webpack = require("webpack");
 var path = require("path");
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
-var cssloader = "css-loader!postcss-loader";
-var sassloader = "style-loader!css-loader!sass-loader!postcss-loader";
-
 module.exports = {
-  _cssloader: cssloader,
-  _sassloader: sassloader,
   cache: true,
   debug: true,
   devtool: 'source-map',
@@ -52,12 +47,8 @@ module.exports = {
         loader: "json-loader"
       },
       {
-        test: /\.css$/,
-        loader: cssloader
-      },
-      {
-        test: /\.scss$/,
-        loader: sassloader
+        test: /\.(s?)css$/,
+        loader: 'style-loader!css-loader?sourceMap!sass-loader?sourceMap'
       }
     ],
     noParse: /lie\.js|[\s\S]*.(svg|ttf|eot)/
@@ -69,7 +60,6 @@ module.exports = {
     failOnError: true
   },
   plugins: [
-    new ExtractTextPlugin('style.css', { allChunks: true }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin({

@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
 
+class LoginComponent extends Component {
 
-class Login extends Component {
-
-  static displayName = 'Login';
+  static displayName = 'Login Component';
 
   render() {
     return (
@@ -47,4 +46,4 @@ class Login extends Component {
 
 }
 
-export default Login
+export default LoginComponent

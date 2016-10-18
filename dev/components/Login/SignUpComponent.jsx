@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
 
+class SignUpComponent extends Component {
 
-
-class SignUp extends Component {
-
-  static displayName = 'SignUp';
+  static displayName = 'SignUp Component';
 
   render() {
     var signUpForm = {
@@ -49,7 +47,7 @@ class SignUp extends Component {
           <label>
             Set A Password<span className="req">*</span>
           </label>
-          <input type="password" srequired autoComplete="off"/>
+          <input type="password" required autoComplete="off"/>
         </div>
 
         <button type="submit" className="button button-block">Get Started</button>
@@ -61,4 +59,4 @@ class SignUp extends Component {
 
 }
 
-export default SignUp
+export default SignUpComponent
