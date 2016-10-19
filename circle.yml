@@ -1,6 +1,9 @@
 test:
   override:
     - npm run build
+  post:
+    - git remote add gitlab git@gitlab.doc.ic.ac.uk:cowhub/cowhub-web-frontend
+    - git push gitlab $(git branch | grep \* | awk -F ' ' '{ print $2 }')
 
 deployment:
   production:
