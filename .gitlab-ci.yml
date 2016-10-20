@@ -1,0 +1,20 @@
+image: "node:6.9.1"
+
+variables:
+  NODE_ENV: test
+
+services:
+  - postgres:latest
+
+cache:
+  paths:
+    - node_modules
+
+before_script:
+  - node --version
+  - npm install
+
+build:
+  script:
+  - npm run build
+
