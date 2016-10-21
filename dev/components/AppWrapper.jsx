@@ -1,3 +1,5 @@
+require('./AppWrapper.scss');
+
 import React, { Component } from 'react';
 
 class AppWrapper extends Component {
@@ -10,7 +12,11 @@ class AppWrapper extends Component {
   render() {
     return (
       <div>
-        { this.props.children }
+        {/* HEADER HERE */}
+        <div className="content-wrapper" >
+          { this.props.children }
+        </div>
+        {/* FOOTER HERE */}
       </div>
     );
   }
