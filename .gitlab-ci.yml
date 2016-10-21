@@ -11,7 +11,6 @@ before_script:
   - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
   - 'which rsync || ( apt-get update -y && apt-get install rsync -y )'
   - eval $(ssh-agent -s)
-  - echo "$GITLAB_DEPLOY_KEY"
   - ssh-add <(echo "$GITLAB_DEPLOY_KEY")
   - rm -rf .ssh/known_hosts
   - node --version
