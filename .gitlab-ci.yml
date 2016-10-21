@@ -28,7 +28,7 @@ build:
 deploy:
   stage: deploy
   only:
-    - feature/docker_deploy
+    - master
   script:
     - npm run build
     - cp public/index.html dist/
