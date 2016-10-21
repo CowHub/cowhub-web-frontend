@@ -2,6 +2,7 @@ image: "node:6.9.1"
 
 variables:
   NODE_ENV: test
+  NPM_CONFIG_LOGLEVEL: warn
 
 cache:
   paths:
