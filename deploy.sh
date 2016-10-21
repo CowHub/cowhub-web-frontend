@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
 # Build latest image
+cd /
 rm -rf /app
 tar -xvf /dist.tar.gz
 mv /dist /app
-rm -rf /dist.tar.gz
 
 # Take service down
 docker rm -f $(docker ps -a -q)
