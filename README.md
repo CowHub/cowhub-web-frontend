@@ -68,3 +68,10 @@ npm run dev
 ```
 
 Opening the [root](http://localhost:10204/) will now render the application.
+
+---
+<br>
+
+## Deployment
+
+The project's dist folder should be deployed onto an Apache instance 
