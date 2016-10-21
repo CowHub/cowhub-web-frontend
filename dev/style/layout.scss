@@ -1,6 +1,21 @@
+@import "./fonts.scss";
+
+// Font defaults
+a,
+body,
+button,
+input {
+  font-family: $font-family-default;
+  font-size: $font-size-default;
+}
+
 body {
-  background-color: #eee;
+  background-color: #fff;
   margin: 0;
   min-height: calc(100vh);
   width: calc(100vw);
+}
+
+button {
+  margin: auto;
 }

@@ -11,7 +11,7 @@ const compiler = webpack(config);
 
 const PORT = 10204;
 
-app.get('/', (req, res, next) => {
+app.get('/app/*', (req, res, next) => {
   res.sendFile(path.join(__dirname, '/public/index-dev.html'))
 });
 
