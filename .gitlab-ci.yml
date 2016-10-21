@@ -32,6 +32,6 @@ deploy:
   script:
     - npm run build
     - cp public/index.html dist/
-    - rsync -avz deploy.sh -e "ssh -o StrictHostKeyChecking=no" root@cloud-vm-46-70.doc.ic.ac.uk:/app
+    - rsync -avz deploy.sh -e "ssh -o StrictHostKeyChecking=no" root@cloud-vm-46-70.doc.ic.ac.uk:/
     - rsync -avz dist.tar.gz -e "ssh -o StrictHostKeyChecking=no" root@cloud-vm-46-70.doc.ic.ac.uk:/
-    - ssh root@cloud-vm-46-70.doc.ic.ac.uk "/bin/bash -c /app/deploy.sh"
+    - ssh root@cloud-vm-46-70.doc.ic.ac.uk "/bin/bash -c /deploy.sh"
