@@ -1,65 +1,58 @@
+require('./SignUpComponent.scss');
+
 import React, { Component } from 'react'
 import { Link } from 'react-router'
 
+import $ from 'jquery'
+
+import Cookie from '../../utils/cookie'
+
 class SignUpComponent extends Component {
 
-  static displayName = 'SignUp Component';
+  static displayName = 'Signup Component';
+
+  componentWillMount() {
+    if (Cookie.getCookie('auth_token')) { window.location = "/" }
+  }
+
+  handleSubmit() {
+    const afterSignUp = () => {
+      window.location = "/"
+    };
+
+    $.ajax('//cloud-vm-46-70.doc.ic.ac.uk/user/create', {
+      method: 'POST',
+      data: {
+        email: this.refs.email.value,
+        password: this.refs.password.value,
+        password_confirmation: this.refs.password_confirmation.value
+      }
+    }).then((res) => {
+      Cookie.setCookie('auth_token', res.auth_token, 3);
+      afterSignUp();
+    }).catch((err) => {
+      console.log(err);
+      afterSignUp();
+    })
+  }
 
   render() {
-    var signUpForm = {
-      color: 'black',
-      maxWidth: 380,
-      margin: 400
-    }
-
     return (
-      <div className="form">
-
-      <ul className="tab-group">
-        <li className="tab"><Link to='/login'>Login</Link></li>
-        <li className="tab active"><Link to='/signup'>SignUp</Link></li>
-      </ul>
-
-        <h1>Sign Up for Free</h1>
-
-        <form action="/" method="post">
-
-        <div className="top-row">
-          <div className="field-wrap" >
-            <label>
-              First Name<span className="req">*</span>
-            </label>
-            <input type="text" required autoComplete="off" />
-          </div>
-
-          <div className="field-wrap">
-            <label>
-              Last Name<span className="req">*</span>
-            </label>
-            <input type="text" required autoComplete="off"/>
-          </div>
-        </div>
-
-        <div className="field-wrap">
-          <label>
-            Email Address<span className="req">*</span>
-          </label>
-          <input type="email"required autoComplete="off"/>
-        </div>
-
-        <div className="field-wrap">
-          <label>
-            Set A Password<span className="req">*</span>
-          </label>
-          <input type="password" required autoComplete="off"/>
-        </div>
-
-        <button type="submit" className="button button-block">Get Started</button>
-
-        </form>
-        <Link to='/'>Home</Link>
-
-
+      <div className="signup-component-wrapper" >
+        <div className="signup-component-title" >Sign up</div>
+        <input
+          ref="email" className="signup-component-input"
+          type="email" placeholder="Email" />
+        <input
+          ref="password" className="signup-component-input"
+          type="password" placeholder="Password" />
+        <input
+          ref="password_confirmation" className="signup-component-input"
+          type="password" placeholder="Password Confirmation" />
+        <button
+          onClick={ () => this.handleSubmit() } className="signup-component-button-submit" >
+          Log In
+        </button>
       </div>
     );
   }

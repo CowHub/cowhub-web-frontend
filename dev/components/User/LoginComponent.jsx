@@ -12,17 +12,22 @@ class LoginComponent extends Component {
   static displayName = 'Login Component';
 
   handleSubmit() {
-    $.ajax('//localhost:3000/user/authenticate', {
+    const afterLogin = () => {
+      window.location = "/"
+    };
+
+    $.ajax('//cloud-vm-46-70.doc.ic.ac.uk/user/authenticate', {
       method: 'POST',
       data: {
         email: this.refs.email.value,
-        password: this.refs.password.value,
-        password_confirmation: this.refs.password_confirmation.value
+        password: this.refs.password.value
       }
     }).then((res) => {
-      Cookie.setCookie('auth_token', res.auth_token, 3)
+      Cookie.setCookie('auth_token', res.auth_token, 3);
+      afterLogin();
     }).catch((err) => {
       console.log(err);
+      afterLogin();
     })
   }
 
@@ -36,9 +41,6 @@ class LoginComponent extends Component {
         <input
           ref="password" className="login-component-input"
           type="password" placeholder="Password" />
-        <input
-          ref="password_confirmation" className="login-component-input"
-          type="password" placeholder="Password Confirmation" />
         <button
           onClick={ () => this.handleSubmit() } className="login-component-button-submit" >
           Log In
