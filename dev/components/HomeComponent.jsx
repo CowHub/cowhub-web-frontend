@@ -1,3 +1,5 @@
+require('./HomeComponent.scss')
+
 import React, { Component } from 'react'
 import { Link } from 'react-router'
 
@@ -7,9 +9,9 @@ class HomeComponent extends Component {
 
   render() {
     return (
-      <div>
-        <Link to='/user/login'>Login</Link>
-        <Link to='/user/signup'>Sign Up</Link>
+      <div className="home-component-wrapper" >
+        <Link className="home-component-link" to='/user/login' >Login</Link>
+        <Link className="home-component-link" to='/user/signup' >Sign Up</Link>
       </div>
     );
   }
