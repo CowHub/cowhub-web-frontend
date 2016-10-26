@@ -3,32 +3,24 @@ require('./LoginComponent.scss');
 import React, { Component } from 'react'
 import { Link } from 'react-router'
 
-import $ from 'jquery'
+import Auth from '../../Auth'
 
-import Cookie from '../../utils/cookie'
+import $ from 'jquery'
 
 class LoginComponent extends Component {
 
   static displayName = 'Login Component';
 
-  handleSubmit() {
-    const afterLogin = () => {
-      window.location = "/"
-    };
+  constructor(props) {
+    super(props);
+    Auth.redirectIfLoggedIn();
+  }
 
-    $.ajax('//cloud-vm-46-70.doc.ic.ac.uk/user/authenticate', {
-      method: 'POST',
-      data: {
-        email: this.refs.email.value,
-        password: this.refs.password.value
-      }
-    }).then((res) => {
-      Cookie.setCookie('auth_token', res.auth_token, 3);
-      afterLogin();
-    }).catch((err) => {
-      console.log(err);
-      afterLogin();
-    })
+  handleSubmit() {
+    Auth.login({
+      email: this.refs.email.value,
+      password: this.refs.password.value
+    });
   }
 
   render() {

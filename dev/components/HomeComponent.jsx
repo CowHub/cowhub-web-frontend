@@ -10,8 +10,7 @@ class HomeComponent extends Component {
   render() {
     return (
       <div className="home-component-wrapper" >
-        <Link className="home-component-link" to='/user/login' >Login</Link>
-        <Link className="home-component-link" to='/user/signup' >Sign Up</Link>
+        Home
       </div>
     );
   }

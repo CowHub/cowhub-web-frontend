@@ -5,34 +5,20 @@ import { Link } from 'react-router'
 
 import $ from 'jquery'
 
-import Cookie from '../../utils/cookie'
-
 class SignUpComponent extends Component {
 
   static displayName = 'Signup Component';
 
-  componentWillMount() {
-    if (Cookie.getCookie('auth_token')) { window.location = "/" }
+  constructor(props) {
+    super(props);
+    Auth.redirectIfLoggedIn();
   }
 
   handleSubmit() {
-    const afterSignUp = () => {
-      window.location = "/"
-    };
-
-    $.ajax('//cloud-vm-46-70.doc.ic.ac.uk/user/create', {
-      method: 'POST',
-      data: {
-        email: this.refs.email.value,
-        password: this.refs.password.value,
-        password_confirmation: this.refs.password_confirmation.value
-      }
-    }).then((res) => {
-      Cookie.setCookie('auth_token', res.auth_token, 3);
-      afterSignUp();
-    }).catch((err) => {
-      console.log(err);
-      afterSignUp();
+    Auth.register({
+      email: this.refs.email.value,
+      password: this.refs.password.value,
+      password_confirmation: this.refs.password_confirmation.value,
     })
   }
 
