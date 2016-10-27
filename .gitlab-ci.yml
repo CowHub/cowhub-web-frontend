@@ -31,7 +31,7 @@ deploy:
   only:
     - master
   script:
-    - sed -i -e 's/process.env['API_HOSTNAME']/cloud-vm-46-166\.doc\.ic\.ac\.uk/g' dev/**/*
+    - sed -i -e 's/process.env['API_HOSTNAME']/\'cloud-vm-46-166\.doc\.ic\.ac\.uk\'/g' dev/**/*
     - npm run build
     - cp public/index.html dist/
     - rsync -avz deploy.sh -e "ssh -o StrictHostKeyChecking=no" root@cloud-vm-46-70.doc.ic.ac.uk:/

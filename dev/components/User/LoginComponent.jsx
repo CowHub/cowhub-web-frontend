@@ -2,19 +2,23 @@ require('./LoginComponent.scss');
 
 import React, { Component } from 'react'
 import { Link } from 'react-router'
+import { connect } from 'react-redux';
 
 import Auth from '../../Auth'
 
 import $ from 'jquery'
 
+const mapStateToProps = (state) => {
+  return {...state};
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {};
+};
+
 class LoginComponent extends Component {
 
   static displayName = 'Login Component';
-
-  constructor(props) {
-    super(props);
-    Auth.redirectIfLoggedIn();
-  }
 
   handleSubmit() {
     Auth.login({
@@ -43,4 +47,4 @@ class LoginComponent extends Component {
 
 }
 
-export default LoginComponent
+export default connect(mapStateToProps, mapDispatchToProps)(LoginComponent);

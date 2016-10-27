@@ -1,6 +1,6 @@
 import $ from 'jquery'
 
-const hostName = 'localhost:3000'
+const hostName = process.env['API_HOSTNAME']
 
 export default class Auth {
 

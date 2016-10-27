@@ -2,6 +2,15 @@ require('./HomeComponent.scss')
 
 import React, { Component } from 'react'
 import { Link } from 'react-router'
+import { connect } from 'react-redux';
+
+const mapStateToProps = (state) => {
+  return {};
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {};
+};
 
 class HomeComponent extends Component {
 
@@ -17,4 +26,4 @@ class HomeComponent extends Component {
 
 }
 
-export default HomeComponent
+export default connect(mapStateToProps, mapDispatchToProps)(HomeComponent);
