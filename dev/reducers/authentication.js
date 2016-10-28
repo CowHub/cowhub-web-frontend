@@ -1,21 +1,50 @@
 import * as Authentication from '../actions/authentication'
 
-const initialState = {
-  token: ''
-};
+import {
+  FETCH_TOKEN,
+  STORE_TOKEN,
+  LOGIN_USER_START,
+  LOGIN_USER_SUCCESS,
+  LOGIN_USER_ERROR,
+  REGISTER_USER_START,
+  REGISTER_USER_SUCCESS,
+  REGISTER_USER_ERROR,
+} from '../actions/authentication'
 
-export default authenticationReducer = (state = initialState, action) => {
+const authentication = (state = {}, action) => {
   switch (action.type) {
-  case Authentication.GET_SESSION_IDENTIFIER:
-    return handleGetSessionIdentifier(state, action.token);
+  case FETCH_TOKEN:
+    return handleFetchToken(state);
+  case STORE_TOKEN:
+    return handleStoreToken(state, action.token);
   default:
     return state;
   }
 };
 
-let handleGetSessionIdentifier = (state, token) => {
+const handleFetchToken = (state) => {
+  let token = state.token;
+  if (!token) token = {};
+
+  if (window.localStorage && window.localStorage.auth_token) {
+    token.value = window.localStorage.auth_token;
+    token.inStore = true;
+    token.error = null;
+  } else {
+    token.value = null;
+    token.inStore = false;
+    token.error = 'Token does not exist in localStorage';
+  }
+
   return {
     ...state,
     token
   }
 }
+
+const handleStoreToken = (state, token) => {
+
+  return state;
+};
+
+export default authentication;

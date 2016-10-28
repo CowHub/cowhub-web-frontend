@@ -1,35 +1,64 @@
-// Loads session identifier from storage into store
+// Token management
+export let FETCH_TOKEN = 'FETCH_TOKEN';
+export let STORE_TOKEN = 'STORE_TOKEN';
 
-
-export let GET_SESSION_IDENTIFIER = 'GET_SESSION_IDENTIFIER';
-export let LOGIN_USER = 'LOGIN_USER';
-export let LOGOUT_USER = 'LOGOUT_USER';
-export let REGISTER_USER = 'REGISTER_USER';
-
-export function getSessionIdentifier() {
+export function fetchToken() {
   return {
-    type: GET_SESSION_IDENTIFIER
+    type: FETCH_TOKEN,
   }
 }
 
-// Params: email, password
-export function loginUser(params) {
+export function storeToken(token) {
   return {
-    type: LOGIN_USER,
-    ...params
+    type: STORE_TOKEN,
+    token,
   }
 }
 
-export function logoutUser() {
+// Login
+export let LOGIN_USER_START = 'LOGIN_USER_START';
+export let LOGIN_USER_SUCCESS = 'LOGIN_USER_SUCCESS';
+export let LOGIN_USER_ERROR = 'LOGIN_USER_ERROR';
+
+export function loginUserStart() {
   return {
-    type: LOGOUT_USER
+    type: LOGIN_USER_START,
   }
 }
 
-// Params: email, password, password_confirmation
-export function registerUser(params) {
+export function loginUserSuccess() {
   return {
-    type: REGISTER_USER,
-    ...params
+    type: LOGIN_USER_SUCCESS,
+  }
+}
+
+export function loginUserError(error) {
+  return {
+    type: LOGIN_USER_ERROR,
+    error,
+  }
+}
+
+// Register
+export let REGISTER_USER_START = 'REGISTER_USER_START';
+export let REGISTER_USER_SUCCESS = 'REGISTER_USER_SUCCESS';
+export let REGISTER_USER_ERROR = 'REGISTER_USER_ERROR';
+
+export function registerUserStart() {
+  return {
+    type: REGISTER_USER_START,
+  }
+}
+
+export function registerUserSuccess() {
+  return {
+    type: REGISTER_USER_SUCCESS,
+  }
+}
+
+export function registerUserError(error) {
+  return {
+    type: REGISTER_USER_ERROR,
+    error,
   }
 }

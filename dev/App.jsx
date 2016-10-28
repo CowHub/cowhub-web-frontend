@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import { Router, IndexRoute, DefaultRoute, Route, browserHistory } from 'react-router'
 
-import Auth from './Auth';
-
 import { Provider } from 'react-redux';
 import store from './store';
 
@@ -19,7 +17,7 @@ import SignUpComponent from './components/User/SignUpComponent';
 class App extends Component {
 
   static displayName = 'CowHub';
-  
+
   render() {
     return (
       <Provider store={store}>

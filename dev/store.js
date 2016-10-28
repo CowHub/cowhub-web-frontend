@@ -1,14 +1,18 @@
 // Redux store
-import { createStore, combineReducers } from 'redux';
+import { applyMiddleware, createStore, combineReducers } from 'redux';
+import thunk from 'redux-thunk';
+import logger from 'redux-logger';
 
-// TODO: Import reducers and replace the default_ reducer below
+import * as reducers_ from './reducers/_index';
+import {
+  fetchToken
+} from './actions/_index';
 
-let default_ = (state = [], action) => {
-  switch (action.type) {
-  default:
-    return state
-  }
-}
+let reducers = combineReducers({ ...reducers_ });
+let middleware = applyMiddleware(thunk, logger());
 
-let reducers = combineReducers([ default_ ]);
-export default createStore(reducers);
+let store = createStore(reducers, middleware);
+
+store.dispatch(fetchToken());
+
+export default store;
