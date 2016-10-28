@@ -62,7 +62,7 @@ class SignUpComponent extends Component {
           type="password" placeholder="Password Confirmation" />
         <button
           onClick={ () => this.handleSubmit() } className="signup-component-button-submit" >
-          Log In
+          Sign up
         </button>
       </div>
     );

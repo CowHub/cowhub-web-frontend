@@ -36,18 +36,15 @@ module.exports = {
         loader: "babel-loader"
       },
       {
-        test: /\.woff[0-9A-Za-z]*$/,
-        loader: require.resolve('file-loader'),
-        query: {
-          name: 'fonts/[name].[ext]'
-        }
+        test: /\.woff($|\?)|\.woff2($|\?)|\.ttf($|\?)|\.eot($|\?)|\.svg($|\?)/,
+        loader: 'url-loader'
       },
       {
         test: /\.json$/,
         loader: "json-loader"
       },
       {
-        test: /\.(s?)css$/,
+        test: /\.(css|scss)$/,
         loader: 'style-loader!css-loader?sourceMap!sass-loader?sourceMap'
       }
     ],

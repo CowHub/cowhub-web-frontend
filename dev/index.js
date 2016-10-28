@@ -1,3 +1,7 @@
+// Library dependencies
+require('expose?jQuery!jquery');
+require('bootstrap-loader');
+
 require('./index.scss');
 
 import React from 'react';
