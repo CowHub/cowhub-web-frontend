@@ -10,6 +10,9 @@ import {
   REGISTER_USER_PENDING,
   REGISTER_USER_SUCCESS,
   REGISTER_USER_ERROR,
+  LOGOUT_USER_PENDING,
+  LOGOUT_USER_SUCCESS,
+  LOGOUT_USER_ERROR,
 } from '../actions/authentication'
 
 const initialState = {
@@ -37,6 +40,12 @@ const authentication = (state = initialState, action) => {
     case LOGIN_USER_ERROR:
     case REGISTER_USER_ERROR:
       return handleLoginRegisterUserError(state, action.error);
+    case LOGOUT_USER_PENDING:
+      return state;
+    case LOGOUT_USER_SUCCESS:
+      return handleLogoutUserSuccess(state);
+    case LOGOUT_USER_ERROR:
+      return handleLogoutUserError(state, action.error);
     default:
       return state;
   }
@@ -49,14 +58,14 @@ const handleLoadToken = (state) => {
       token: window.localStorage.auth_token,
       inStore: true,
       error: null,
-    }
+    };
   } else {
     return {
       ...state,
       token: null,
       inStore: false,
       error: new Error('auth_token does not exist in localStorage'),
-    }
+    };
   }
 }
 
@@ -66,12 +75,12 @@ const handleStoreToken = (state, token) => {
     return {
       ...state,
       inStore: true,
-    }
+    };
   } else {
     return {
       ...state,
       error: new Error('localStorage not available to store items')
-    }
+    };
   }
 };
 
@@ -83,7 +92,7 @@ const handleRemoveToken = (state) => {
     ...state,
     token: null,
     inStore: false
-  }
+  };
 }
 
 const handleLoginRegisterUserPending = (state) => {
@@ -106,6 +115,19 @@ const handleLoginRegisterUserError = (state, error) => {
     ...state,
     fetching: false,
     error,
+  };
+}
+
+const handleLogoutUserSuccess = (state) => {
+  return {
+    ...state
+  };
+}
+
+const handleLogoutUserError = (state, error) => {
+  return {
+    ...state,
+    error
   };
 }
 

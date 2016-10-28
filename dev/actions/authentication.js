@@ -104,3 +104,44 @@ export function registerUserError(error) {
     error,
   }
 }
+
+// Logout
+export let LOGOUT_USER_PENDING = 'LOGOUT_USER_PENDING';
+export let LOGOUT_USER_SUCCESS = 'LOGOUT_USER_SUCCESS';
+export let LOGOUT_USER_ERROR = 'LOGOUT_USER_ERROR';
+
+export function logoutUser(token) {
+  return (dispatch) => {
+    dispatch(logoutUserPending());
+    $.ajax('//localhost:3000/user/unauthenticate', {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      },
+      method: 'DELETE',
+    }).then((response) => {
+      dispatch(logoutUserSuccess());
+      dispatch(removeToken());
+    }).catch((error) => {
+      dispatch(logoutUserError(error));
+    })
+  }
+}
+
+export function logoutUserPending() {
+  return {
+    type: LOGOUT_USER_PENDING,
+  }
+}
+
+export function logoutUserSuccess() {
+  return {
+    type: LOGOUT_USER_SUCCESS,
+  }
+}
+
+export function logoutUserError(error) {
+  return {
+    type: LOGOUT_USER_ERROR,
+    error,
+  }
+}
