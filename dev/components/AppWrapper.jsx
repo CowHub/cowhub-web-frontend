@@ -30,8 +30,8 @@ class AppWrapper extends Component {
   renderUserLinks() {
     return this.props.token ?
       <ul className="nav navbar-nav navbar-right">
-        <li><Link to='/user/profile' >Profile</Link></li>
-        <li><button onClick={ () => this.props.handleLogout() } >Logout</button></li>
+        <li><Link className='navbar-link' to='/user/profile' >Profile</Link></li>
+        <li><button className='btn navbar-btn' onClick={ () => this.props.handleLogout() } >Logout</button></li>
       </ul>
       :
       <ul className="nav navbar-nav navbar-right">

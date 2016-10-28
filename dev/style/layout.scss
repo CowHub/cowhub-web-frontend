@@ -31,3 +31,12 @@ button {
   margin: auto;
   outline: none;
 }
+
+.btn,
+.btn:active,
+.btn:focus,
+.btn:hover,
+.btn:visited {
+  box-shadow: none !important;
+  outline: none !important;
+}
