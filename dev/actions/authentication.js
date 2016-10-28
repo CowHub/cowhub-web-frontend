@@ -1,10 +1,13 @@
+import $ from 'jquery';
+
 // Token management
-export let FETCH_TOKEN = 'FETCH_TOKEN';
+export let LOAD_TOKEN = 'LOAD_TOKEN';
 export let STORE_TOKEN = 'STORE_TOKEN';
+export let REMOVE_TOKEN = 'REMOVE_TOKEN';
 
 export function fetchToken() {
   return {
-    type: FETCH_TOKEN,
+    type: LOAD_TOKEN,
   }
 }
 
@@ -15,14 +18,37 @@ export function storeToken(token) {
   }
 }
 
+export function removeToken() {
+  return {
+    type: REMOVE_TOKEN,
+  }
+}
+
 // Login
-export let LOGIN_USER_START = 'LOGIN_USER_START';
+export let LOGIN_USER_PENDING = 'LOGIN_USER_PENDING';
 export let LOGIN_USER_SUCCESS = 'LOGIN_USER_SUCCESS';
 export let LOGIN_USER_ERROR = 'LOGIN_USER_ERROR';
 
-export function loginUserStart() {
+// params: email, password
+export function loginUser(params) {
+  console.dir(params);
+  return (dispatch) => {
+    dispatch(loginUserPending());
+    $.ajax('//localhost:3000/user/authenticate', {
+      method: 'POST',
+      data: params
+    }).then((response) => {
+      dispatch(loginUserSuccess());
+      dispatch(storeToken(response.auth_token));
+    }).catch((error) => {
+      dispatch(loginUserError(error));
+    })
+  }
+}
+
+export function loginUserPending() {
   return {
-    type: LOGIN_USER_START,
+    type: LOGIN_USER_PENDING,
   }
 }
 
@@ -40,13 +66,29 @@ export function loginUserError(error) {
 }
 
 // Register
-export let REGISTER_USER_START = 'REGISTER_USER_START';
+export let REGISTER_USER_PENDING = 'REGISTER_USER_PENDING';
 export let REGISTER_USER_SUCCESS = 'REGISTER_USER_SUCCESS';
 export let REGISTER_USER_ERROR = 'REGISTER_USER_ERROR';
 
-export function registerUserStart() {
+// params: email, password, password_confirmation
+export function registerUser(params) {
+  return (dispatch) => {
+    dispatch(registerUserPending());
+    $.ajax('//localhost:3000/user/create', {
+      method: 'POST',
+      data: params
+    }).then((response) => {
+      dispatch(registerUserSuccess());
+      dispatch(storeToken(response))
+    }).catch((error) => {
+      dispatch(registerUserError(error))
+    })
+  }
+}
+
+export function registerUserPending() {
   return {
-    type: REGISTER_USER_START,
+    type: REGISTER_USER_PENDING,
   }
 }
 

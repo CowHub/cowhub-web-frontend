@@ -2,21 +2,36 @@ require('./AppWrapper.scss');
 
 import React, { Component } from 'react';
 import { Link } from 'react-router';
+import { connect } from 'react-redux';
 
-import Auth from '../Auth'
+import { logoutUser } from '../actions/index';
+
+const mapStateToProps = (state) => {
+  return {
+    ...state.authentication
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    handleLogout: () => { dispatch(logoutUser()) },
+  };
+};
 
 class AppWrapper extends Component {
 
   static displayName = 'CowHub Wrapper';
   static propTypes = {
-    children: React.PropTypes.object
+    token: React.PropTypes.string,
+    children: React.PropTypes.object,
+    handleLogout: React.PropTypes.func,
   };
 
   renderUserLinks() {
-    return Auth.isLoggedIn() ?
+    return this.props.token ?
       <ul>
         <li><Link to='/user/profile' >Profile</Link></li>
-        <li><button onClick={ () => Auth.logout() } >Logout</button></li>
+        <li><button onClick={ () => this.props.handleLogout() } >Logout</button></li>
       </ul>
       :
       <ul>
@@ -45,4 +60,4 @@ class AppWrapper extends Component {
 
 };
 
-export default AppWrapper;
+export default connect(mapStateToProps, mapDispatchToProps)(AppWrapper);

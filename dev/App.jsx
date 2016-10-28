@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Router, IndexRoute, DefaultRoute, Route, browserHistory } from 'react-router'
 
 import { Provider } from 'react-redux';
-import store from './store';
+import store from './store/store';
 
 // Wrapper
 import AppWrapper from './components/AppWrapper';

@@ -1,24 +1,49 @@
 require('./SignUpComponent.scss');
 
-import React, { Component } from 'react'
-import { Link } from 'react-router'
+import React, { Component } from 'react';
+import { Link } from 'react-router';
+import { connect } from 'react-redux';
 
-import $ from 'jquery'
+const mapStateToProps = (state) => {
+  return {
+    ...state.authentication
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    handleRegister: (p) => { dispatch(registerUser(p)) }
+  };
+};
 
 class SignUpComponent extends Component {
 
   static displayName = 'Signup Component';
+  static propTypes = {
+    token: React.PropTypes.string,
+    handleRegister: React.PropTypes.func,
+  };
 
-  constructor(props) {
-    super(props);
-    Auth.redirectIfLoggedIn();
+  componentWillMount() {
+    this.handleAuthenticated(this.props);
+  }
+
+  componentWillReceiveProps(props) {
+    this.handleAuthenticated(props);
+  }
+
+  handleAuthenticated(props) {
+    if (props.token) {
+      console.log('Redirecting... you are authenticated already.')
+      window.location = '/';
+    }
   }
 
   handleSubmit() {
-    Auth.register({
+    this.props.handleRegister({
       email: this.refs.email.value,
       password: this.refs.password.value,
-      password_confirmation: this.refs.password_confirmation.value,
+      password_confirmation: this.refs.password_confirmation.value
     })
   }
 

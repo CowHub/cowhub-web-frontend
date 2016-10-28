@@ -33,7 +33,7 @@
   "rules": {
     "no-bitwise": 1,
     "camelcase": [2,{ "properties": "never" }],
-    "indent": [2, 2],
+    "indent": [2, 2, { "SwitchCase": 1 }],
     "max-depth": [1, 4],
     "max-statements": [1, 30],
     "complexity": [1, 15],
