@@ -1,18 +1,39 @@
 import React, { Component } from 'react'
-import { Router, Route, browserHistory } from 'react-router'
+import { Router, IndexRoute, DefaultRoute, Route, browserHistory } from 'react-router'
 
-import Home from './components/Home'
+import { Provider } from 'react-redux';
+import store from './store/store';
+
+// Wrapper
+import AppWrapper from './components/AppWrapper';
+
+// Home
+import HomeComponent from './components/HomeComponent';
+
+// User
+import LoginComponent from './components/User/LoginComponent';
+import SignUpComponent from './components/User/SignUpComponent';
 
 class App extends Component {
 
-  static displayName = 'CowHub'
+  static displayName = 'CowHub';
 
   render() {
     return (
-      <Router history={browserHistory}>
-        <Route path='/' component={Home} />
-      </Router>
-    )
+      <Provider store={store}>
+        <Router history={browserHistory} >
+          <Route path='/' component={AppWrapper} >
+            <IndexRoute component={HomeComponent} />
+            <Route path='user'>
+              <Route path='login' component={LoginComponent} />
+              <Route path='signup' component={SignUpComponent} />
+              <Route path='profile' component={LoginComponent} />
+              <Route path='logout' component={SignUpComponent} />
+            </Route>
+          </Route>
+        </Router>
+      </Provider>
+    );
   }
 
 }
