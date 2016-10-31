@@ -1,0 +1,16 @@
+version: '2'
+
+services:
+  db:
+    image: postgres
+  api:
+    image: cowhub/cowhub-server-api
+    ports:
+      - "3000:3000"
+  web:
+    build: .
+    ports:
+      - "10204:10204"
+    volumes:
+      - .:/app
+
