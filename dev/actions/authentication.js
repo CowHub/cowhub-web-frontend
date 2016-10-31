@@ -34,7 +34,7 @@ export function loginUser(params) {
   console.dir(params);
   return (dispatch) => {
     dispatch(loginUserPending());
-    $.ajax('//localhost:3000/user/authenticate', {
+    $.ajax(`//${process.env.API_ENDPOINT}/user/authenticate`, {
       method: 'POST',
       data: params
     }).then((response) => {
@@ -74,7 +74,7 @@ export let REGISTER_USER_ERROR = 'REGISTER_USER_ERROR';
 export function registerUser(params) {
   return (dispatch) => {
     dispatch(registerUserPending());
-    $.ajax('//localhost:3000/user/create', {
+    $.ajax(`//${process.env.API_ENDPOINT}/user/create`, {
       method: 'POST',
       data: params
     }).then((response) => {
@@ -113,7 +113,7 @@ export let LOGOUT_USER_ERROR = 'LOGOUT_USER_ERROR';
 export function logoutUser(token) {
   return (dispatch) => {
     dispatch(logoutUserPending());
-    $.ajax('//localhost:3000/user/unauthenticate', {
+    $.ajax(`//${process.env.API_ENDPOINT}/user/unauthenticate`, {
       headers: {
         'Authorization': `Bearer ${token}`
       },

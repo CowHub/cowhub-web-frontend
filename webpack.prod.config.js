@@ -12,6 +12,7 @@ options.plugins = [
   new webpack.DefinePlugin({
     '__DEV__': false,
     'process.env': {
+      'API_ENDPOINT': JSON.stringify('cloud-vm-46-166.doc.ic.ac.uk'),
       'NODE_ENV': JSON.stringify('production')
     }
   }),
