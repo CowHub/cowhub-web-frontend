@@ -6,7 +6,8 @@
   "scripts": {
     "build": "webpack --config webpack.prod.config.js && npm run tar",
     "dev": "env NODE_ENV=development node app-dev-server.js",
-    "tar": "cp public/.* dist/; cp public/index.html dist/; tar -cvf dist.tar.gz dist"
+    "tar": "cp public/.* dist/; cp public/index.html dist/; tar -cvf dist.tar.gz dist",
+    "postinstall": "npm rebuild node-sass"
   },
   "author": "",
   "license": "ISC",
