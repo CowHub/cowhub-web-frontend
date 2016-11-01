@@ -6,6 +6,7 @@ rm -rf /app
 mkdir /app
 tar -xvf /dist.tar.gz
 mv /dist /app/dist
+mv /app-server.js /app/
 
 # Take service down
 docker rm -f $(docker ps -a -q)
