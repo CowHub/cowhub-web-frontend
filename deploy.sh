@@ -3,11 +3,12 @@
 # Build latest image
 cd /
 rm -rf /app
+mkdir /app
 tar -xvf /dist.tar.gz
-mv /dist /app
+mv /dist /app/dist
 
 # Take service down
 docker rm -f $(docker ps -a -q)
 
 # Bring service up (with latest)
-docker run -dit -v /app:/usr/local/apache2/htdocs -p 80:80 -p 443:443 --name cowhub-web-frontend httpd
+docker run -dit node:6.9.1 -v /app:/app -p 80:8080 -w /app --name cowhub-web-frontend node app-server.js

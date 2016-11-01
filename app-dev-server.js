@@ -9,7 +9,7 @@ const config = require('./webpack.dev.config');
 const app = express();
 const compiler = webpack(config);
 
-const PORT = 10204;
+const PORT = process.env.SERVER_PORT;
 
 app.use(require('webpack-dev-middleware')(compiler, {
   publicPath: config.output.publicPath,
