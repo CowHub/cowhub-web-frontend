@@ -11,5 +11,5 @@ mv /dist /app/dist
 docker rm -f $(docker ps -a -q)
 
 # Bring service up (with latest)
-docker run -it node:6.9.1 -v /app:/app -w /app npm install
-docker run -dit node:6.9.1 -v /app:/app -p 80:8080 -w /app --name cowhub-web-frontend node app-server.js
+docker run -v /app:/app -w /app -it node:6.9.1 npm install
+docker run -v /app:/app -p 80:8080 -w /app --name cowhub-web-frontend -dit node:6.9.1 node app-server.js
