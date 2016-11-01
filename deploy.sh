@@ -13,4 +13,4 @@ mv /node_modules /app/
 docker rm -f $(docker ps -a -q)
 
 # Bring service up (with latest)
-docker run -v /app:/app -p 80:8080 -w /app --name cowhub-web-frontend -dit node:6.9.1 node app-server.js
+docker run -v /app:/app -p 80:80 -e 'SERVER_PORT=80' -w /app --name cowhub-web-frontend -dit node:6.9.1 node app-server.js
