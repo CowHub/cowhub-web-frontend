@@ -56,14 +56,14 @@ const handleLoadToken = (state) => {
     return {
       ...state,
       token: window.localStorage.auth_token,
-      inStore: true,
+      stored: true,
       error: null,
     };
   } else {
     return {
       ...state,
       token: null,
-      inStore: false,
+      stored: false,
       error: new Error('auth_token does not exist in localStorage'),
     };
   }
@@ -74,7 +74,8 @@ const handleStoreToken = (state, token) => {
     window.localStorage.setItem('auth_token', token);
     return {
       ...state,
-      inStore: true,
+      stored: true,
+      token: token,
     };
   } else {
     return {
@@ -91,7 +92,7 @@ const handleRemoveToken = (state) => {
   return {
     ...state,
     token: null,
-    inStore: false
+    stored: false
   };
 }
 

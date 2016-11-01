@@ -4,6 +4,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 
+import { registerUser } from '../../actions/index';
+
 const mapStateToProps = (state) => {
   return {
     ...state.authentication
@@ -70,4 +72,4 @@ class SignUpComponent extends Component {
 
 }
 
-export default SignUpComponent
+export default connect(mapStateToProps, mapDispatchToProps)(SignUpComponent);
