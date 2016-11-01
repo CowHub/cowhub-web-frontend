@@ -52,21 +52,15 @@ const authentication = (state = initialState, action) => {
 };
 
 const handleLoadToken = (state) => {
-  if (window.localStorage && window.localStorage.auth_token) {
-    return {
-      ...state,
-      token: window.localStorage.auth_token,
-      stored: true,
-      error: null,
-    };
-  } else {
-    return {
-      ...state,
-      token: null,
-      stored: false,
-      error: new Error('auth_token does not exist in localStorage'),
-    };
-  }
+  // No error as if token doesn't exist, that's an expected behaviour
+
+  token = (window.localStorage && window.localStorage.auth_token) ? window.localStorage.auth_token : null;
+  return {
+    ...state,
+    token,
+    stored: window.localStorage && window.localStorage.auth_token,
+    error: null,
+  };
 }
 
 const handleStoreToken = (state, token) => {
