@@ -15,7 +15,7 @@ import LoginComponent from './components/User/LoginComponent';
 import SignUpComponent from './components/User/SignUpComponent';
 
 // Cattle
-import CattleListComponent from './components/Cattle/CattleListComponent';
+import CattleComponent from './components/Cattle/CattleComponent';
 
 class App extends Component {
 
@@ -34,7 +34,7 @@ class App extends Component {
               <Route path='logout' component={SignUpComponent} />
             </Route>
             <Route path='cattle'>
-              <IndexRoute component={CattleListComponent} />
+              <IndexRoute component={CattleComponent} />
             </Route>
           </Route>
         </Router>
