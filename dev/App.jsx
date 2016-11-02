@@ -14,6 +14,9 @@ import HomeComponent from './components/HomeComponent';
 import LoginComponent from './components/User/LoginComponent';
 import SignUpComponent from './components/User/SignUpComponent';
 
+// Cattle
+import CattleListComponent from './components/Cattle/CattleListComponent';
+
 class App extends Component {
 
   static displayName = 'CowHub';
@@ -29,6 +32,9 @@ class App extends Component {
               <Route path='signup' component={SignUpComponent} />
               <Route path='profile' component={LoginComponent} />
               <Route path='logout' component={SignUpComponent} />
+            </Route>
+            <Route path='cattle'>
+              <IndexRoute component={CattleListComponent} />
             </Route>
           </Route>
         </Router>

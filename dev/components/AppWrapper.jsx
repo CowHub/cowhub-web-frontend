@@ -37,7 +37,8 @@ class AppWrapper extends Component {
       <ul className="nav navbar-nav navbar-right">
         <li><Link to='/user/login' >Login</Link></li>
         <li><Link to='/user/signup' >Sign Up</Link></li>
-      </ul>;
+      </ul>
+      ;
   }
 
   render() {
@@ -57,7 +58,10 @@ class AppWrapper extends Component {
               <Link className="navbar-brand" to='/' >CowHub</Link>
             </div>
             <div id="navbar" className="navbar-collapse collapse">
-            { this.renderUserLinks() }
+              { this.renderUserLinks() }
+              <ul className="nav navbar-nav navbar-right">
+                <li><Link className='navbar-link' to='/cattle' >Cattle</Link></li>
+              </ul>
             </div>
             {/* <!--/.nav-collapse --> */}
           </div>
