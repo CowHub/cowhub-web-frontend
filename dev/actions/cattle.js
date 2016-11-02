@@ -140,7 +140,6 @@ export function updateCattleError(error) {
   };
 }
 
-
 // Cattle update
 export let DELETE_CATTLE_PENDING = 'DELETE_CATTLE_PENDING';
 export let DELETE_CATTLE_SUCCESS = 'DELETE_CATTLE_SUCCESS';
@@ -148,7 +147,6 @@ export let DELETE_CATTLE_ERROR = 'DELETE_CATTLE_ERROR';
 
 export function deleteCattle(id) {
   let token = store.getState().authentication.token;
-
   return (dispatch) => {
     dispatch(deleteCattlePending());
     $.ajax(`${process.env.API_ENDPOINT}/cattle/${id}`, {
