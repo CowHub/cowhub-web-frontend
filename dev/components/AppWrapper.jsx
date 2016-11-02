@@ -30,6 +30,7 @@ class AppWrapper extends Component {
   renderUserLinks() {
     return this.props.token ?
       <ul className="nav navbar-nav navbar-right">
+        <li><Link className='navbar-link' to='/cattle' >Cattle</Link></li>
         <li><Link className='navbar-link' to='/user/profile' >Profile</Link></li>
         <li><button className='btn navbar-btn' onClick={ () => this.props.handleLogout() } >Logout</button></li>
       </ul>
@@ -59,9 +60,6 @@ class AppWrapper extends Component {
             </div>
             <div id="navbar" className="navbar-collapse collapse">
               { this.renderUserLinks() }
-              <ul className="nav navbar-nav navbar-right">
-                <li><Link className='navbar-link' to='/cattle' >Cattle</Link></li>
-              </ul>
             </div>
             {/* <!--/.nav-collapse --> */}
           </div>
