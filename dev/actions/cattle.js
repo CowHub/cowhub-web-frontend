@@ -32,13 +32,13 @@ export function fetchCattlePending() {
 export function fetchCattleSuccess(cattle) {
   return {
     type: FETCH_CATTLE_SUCCESS,
-    cattle
+    cattle,
   };
 };
 
 export function fetchCattleError(error) {
   return {
     type: FETCH_CATTLE_ERROR,
-    error
+    error,
   };
 };
