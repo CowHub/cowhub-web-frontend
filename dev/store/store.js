@@ -9,7 +9,9 @@ import {
   removeToken,
 } from '../actions/index';
 
-let middleware = applyMiddleware(thunk, logger());
+let middleware = (process.env.NODE_ENV !== 'production') ?
+    applyMiddleware(thunk, logger()) :
+    appleMiddleware(thunk);
 
 const store = createStore(reducers, middleware);
 
