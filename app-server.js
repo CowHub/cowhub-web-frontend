@@ -8,6 +8,8 @@ const app = express();
 const PORT = process.env.SERVER_PORT || 3000;
 
 const applyDev = (app) => {
+  console.log('APPLYING DEVELOPMENT ROUTES');
+
   const webpack = require('webpack');
   const config = require('./webpack.dev.config');
   const compiler = webpack(config);
@@ -25,6 +27,8 @@ const applyDev = (app) => {
 };
 
 const applyPro = (app) => {
+  console.log('APPLYING PRODUCTION ROUTES');
+
   app.get('/style.css', (req, res, next) => {
     res.sendFile(path.join(__dirname, '/dist/style.css'))
   })
