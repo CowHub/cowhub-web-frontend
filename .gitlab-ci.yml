@@ -27,7 +27,7 @@ release:
     - master
   script:
     - docker login -u $DOCKER_USER -p $DOCKER_PASS
-    - docker build -t cowhub/cowhub-web-frontend:latest .
+    - docker build -t cowhub/cowhub-web-frontend:latest -f Dockerfile.production .
     - docker push cowhub/cowhub-web-frontend
 
 
@@ -41,5 +41,5 @@ deploy:
     - eval $(ssh-agent -s)
     - ssh-add <(echo "$GITLAB_DEPLOY_KEY")
     - rm -rf .ssh/known_hosts
-    - rsync -avz {deploy.sh,docker-compose-product.yml} -e "ssh -o StrictHostKeyChecking=no" root@cloud-vm-46-70.doc.ic.ac.uk:/
+    - rsync -avz {deploy.sh,docker-compose-production.yml} -e "ssh -o StrictHostKeyChecking=no" root@cloud-vm-46-70.doc.ic.ac.uk:/
     - ssh root@cloud-vm-46-70.doc.ic.ac.uk "docker login -u $DOCKER_USER -p $DOCKER_PASS && /bin/bash -c /deploy.sh"
