@@ -1,13 +1,6 @@
 require('./CattleItemComponent.scss');
 
 import React, { Component } from 'react';
-// import { connect } from 'react-redux';
-//
-// const mapStateToProps = (state, ownProps) => {
-//   return {
-//     cattle: state.cattle[ownProps.id],
-//   }
-// }
 
 import CattleUpdateDeleteComponent from './CattleUpdateDeleteComponent'
 
@@ -53,7 +46,7 @@ class CattleItemComponent extends Component {
           <div className='col-md-4 col-xs-7 cattle-item-component-name'>
             { name && `${name}` }
           </div>
-          <CattleUpdateDeleteComponent cattle={cattle}/>
+          <CattleUpdateDeleteComponent cattle={cattle} />
         </div>
         { expanded &&
           <div className='col-xs-12' >

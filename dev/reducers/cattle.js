@@ -61,6 +61,7 @@ export function handleFetchCattlePending(state) {
   };
 };
 
+<<<<<<< bfe3eb28bf6ffc658460ddf6f22ae814cc2ffb2e
 const generateCattleObject = (cattle) => {
   return {
     cattle,
@@ -72,6 +73,15 @@ export function handleFetchCattleSuccess(state, cattleRaw) {
   let cattle = [];
   for (let i in cattleRaw) {
     cattle.push(generateCattleObject(cattleRaw[i]));
+=======
+export function handleFetchCattleSuccess(state, cattleRaw) {
+  let cattle = [];
+  for (let i in cattleRaw) {
+    cattle.push({
+      cattle: cattleRaw[i],
+      expanded: false,
+    });
+>>>>>>> Refactored and improved cattle componentry
   };
 
   return {
@@ -92,6 +102,7 @@ export function handleFetchCattleError(state, error) {
   };
 };
 
+<<<<<<< bfe3eb28bf6ffc658460ddf6f22ae814cc2ffb2e
 export function handleRegisterCattlePending(state) {
   return {
     ...state,
@@ -156,6 +167,8 @@ export function handleDeleteCattleError(state, error) {
   };
 }
 
+=======
+>>>>>>> Refactored and improved cattle componentry
 export function handleExpandCattleToggle(state, id) {
   let cattle = state.cattle;
   for (let i in cattle) {

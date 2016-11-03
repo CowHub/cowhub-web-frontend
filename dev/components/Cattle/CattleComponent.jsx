@@ -45,8 +45,6 @@ class CattleComponent extends Component {
       expandCattleToggle,
     } = this.props;
 
-    console.dir(cattle);
-
     return (
       <div className='cattle-list-component-wrapper' >
         <CattleRegistrationComponent/>
