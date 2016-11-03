@@ -79,7 +79,7 @@ export function registerUser(params) {
       data: params
     }).then((response) => {
       dispatch(registerUserSuccess());
-      dispatch(storeToken(response))
+      dispatch(storeToken(response.auth_token))
     }).catch((error) => {
       dispatch(registerUserError(error))
     })
