@@ -1,7 +1,6 @@
 image: "node:6.9.1"
 
 variables:
-  NODE_ENV: test
   NPM_CONFIG_LOGLEVEL: warn
 
 cache:
@@ -10,29 +9,37 @@ cache:
 
 stages:
   - test
+  - release
   - deploy
 
-before_script:
-  - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
-  - 'which rsync || ( apt-get update -y && apt-get install rsync -y )'
-  - eval $(ssh-agent -s)
-  - ssh-add <(echo "$GITLAB_DEPLOY_KEY")
-  - rm -rf .ssh/known_hosts
-  - node --version
-  - npm install
 
 build:
   stage: test
   script:
+    - npm install
     - npm run build
+
+
+release:
+  image: "gitlab/dind:latest"
+  stage: release
+  only:
+    - master
+  script:
+    - docker login -u $DOCKER_USER -p $DOCKER_PASS
+    - docker build -t cowhub/cowhub-web-frontend:latest .
+    - docker push cowhub/cowhub-web-frontend
+
 
 deploy:
   stage: deploy
   only:
     - master
   script:
-    - npm run build
-    - cp public/index.html dist/
-    - rsync -avz deploy.sh -e "ssh -o StrictHostKeyChecking=no" root@cloud-vm-46-70.doc.ic.ac.uk:/
-    - rsync -avz dist.tar.gz -e "ssh -o StrictHostKeyChecking=no" root@cloud-vm-46-70.doc.ic.ac.uk:/
-    - ssh root@cloud-vm-46-70.doc.ic.ac.uk "/bin/bash -c /deploy.sh"
+    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+    - 'which rsync || ( apt-get update -y && apt-get install rsync -y )'
+    - eval $(ssh-agent -s)
+    - ssh-add <(echo "$GITLAB_DEPLOY_KEY")
+    - rm -rf .ssh/known_hosts
+    - rsync -avz {deploy.sh,docker-compose-product.yml} -e "ssh -o StrictHostKeyChecking=no" root@cloud-vm-46-70.doc.ic.ac.uk:/
+    - ssh root@cloud-vm-46-70.doc.ic.ac.uk "docker login -u $DOCKER_USER -p $DOCKER_PASS && /bin/bash -c /deploy.sh"
