@@ -5,8 +5,17 @@ services:
     image: postgres
   api:
     image: cowhub/cowhub-server-api
+    environment:
+      - RAILS_ENV=development
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=
+      - POSTGRES_HOST=db
+    links:
+      - db
     depends_on:
       - db
+    ports:
+      - "8080:8080"
   web:
     build: .
     command: /bin/bash -c 'npm install && npm run dev'
