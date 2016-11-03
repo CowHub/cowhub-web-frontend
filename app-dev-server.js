@@ -26,11 +26,12 @@ app.get('/*', (req, res, next) => {
   res.sendFile(path.join(__dirname, '/public/index-dev.html'))
 });
 
-app.listen(PORT, 'localhost', err => {
+const HOST = '0.0.0.0';
+app.listen(PORT, HOST, err => {
   if (err) {
     console.log(err);
     return;
   }
 
-  console.log(`Listening at http://localhost:${PORT}`);
+  console.log(`Listening at http://${HOST}:${PORT}`);
 });
