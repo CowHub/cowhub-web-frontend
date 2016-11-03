@@ -10,11 +10,11 @@ module.exports = {
   debug: true,
   devtool: 'source-map',
   entry: [
-    'webpack-hot-middleware/client?path=http://localhost:10204/__webpack_hmr',
+    'webpack-hot-middleware/client?path=http://localhost:3000/__webpack_hmr',
     './dev/index.js'
   ],
   output: {
-    publicPath: 'http://localhost:10204/',
+    publicPath: 'http://localhost:3000/',
     path: __dirname,
     filename: "bundle.js"
   },
