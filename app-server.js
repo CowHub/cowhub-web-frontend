@@ -5,7 +5,7 @@ const path = require('path');
 const express = require('express');
 const app = express();
 
-const PORT = process.env.SERVER_PORT;
+const PORT = process.env.SERVER_PORT || 3000;
 
 const applyDev = (app) => {
   const webpack = require('webpack');

@@ -41,10 +41,5 @@ deploy:
     - eval $(ssh-agent -s)
     - ssh-add <(echo "$GITLAB_DEPLOY_KEY")
     - rm -rf .ssh/known_hosts
-    - npm install
-    - npm run build
-    - npm run tar
-    - cp public/index.html dist/
-    - rsync -avz deploy.sh -e "ssh -o StrictHostKeyChecking=no" root@cloud-vm-46-70.doc.ic.ac.uk:/
-    - rsync -avz dist.tar.gz -e "ssh -o StrictHostKeyChecking=no" root@cloud-vm-46-70.doc.ic.ac.uk:/
-    - ssh root@cloud-vm-46-70.doc.ic.ac.uk "/bin/bash -c /deploy.sh"
+    - rsync -avz {deploy.sh,docker-compose-product.yml} -e "ssh -o StrictHostKeyChecking=no" root@cloud-vm-46-70.doc.ic.ac.uk:/
+    - ssh root@cloud-vm-46-70.doc.ic.ac.uk "docker login -u $DOCKER_USER -p $DOCKER_PASS && /bin/bash -c /deploy.sh"

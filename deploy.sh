@@ -1,16 +1,7 @@
 #!/usr/bin/env bash
 
-# Build latest image
-cd /
-rm -rf /app
-mkdir /app
-tar -xvf /dist.tar.gz
-mv /dist /app/dist
-mv /app-server.js /app/
-mv /node_modules /app/
-
 # Take service down
 docker rm -f $(docker ps -a -q)
 
-# Bring service up (with latest)
-docker run -v /app:/app -p 80:80 -e 'SERVER_PORT=80' -w /app --name cowhub-web-frontend -dit node:6.9.1 node app-server.js
+# Bring service up
+docker-compose up -d -f /docker-compose-production.yml --force-recreate
