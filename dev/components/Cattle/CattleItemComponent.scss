@@ -1,0 +1,22 @@
+%cattle-item {
+  color: black;
+}
+
+.cattle-item-component-wrapper {
+  @extend %cattle-item;
+  border-top: 1px solid black;
+  padding: 10px 0;
+
+
+  &:last-child {
+    border-bottom: 1px solid black;
+  }
+}
+
+.cattle-item-component-tag {
+  @extend %cattle-item;
+}
+
+.cattle-item-component-name {
+  @extend %cattle-item;
+}

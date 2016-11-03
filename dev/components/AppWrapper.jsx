@@ -66,7 +66,7 @@ class AppWrapper extends Component {
         </nav>
 
         {/* CONTENT HERE */}
-        <div className="content-wrapper" >
+        <div className="container content-wrapper" >
           { this.props.children }
         </div>
 

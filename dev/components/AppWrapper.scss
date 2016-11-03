@@ -1,7 +1,8 @@
 @import "../style/colours.scss";
 
 .content-wrapper {
-  margin-top: 20px;
+  margin: auto 20px !important;
+  padding: 20px 0;
 }
 
 .navbar-link {
