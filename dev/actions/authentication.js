@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import store from '../store/store';
 
 // Token management
 export let LOAD_TOKEN = 'LOAD_TOKEN';
@@ -31,7 +32,6 @@ export let LOGIN_USER_ERROR = 'LOGIN_USER_ERROR';
 
 // params: email, password
 export function loginUser(params) {
-  console.dir(params);
   return (dispatch) => {
     dispatch(loginUserPending());
     $.ajax(`${process.env.API_ENDPOINT}/user/authenticate`, {
@@ -110,7 +110,8 @@ export let LOGOUT_USER_PENDING = 'LOGOUT_USER_PENDING';
 export let LOGOUT_USER_SUCCESS = 'LOGOUT_USER_SUCCESS';
 export let LOGOUT_USER_ERROR = 'LOGOUT_USER_ERROR';
 
-export function logoutUser(token) {
+export function logoutUser() {
+  let token = store.getState().authentication.token;
   return (dispatch) => {
     dispatch(logoutUserPending());
     $.ajax(`${process.env.API_ENDPOINT}/user/unauthenticate`, {
