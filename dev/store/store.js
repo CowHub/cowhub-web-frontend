@@ -11,7 +11,7 @@ import {
 
 let middleware = (process.env.NODE_ENV !== 'production') ?
     applyMiddleware(thunk, logger()) :
-    appleMiddleware(thunk);
+    applyMiddleware(thunk);
 
 const store = createStore(reducers, middleware);
 
