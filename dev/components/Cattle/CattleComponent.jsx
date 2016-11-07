@@ -52,14 +52,12 @@ class CattleComponent extends Component {
         <h2 className='cattle-list-component-title' >
           Registered Cattle
         </h2>
-        { cattle.map((item) => {
-          return (
+        { cattle.map((item) =>
             <CattleItemComponent
               key={ item.cattle.id }
               expandCattleToggle={ () => expandCattleToggle(item.cattle.id) }
               { ...item } />
-          );
-        })}
+        )}
       </div>
     )
   }
