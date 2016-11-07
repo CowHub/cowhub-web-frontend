@@ -11,6 +11,7 @@ import {
 import CattleItemComponent from './CattleItemComponent';
 import CattleRegistrationComponent from './CattleRegistrationComponent';
 
+
 const mapStateToProps = (state) => {
   return {
     ...state.cattle
@@ -47,18 +48,16 @@ class CattleComponent extends Component {
 
     return (
       <div className='cattle-list-component-wrapper' >
+        <CattleRegistrationComponent/>
         <h2 className='cattle-list-component-title' >
           Registered Cattle
         </h2>
         { cattle.map((item) => {
           return (
-            <div>
-              <CattleRegistrationComponent/>
-              <CattleItemComponent
-                key={ item.cattle.id }
-                expandCattleToggle={ () => expandCattleToggle(item.cattle.id) }
-                { ...item } />
-            </div>
+            <CattleItemComponent
+              key={ item.cattle.id }
+              expandCattleToggle={ () => expandCattleToggle(item.cattle.id) }
+              { ...item } />
           );
         })}
       </div>
