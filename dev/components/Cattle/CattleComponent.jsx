@@ -9,6 +9,7 @@ import {
 } from '../../actions/index';
 
 import CattleItemComponent from './CattleItemComponent';
+import CattleRegistrationComponent from './CattleRegistrationComponent';
 
 const mapStateToProps = (state) => {
   return {
@@ -51,10 +52,13 @@ class CattleComponent extends Component {
         </h2>
         { cattle.map((item) => {
           return (
-            <CattleItemComponent
-              key={ item.cattle.id }
-              expandCattleToggle={ () => expandCattleToggle(item.cattle.id) }
-              { ...item } />
+            <div>
+              <CattleRegistrationComponent/>
+              <CattleItemComponent
+                key={ item.cattle.id }
+                expandCattleToggle={ () => expandCattleToggle(item.cattle.id) }
+                { ...item } />
+            </div>
           );
         })}
       </div>

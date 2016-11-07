@@ -1,0 +1,32 @@
+@import "../../style/colours.scss";
+@import "../../style/fonts.scss";
+
+.registeration-component-button-register {
+  padding: 6px 10px;
+}
+
+.cattle-registration-component-wrapper{
+  margin: auto;
+  max-width: 600px;
+  text-align: center;
+}
+
+.cattle-registration-component-form{
+  border-color: black;
+  border-style: groove;
+  border-radius: 10px;
+  position:relative;
+}
+
+.registeration-component-input{
+  box-sizing: border-box;
+  border: 1px solid $background-colour-dark;
+  border-radius: 2px;
+  font-family: $font-family-default;
+  margin: 10px 5px;
+  padding: 8px 6px;
+}
+
+.registration-component-inline-radio{
+  margin-left: 5px;
+}

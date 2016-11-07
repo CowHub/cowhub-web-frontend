@@ -52,3 +52,47 @@ export function fetchCattleError(error) {
     error,
   };
 };
+
+// Cattle register
+export let CATTLE_REGISTRATION_PENDING = 'CATTLE_REGISTRATION_PENDING';
+export let CATTLE_REGISTRATION_SUCCESS = 'CATTLE_REGISTRATION_SUCCESS';
+export let CATTLE_REGISTRATION_ERROR = 'CATTLE_REGISTRATION_ERROR';
+
+export function registerCattle(params) {
+  let token = store.getState().authentication.token;
+  return (dispatch) => {
+    dispatch(registerCattlePending());
+    $.ajax(`${process.env.API_ENDPOINT}/cattle/new`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+      data: params,
+    }).then((response) => {
+      dispatch(registerCattleSuccess(response.cattle));
+      location.reload();
+    }).catch((error) => {
+      dispatch(registerCattleError(error));
+    })
+  };
+};
+
+export function registerCattlePending() {
+  return {
+    type: CATTLE_REGISTRATION_PENDING,
+  };
+};
+
+export function registerCattleSuccess(cattle) {
+  return {
+    type: CATTLE_REGISTRATION_SUCCESS,
+    cattle,
+  };
+};
+
+export function registerCattleError(error) {
+  return {
+    type: CATTLE_REGISTRATION_ERROR,
+    error,
+  };
+};
