@@ -97,9 +97,9 @@ export function registerCattleError(error) {
 };
 
 // Cattle update
-export let CATTLE_UPDATE_PENDING = 'CATTLE_UPDATE_PENDING';
-export let CATTLE_UPDATE_SUCCESS = 'CATTLE_UPDATE_SUCCESS';
-export let CATTLE_UPDATE_ERROR = 'CATTLE_UPDATE_ERROR';
+export let UPDATE_CATTLE_PENDING = 'UPDATE_CATTLE_PENDING';
+export let UPDATE_CATTLE_SUCCESS = 'UPDATE_CATTLE_SUCCESS';
+export let UPDATE_CATTLE_ERROR = 'UPDATE_CATTLE_ERROR';
 
 export function updateCattle(id, params) {
   let token = store.getState().authentication.token;
@@ -122,20 +122,20 @@ export function updateCattle(id, params) {
 
 export function updateCattlePending() {
   return {
-    type: CATTLE_UPDATE_PENDING,
+    type: UPDATE_CATTLE_PENDING,
   };
 };
 
 export function updateCattleSuccess(cattle) {
   return {
-    type: CATTLE_UPDATE_SUCCESS,
+    type: UPDATE_CATTLE_SUCCESS,
     cattle,
   };
 };
 
 export function updateCattleError(error) {
   return {
-    type: CATTLE_UPDATE_ERROR,
+    type: UPDATE_CATTLE_ERROR,
     error,
   };
 }
