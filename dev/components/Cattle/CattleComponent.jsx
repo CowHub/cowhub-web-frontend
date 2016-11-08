@@ -11,7 +11,6 @@ import {
 import CattleItemComponent from './CattleItemComponent';
 import CattleRegistrationComponent from './CattleRegistrationComponent';
 
-
 const mapStateToProps = (state) => {
   return {
     ...state.cattle
@@ -45,6 +44,8 @@ class CattleComponent extends Component {
       cattle,
       expandCattleToggle,
     } = this.props;
+
+    console.dir(cattle);
 
     return (
       <div className='cattle-list-component-wrapper' >

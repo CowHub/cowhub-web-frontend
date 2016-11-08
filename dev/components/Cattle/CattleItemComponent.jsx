@@ -1,6 +1,13 @@
 require('./CattleItemComponent.scss');
 
 import React, { Component } from 'react';
+// import { connect } from 'react-redux';
+//
+// const mapStateToProps = (state, ownProps) => {
+//   return {
+//     cattle: state.cattle[ownProps.id],
+//   }
+// }
 
 class CattleItemComponent extends Component {
 

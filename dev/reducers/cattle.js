@@ -43,13 +43,17 @@ export function handleFetchCattlePending(state) {
   };
 };
 
+const generateCattleObject = (cattle) => {
+  return {
+    cattle,
+    expanded: false,
+  }
+};
+
 export function handleFetchCattleSuccess(state, cattleRaw) {
   let cattle = [];
   for (let i in cattleRaw) {
-    cattle.push({
-      cattle: cattleRaw[i],
-      expanded: false,
-    });
+    cattle.push(generateCattleObject(cattleRaw[i]));
   };
 
   return {
@@ -78,7 +82,7 @@ export function handleRegisterCattlePending(state) {
 
 export function handleRegisterCattleSuccess(state, cattleNew) {
   let cattle = state.cattle;
-  cattle.push(cattleNew)
+  cattle.push(generateCattleObject(cattleNew))
   return {
     ...state,
     cattle,

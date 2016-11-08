@@ -1,21 +1,18 @@
 require('./CattleRegistrationComponent.scss');
 
 import React, { Component } from 'react';
+import Dropdown from 'react-dropdown';
 import { connect } from 'react-redux';
 
 import { registerCattle } from '../../actions/index';
 
-import CattleItemComponent from './CattleItemComponent';
-
 const mapStateToProps = (state) => {
-  return {
-    ...state.cattle
-  };
+  return {};
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleCattleRegister: (p) => { dispatch(registerCattle(p)) }
+    handleRegisterCattle: (c) => { dispatch(registerCattle(c)) }
   };
 };
 
@@ -23,112 +20,87 @@ class CattleRegistrationComponent extends Component {
 
   static displayName = 'Cattle Register Component';
   static propTypes = {
-    breed: React.PropTypes.string,
-    check_digit: React.PropTypes.number,
-    country_code: React.PropTypes.string,
-    dob: React.PropTypes.string,
-    gender: React.PropTypes.string,
-    herdmark: React.PropTypes.string,
-    id: React.PropTypes.number,
-    individual_number: React.PropTypes.number,
-    name: React.PropTypes.string,
-    handleCattleRegister: React.PropTypes.func,
+    handleRegisterCattle: React.PropTypes.func,
   };
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+
+    const genders = [ 'Male', 'Female' ];
     this.state = {
-      clicked: false,
+      gender: genders[0],
+      genders
     }
-  }
-
-  componentWillMount() {
-    this.handleRegistered(this.props);
-  }
-
-  componentWillReceiveProps(props) {
-    this.handleRegistered(props);
-  }
-
-  handleRegistered(props) {
-    if (props.check_digit && props.country_code && props.herdmark
-        && props.individual_number ) {
-      console.log('Redirecting... cattle registered.')
-      window.location = '/cattle';
-    }
-  }
-
-  handleClick() {
-    this.setState({clicked: !this.state.clicked,});
   }
 
   handleSubmit() {
-    this.props.handleCattleRegister({
+    this.props.handleRegisterCattle({
       country_code: this.refs.country_code.value,
       herdmark: this.refs.herdmark.value,
       check_digit: this.refs.check_digit.value,
       individual_number: this.refs.individual_number.value,
-      name: this.refs.name.value,
-      gender: this.refs.gender.value,
+      // name: this.refs.name.value,
+      // gender: this.refs.gender.value,
       //breed: this.refs.breed.value,
       //dob: this.refs.dob.value,
     })
   }
 
-  renderRef(ref, length, width, req){
-    var result;
-    if (req) {
-      result = (<input ref={ref} className="registeration-component-input"
-        type={ref} maxLength={length} style={{width: width}} required autoFocus/>);
-    } else {
-      result = (<input ref={ref} className="registeration-component-input"
-        type={ref} maxLength={length} style={{width: width}} autoFocus/>);
-    }
-    return result;
-  }
-
-  renderRadio(value){
+  renderRef(ref, length, style, req) {
+    if (!style) style = ""
     return (
-      <span>
-        <input style={{marginLeft: 10}} type="radio" ref="gender"
-          value={value}/>
-          {value}
-      </span>
+      <input ref={ref} className={ `${style} cattle-registration-component-input` }
+        type={ref} maxLength={length} />
     );
   }
 
   render() {
+    let {
+      gender,
+      genders
+    } = this.state;
+
     return (
       <div className="cattle-registration-component-wrapper">
-        {this.state.clicked ?
-          <form className="cattle-registration-component-form" onSubmit={() => this.handleSubmit()}>
-            <h2>Cattle Registration</h2>
-              <label className="control-label">Tag *</label>
-              {this.renderRef("country_code", 2, 35, true)}
-              {this.renderRef("herdmark", 6, 62, true)}
-              {this.renderRef("check_digit", 1, 22, true)}
-              {this.renderRef("individual_number", 5, 55, true)}
-            <div className="name">
-              <label className="control-label">Name</label>
-              {this.renderRef("name", 60, 500, false)}
+        <h2 className="cattle-registration-component-title" >
+          Register Cattle
+        </h2>
+        <div className="row cattle-registration-component-data-wrapper" >
+          <div className="col-lg-4 row">
+            <div className="col-lg-4 cattle-registration-component-data-label">
+              Country Code
             </div>
-            <div className="form-group">
-            <label className="control-label">Gender</label>
-            {this.renderRadio("Female")}
-            {this.renderRadio("Male")}
+            {this.renderRef("country_code", 2, "col-lg-8", true)}
+          </div>
+          <div className="col-lg-4 row">
+            <div className="col-lg-4 cattle-registration-component-data-label">
+              Herdmark
             </div>
-            <button
-                onClick={ () => this.handleSubmit() } className="registeration-component-button-submit" >
-              Submit</button><button
-                onClick={ () => this.handleClick() } className="registeration-component-button-submit" >
-              Cancel</button>
-              <br/><br/>
-          </form>
-          :
-          <button
-                onClick={ () => this.handleClick() } className="registeration-component-button-submit" >
-            Register Cattle</button> }
-        <br/><br/>
+            {this.renderRef("herdmark", 6, "col-lg-8", true)}
+          </div>
+          <div className="col-lg-4 row">
+            <div className="col-lg-4 cattle-registration-component-data-label">
+              Check Digit
+            </div>
+            {this.renderRef("check_digit", 1, "col-lg-8", true)}
+          </div>
+          <div className="col-lg-4 row">
+            <div className="col-lg-4 cattle-registration-component-data-label">
+              Individual No.
+            </div>
+            {this.renderRef("individual_number", 5, "col-lg-8", true)}
+          </div>
+          {/* <div className="col-lg-8 row">
+            <div className="col-lg-2 cattle-registration-component-data-label">
+            Name
+            </div>
+            {this.renderRef("name", 60, "col-lg-10", false)}
+            </div>
+          <Dropdown options={genders} value={gender} /> */}
+        </div>
+        <div className="cattle-registration-component-button-wrapper" >
+          <button onClick={ () => { this.handleSubmit() } } >Register</button>
+        </div>
       </div>
     );
   }
