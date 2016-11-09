@@ -6,6 +6,9 @@ import {
   REGISTER_CATTLE_PENDING,
   REGISTER_CATTLE_SUCCESS,
   REGISTER_CATTLE_ERROR,
+  CATTLE_UPDATE_PENDING,
+  CATTLE_UPDATE_SUCCESS,
+  CATTLE_UPDATE_ERROR,
 } from '../actions/cattle';
 
 const initialState = {
@@ -29,6 +32,12 @@ const cattle = (state = initialState, action) => {
       return handleRegisterCattleSuccess(state, action.cattle);
     case REGISTER_CATTLE_ERROR:
       return handleRegisterCattleError(state, action.error);
+    case CATTLE_UPDATE_PENDING:
+      return handleCattleUpdatePending(state);
+    case CATTLE_UPDATE_SUCCESS:
+      return handleCattleUpdateSuccess(state, action.cattle);
+    case CATTLE_UPDATE_ERROR:
+      return handleCattleUpdateError(state, action.error);
     case EXPAND_CATTLE_TOGGLE:
       return handleExpandCattleToggle(state, action.id);
     default:
@@ -90,6 +99,34 @@ export function handleRegisterCattleSuccess(state, cattleNew) {
 }
 
 export function handleRegisterCattleError(state, error) {
+  return {
+    ...state,
+    error,
+  };
+}
+
+export function handleCattleUpdatePending(state) {
+  return {
+    ...state,
+  };
+}
+
+export function handleCattleUpdateSuccess(state, cattleUpdated) {
+  let cattle = state.cattle;
+  let id = cattleUpdated.id;
+  for (let c in cattle) {
+    if (c.id === id) {
+      c = cattleUpdated;
+      break;
+    }
+  }
+  return {
+    ...state,
+    cattle,
+  };
+}
+
+export function handleCattleUpdateError(state, error) {
   return {
     ...state,
     error,

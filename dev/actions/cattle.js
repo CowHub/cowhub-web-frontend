@@ -95,3 +95,52 @@ export function registerCattleError(error) {
     error,
   };
 };
+
+// Cattle update
+export let CATTLE_UPDATE_PENDING = 'CATTLE_UPDATE_PENDING';
+export let CATTLE_UPDATE_SUCCESS = 'CATTLE_UPDATE_SUCCESS';
+export let CATTLE_UPDATE_ERROR = 'CATTLE_UPDATE_ERROR';
+
+export function updateCattle(id, params) {
+  let token = store.getState().authentication.token;
+  console.log("in updateCattle");
+  console.log(id);
+  console.log(params);
+
+  return (dispatch) => {
+    dispatch(updateCattlePending());
+    $.ajax(`${process.env.API_ENDPOINT}/cattle/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+      data: params,
+    }).then((response) => {
+      console.log(response);
+      dispatch(updateCattleSuccess(response.cattle));
+      location.reload();
+    }).catch((error) => {
+      dispatch(updateCattleError(error));
+    })
+  };
+};
+
+export function updateCattlePending() {
+  return {
+    type: CATTLE_UPDATE_PENDING,
+  };
+};
+
+export function updateCattleSuccess(cattle) {
+  return {
+    type: CATTLE_UPDATE_SUCCESS,
+    cattle,
+  };
+};
+
+export function updateCattleError(error) {
+  return {
+    type: CATTLE_UPDATE_ERROR,
+    error,
+  };
+}

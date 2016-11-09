@@ -9,6 +9,8 @@ import React, { Component } from 'react';
 //   }
 // }
 
+import CattleUpdateComponent from './CattleUpdateComponent'
+
 class CattleItemComponent extends Component {
 
   static displayName = 'Cattle Item Component';
@@ -38,7 +40,8 @@ class CattleItemComponent extends Component {
       name,
     } = this.props.cattle;
     let {
-      expanded
+      expanded,
+      cattle,
     } = this.props;
 
     return (
@@ -50,6 +53,7 @@ class CattleItemComponent extends Component {
           <div className='col-md-4 col-xs-7 cattle-item-component-name'>
             { name && `${name}` }
           </div>
+          <CattleUpdateComponent {...cattle}/>
         </div>
         { expanded &&
           <div className='col-xs-12' >

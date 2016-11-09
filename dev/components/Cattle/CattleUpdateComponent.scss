@@ -1,0 +1,39 @@
+@import "../../style/colours.scss";
+@import "../../style/fonts.scss";
+
+.cattle-update-component-wrapper{
+  margin: auto;
+  max-width: 800px;
+  text-align: center;
+}
+
+.cattle-update-component-form{
+  border-color: black;
+  border-style: groove;
+  border-radius: 10px;
+  position:relative;
+}
+
+.update-component-input{
+  display: inline-block;
+  box-sizing: border-box;
+  border: 1px solid $background-colour-dark;
+  border-radius: 2px;
+  font-family: $font-family-default;
+  margin: 10px 5px;
+  padding: 8px 6px;
+}
+
+.active {
+  background: #0041C2;
+  color: #ffffff;
+}
+
+.update-component-button {
+  padding: 6px 10px;
+}
+
+.cattle-update-component-data-label {
+  margin: 10px 5px;
+  padding:  9px 5px;
+}
