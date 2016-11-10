@@ -1,13 +1,13 @@
 @import "../../style/colours.scss";
 @import "../../style/fonts.scss";
 
-.cattle-update-component-wrapper{
+.cattle-update-delete-component-wrapper{
   margin: auto;
   max-width: 800px;
   text-align: center;
 }
 
-.cattle-update-component-form{
+.cattle-update-delete-component-form{
   border-color: black;
   border-style: groove;
   border-radius: 10px;
@@ -33,7 +33,14 @@
   padding: 6px 10px;
 }
 
-.cattle-update-component-data-label {
+.update-component-button-delete {
+  margin-left: 2px;
+  margin-right: 2px;
+  padding: 6px 10px;
+  background-color: #E50909;
+}
+
+.cattle-update-delete-component-data-label {
   margin: 10px 5px;
   padding:  9px 5px;
 }

@@ -9,7 +9,7 @@ import React, { Component } from 'react';
 //   }
 // }
 
-import CattleUpdateComponent from './CattleUpdateComponent'
+import CattleUpdateDeleteComponent from './CattleUpdateDeleteComponent'
 
 class CattleItemComponent extends Component {
 
@@ -53,7 +53,7 @@ class CattleItemComponent extends Component {
           <div className='col-md-4 col-xs-7 cattle-item-component-name'>
             { name && `${name}` }
           </div>
-          <CattleUpdateComponent {...cattle}/>
+          <CattleUpdateDeleteComponent {...cattle}/>
         </div>
         { expanded &&
           <div className='col-xs-12' >

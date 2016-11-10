@@ -1,9 +1,12 @@
-require('./CattleUpdateComponent.scss');
+require('./CattleUpdateDeleteComponent.scss');
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { updateCattle } from '../../actions/index';
+import {
+  updateCattle,
+  deleteCattle
+} from '../../actions/index';
 
 import CattleItemComponent from './CattleItemComponent';
 
@@ -13,11 +16,12 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleUpdateCattle: (id, p) => { dispatch(updateCattle(id, p)) }
+    handleUpdateCattle: (id, p) => { dispatch(updateCattle(id, p)) },
+    handleDeleteCattle: (id) => { dispatch(deleteCattle(id)) },
   };
 };
 
-class CattleUpdateComponent extends Component {
+class CattleUpdateDeleteComponent extends Component {
 
   static displayName = 'Cattle Update Component';
   static propTypes = {
@@ -31,17 +35,21 @@ class CattleUpdateComponent extends Component {
     individual_number: React.PropTypes.number.isRequired,
     name: React.PropTypes.string,
     handleUpdateCattle: React.PropTypes.func,
+    handleDeleteCattle: React.PropTypes.func,
   };
 
   constructor() {
     super();
     this.state = {
-      clicked: false,
+      submitted: false,
+      deleted: false,
     }
   }
 
+
+
   handleClick() {
-    this.setState({clicked: !this.state.clicked,});
+    this.setState({submitted: !this.state.submitted,});
   }
 
   handleSubmit() {
@@ -62,56 +70,79 @@ class CattleUpdateComponent extends Component {
     })
   }
 
+  handleDelete() {
+    this.setState({deleted: !this.state.deleted,});
+  }
+
+  confirmDelete() {
+    this.props.handleDeleteCattle(this.props.id);
+  }
+
   renderRef(ref, length, width){
     return (<input ref={ref} className="update-component-input"
       type={ref} maxLength={length} style={{width: width}} autoFocus/>);
   }
 
-  renderRadio(value){
-    return (
-      <span>
-        <input style={{marginLeft: 10}} type="radio" ref="gender"
-          value={value}/>
-          {value}
-      </span>
-    );
+  renderDelete() {
+    return (this.state.deleted) ?
+      (<div>
+        <br/>
+        <div className="cattle-update-delete-component-form">
+          <h2>
+            Confirm Delete
+          </h2>
+          Are you sure you want to delete this cattle reference?
+          <br/><br/>
+          <button
+                onClick={ () => this.confirmDelete() } className="update-component-button-delete" >
+            Confirm</button>
+          <button
+                onClick={ () => this.handleDelete() } className="update-component-button" >
+            Cancel</button>
+            <br/><br/>
+        </div>
+      </div>)
+      :
+      (<button
+            onClick={ () => this.handleDelete() } className="update-component-button-delete" >
+          Delete Cattle</button>);
   }
 
   render() {
     return (
-      <div className="cattle-update-component-wrapper">
-        {this.state.clicked ?
-          <div className="cattle-update-component-form" >
+      <div className="cattle-update-delete-component-wrapper">
+        {this.state.submitted ?
+          <div>
+          <div className="cattle-update-delete-component-form" >
             <h2>
               Update Cattle
             </h2>
-            <div className="row cattle-update-component-data-wrapper" >
+            <div className="row cattle-update-delete-component-data-wrapper" >
             <div className="col-lg-5 row">
-                <div className="col-lg-5 cattle-update-component-data-label">
+                <div className="col-lg-5 cattle-update-delete-component-data-label">
                   Country Code
                 </div>
                 {this.renderRef("country_code", 2, "col-lg-8", true)}
               </div>
               <div className="col-lg-5 row">
-                <div className="col-lg-5 cattle-update-component-data-label">
+                <div className="col-lg-5 cattle-update-delete-component-data-label">
                   Herdmark
                 </div>
                 {this.renderRef("herdmark", 6, "col-lg-8", true)}
               </div>
               <div className="col-lg-5 row">
-                <div className="col-lg-5 cattle-update-component-data-label">
+                <div className="col-lg-5 cattle-update-delete-component-data-label">
                   Check Digit
                 </div>
                 {this.renderRef("check_digit", 1, "col-lg-8", true)}
               </div>
               <div className="col-lg-5 row">
-                <div className="col-lg-5 cattle-update-component-data-label">
+                <div className="col-lg-5 cattle-update-delete-component-data-label">
                   Individual No.
                 </div>
                 {this.renderRef("individual_number", 5, "col-lg-8", true)}
               </div>
             </div>
-
 
             <button
                 onClick={ () => this.handleSubmit() } className="update-component-button active" >
@@ -121,10 +152,15 @@ class CattleUpdateComponent extends Component {
               Cancel</button>
             <br/><br/>
           </div>
+          {this.renderDelete()}
+          </div>
           :
+          <div className="row">
           <button
                 onClick={ () => this.handleClick() } className="update-component-button" >
-            Update Cattle</button> }
+            Update Cattle</button>
+          {this.renderDelete()}
+          </div>}
         <br/><br/>
       </div>
     );
@@ -132,4 +168,4 @@ class CattleUpdateComponent extends Component {
 
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CattleUpdateComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(CattleUpdateDeleteComponent);

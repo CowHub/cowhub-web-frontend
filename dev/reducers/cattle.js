@@ -9,6 +9,9 @@ import {
   CATTLE_UPDATE_PENDING,
   CATTLE_UPDATE_SUCCESS,
   CATTLE_UPDATE_ERROR,
+  DELETE_CATTLE_PENDING,
+  DELETE_CATTLE_SUCCESS,
+  DELETE_CATTLE_ERROR,
 } from '../actions/cattle';
 
 const initialState = {
@@ -38,6 +41,12 @@ const cattle = (state = initialState, action) => {
       return handleCattleUpdateSuccess(state, action.cattle);
     case CATTLE_UPDATE_ERROR:
       return handleCattleUpdateError(state, action.error);
+    case DELETE_CATTLE_PENDING:
+      return handleDeleteCattlePending(state);
+    case DELETE_CATTLE_SUCCESS:
+      return handleDeleteCattleSuccess(state, action.id);
+    case DELETE_CATTLE_ERROR:
+      return handleDeleteCattleError(state, action.error);
     case EXPAND_CATTLE_TOGGLE:
       return handleExpandCattleToggle(state, action.id);
     default:
@@ -127,6 +136,27 @@ export function handleCattleUpdateSuccess(state, cattleUpdated) {
 }
 
 export function handleCattleUpdateError(state, error) {
+  return {
+    ...state,
+    error,
+  };
+}
+
+export function handleDeleteCattlePending(state) {
+  return {
+    ...state,
+  };
+}
+
+export function handleDeleteCattleSuccess(state, deleteCattleId) {
+  let cattle = state.cattle.filter(cattle => cattle.id !== deleteCattleId);
+  return {
+    ...state,
+    cattle,
+  };
+}
+
+export function handleDeleteCattleError(state, error) {
   return {
     ...state,
     error,

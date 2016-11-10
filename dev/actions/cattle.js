@@ -70,6 +70,7 @@ export function registerCattle(params) {
       data: params,
     }).then((response) => {
       dispatch(registerCattleSuccess(response.cattle));
+      location.reload();
     }).catch((error) => {
       dispatch(registerCattleError(error));
     })
@@ -103,9 +104,6 @@ export let CATTLE_UPDATE_ERROR = 'CATTLE_UPDATE_ERROR';
 
 export function updateCattle(id, params) {
   let token = store.getState().authentication.token;
-  console.log("in updateCattle");
-  console.log(id);
-  console.log(params);
 
   return (dispatch) => {
     dispatch(updateCattlePending());
@@ -116,7 +114,6 @@ export function updateCattle(id, params) {
       },
       data: params,
     }).then((response) => {
-      console.log(response);
       dispatch(updateCattleSuccess(response.cattle));
       location.reload();
     }).catch((error) => {
@@ -141,6 +138,51 @@ export function updateCattleSuccess(cattle) {
 export function updateCattleError(error) {
   return {
     type: CATTLE_UPDATE_ERROR,
+    error,
+  };
+}
+
+
+// Cattle update
+export let DELETE_CATTLE_PENDING = 'DELETE_CATTLE_PENDING';
+export let DELETE_CATTLE_SUCCESS = 'DELETE_CATTLE_SUCCESS';
+export let DELETE_CATTLE_ERROR = 'DELETE_CATTLE_ERROR';
+
+export function deleteCattle(id) {
+  let token = store.getState().authentication.token;
+
+  return (dispatch) => {
+    dispatch(deleteCattlePending());
+    $.ajax(`${process.env.API_ENDPOINT}/cattle/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+    }).then((response) => {
+      dispatch(deleteCattleSuccess(id));
+      location.reload();
+    }).catch((error) => {
+      dispatch(deleteCattleError(error));
+    })
+  };
+};
+
+export function deleteCattlePending() {
+  return {
+    type: DELETE_CATTLE_PENDING,
+  };
+};
+
+export function deleteCattleSuccess(id) {
+  return {
+    type: DELETE_CATTLE_SUCCESS,
+    id,
+  };
+};
+
+export function deleteCattleError(error) {
+  return {
+    type: DELETE_CATLEE_ERROR,
     error,
   };
 }
