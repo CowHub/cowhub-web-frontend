@@ -121,17 +121,16 @@ export function handleCattleUpdatePending(state) {
 }
 
 export function handleCattleUpdateSuccess(state, cattleUpdated) {
-  let cattle = state.cattle;
   let id = cattleUpdated.id;
-  for (let c in cattle) {
-    if (c.id === id) {
-      c = cattleUpdated;
-      break;
-    }
-  }
+  let cattle = [];
+  state.cattle.map( (elem) => {
+    (elem.cattle.id !== id) ?
+      cattle.push(elem)
+      :
+      cattle.push(generateCattleObject(cattleUpdated));
+  } )
   return {
-    ...state,
-    cattle,
+    cattle
   };
 }
 

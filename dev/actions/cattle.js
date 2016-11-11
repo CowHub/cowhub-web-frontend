@@ -115,7 +115,6 @@ export function updateCattle(id, params) {
       data: params,
     }).then((response) => {
       dispatch(updateCattleSuccess(response.cattle));
-      location.reload();
     }).catch((error) => {
       dispatch(updateCattleError(error));
     })
@@ -160,7 +159,6 @@ export function deleteCattle(id) {
       },
     }).then((response) => {
       dispatch(deleteCattleSuccess(id));
-      location.reload();
     }).catch((error) => {
       dispatch(deleteCattleError(error));
     })
