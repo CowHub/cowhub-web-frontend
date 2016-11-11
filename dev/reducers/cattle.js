@@ -122,15 +122,11 @@ export function handleCattleUpdatePending(state) {
 
 export function handleCattleUpdateSuccess(state, cattleUpdated) {
   let id = cattleUpdated.id;
-  let cattle = [];
-  state.cattle.map( (elem) => {
-    (elem.cattle.id !== id) ?
-      cattle.push(elem)
-      :
-      cattle.push(generateCattleObject(cattleUpdated));
-  } )
+  let cattle = state.cattle
+  let index = cattle.findIndex( (c) => {return c.cattle.id === id} );
+  cattle[index] = generateCattleObject(cattleUpdated)
   return {
-    cattle
+    cattle,
   };
 }
 
@@ -148,9 +144,8 @@ export function handleDeleteCattlePending(state) {
 }
 
 export function handleDeleteCattleSuccess(state, deleteCattleId) {
-  let cattle = state.cattle.filter(cattle => cattle.id !== deleteCattleId);
+  let cattle = state.cattle.filter( (c) => c.cattle.id !== deleteCattleId);
   return {
-    ...state,
     cattle,
   };
 }
