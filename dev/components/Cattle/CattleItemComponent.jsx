@@ -53,7 +53,7 @@ class CattleItemComponent extends Component {
           <div className='col-md-4 col-xs-7 cattle-item-component-name'>
             { name && `${name}` }
           </div>
-          <CattleUpdateDeleteComponent {...cattle}/>
+          <CattleUpdateDeleteComponent cattle={cattle}/>
         </div>
         { expanded &&
           <div className='col-xs-12' >
