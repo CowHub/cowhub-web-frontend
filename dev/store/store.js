@@ -9,6 +9,8 @@ import {
   removeToken,
 } from '../actions/index';
 
+const initialState = {};
+
 let middleware = (process.env.NODE_ENV !== 'production') ?
     applyMiddleware(thunk, logger()) :
     applyMiddleware(thunk);
