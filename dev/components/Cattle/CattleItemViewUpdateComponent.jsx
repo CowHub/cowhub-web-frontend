@@ -1,4 +1,4 @@
-require('./CattleUpdateDeleteComponent.scss');
+require('./CattleItemViewUpdateComponent.scss');
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
@@ -21,7 +21,7 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-class CattleUpdateDeleteComponent extends CattleItemComponent {
+class CattleItemViewUpdateComponent extends CattleItemComponent {
 
   static displayName = 'Cattle Update Component';
   static propTypes = {
@@ -146,4 +146,4 @@ class CattleUpdateDeleteComponent extends CattleItemComponent {
 
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CattleUpdateDeleteComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(CattleItemViewUpdateComponent);

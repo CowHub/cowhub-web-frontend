@@ -9,7 +9,7 @@ import {
 
 import CattleItemComponent from './CattleItemComponent';
 import CattleRegistrationComponent from './CattleRegistrationComponent';
-import CattleUpdateDeleteComponent from './CattleUpdateDeleteComponent';
+import CattleItemViewUpdateComponent from './CattleItemViewUpdateComponent';
 
 const mapStateToProps = (state) => {
   return {
@@ -53,7 +53,7 @@ class CattleComponent extends Component {
         </h2>
         { this.props.addCattle && <CattleRegistrationComponent/> }
         { cattle.map((item) =>
-            <CattleUpdateDeleteComponent
+            <CattleItemViewUpdateComponent
               key={ item.cattle.id }
               { ...item } />
         )}
