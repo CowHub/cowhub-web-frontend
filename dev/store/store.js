@@ -1,5 +1,5 @@
 // Redux store
-import { applyMiddleware, createStore } from 'redux';
+import { applyMiddleware, compose, createStore } from 'redux';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 
@@ -11,11 +11,15 @@ import {
 
 const initialState = {};
 
-let middleware = (process.env.NODE_ENV !== 'production') ?
-    applyMiddleware(thunk, logger()) :
-    applyMiddleware(thunk);
+let middleware = (process.env.NODE_ENV !== 'production')
+  ? applyMiddleware(thunk, logger())
+  : applyMiddleware(thunk)
 
-const store = createStore(reducers, middleware);
+const composeEnhancer = (process.env.NODE_ENV !== 'production')
+  ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+  : compose
+
+const store = createStore(reducers, initialState, composeEnhancer(middleware));
 
 // Get token if one exists
 store.dispatch(fetchToken());
