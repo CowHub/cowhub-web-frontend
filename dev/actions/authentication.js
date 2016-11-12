@@ -112,6 +112,10 @@ export let LOGOUT_USER_ERROR = 'LOGOUT_USER_ERROR';
 
 export function logoutUser() {
   let token = store.getState().authentication.token;
+  const logoutSuccess = (dispatch) => {
+    dispatch(logoutUserSuccess());
+    dispatch(removeToken());
+  };
   return (dispatch) => {
     dispatch(logoutUserPending());
     $.ajax(`${process.env.API_ENDPOINT}/user/unauthenticate`, {
@@ -120,10 +124,13 @@ export function logoutUser() {
       },
       method: 'DELETE',
     }).then((response) => {
-      dispatch(logoutUserSuccess());
-      dispatch(removeToken());
+      logoutSuccess(dispatch);
     }).catch((error) => {
-      dispatch(logoutUserError(error));
+      if (error.status === 401) {
+        logoutSuccess(dispatch);
+      } else {
+        dispatch(logoutUserError(error));
+      }
     })
   }
 }
