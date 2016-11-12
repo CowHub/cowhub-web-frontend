@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import store from '../store/store';
 
 // Token management
 export let LOAD_TOKEN = 'LOAD_TOKEN';
@@ -31,7 +32,6 @@ export let LOGIN_USER_ERROR = 'LOGIN_USER_ERROR';
 
 // params: email, password
 export function loginUser(params) {
-  console.dir(params);
   return (dispatch) => {
     dispatch(loginUserPending());
     $.ajax(`${process.env.API_ENDPOINT}/user/authenticate`, {
@@ -110,7 +110,12 @@ export let LOGOUT_USER_PENDING = 'LOGOUT_USER_PENDING';
 export let LOGOUT_USER_SUCCESS = 'LOGOUT_USER_SUCCESS';
 export let LOGOUT_USER_ERROR = 'LOGOUT_USER_ERROR';
 
-export function logoutUser(token) {
+export function logoutUser() {
+  let token = store.getState().authentication.token;
+  const logoutSuccess = (dispatch) => {
+    dispatch(logoutUserSuccess());
+    dispatch(removeToken());
+  };
   return (dispatch) => {
     dispatch(logoutUserPending());
     $.ajax(`${process.env.API_ENDPOINT}/user/unauthenticate`, {
@@ -119,10 +124,13 @@ export function logoutUser(token) {
       },
       method: 'DELETE',
     }).then((response) => {
-      dispatch(logoutUserSuccess());
-      dispatch(removeToken());
+      logoutSuccess(dispatch);
     }).catch((error) => {
-      dispatch(logoutUserError(error));
+      if (error.status === 401) {
+        logoutSuccess(dispatch);
+      } else {
+        dispatch(logoutUserError(error));
+      }
     })
   }
 }
