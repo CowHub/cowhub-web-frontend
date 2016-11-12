@@ -106,9 +106,15 @@ class CattleUpdateDeleteComponent extends Component {
         </div>
       </div>)
       :
-      (<button
+      ( (this.state.submitted) ? <div className="row">
+          <button
             onClick={ () => this.handleDelete() } className="update-component-button-delete" >
-          Delete Cattle</button>);
+          Delete Cattle</button>
+          <br/><br/>
+          </div>
+          : <button
+            onClick={ () => this.handleDelete() } className="update-component-button-delete" >
+          Delete Cattle</button> );
   }
 
   render() {
@@ -123,6 +129,7 @@ class CattleUpdateDeleteComponent extends Component {
       <div className="cattle-update-delete-component-wrapper">
         {this.state.submitted ?
           <div>
+          {!this.state.deleted && this.renderDelete()}
           <div className="cattle-update-delete-component-form" >
             <h2>
               Update Cattle
@@ -160,10 +167,10 @@ class CattleUpdateDeleteComponent extends Component {
             <button
                 onClick={ () => this.handleClick() } className="update-component-button" >
               Cancel</button>
-            <br/><br/>
+            <br/>
           </div>
           <br/>
-          {this.renderDelete()}
+          {this.state.deleted && this.renderDelete()}
           </div>
           :
           <div className="row">
