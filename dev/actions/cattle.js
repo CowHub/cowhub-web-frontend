@@ -70,7 +70,6 @@ export function registerCattle(params) {
       data: params,
     }).then((response) => {
       dispatch(registerCattleSuccess(response.cattle));
-      location.reload();
     }).catch((error) => {
       dispatch(registerCattleError(error));
     })
