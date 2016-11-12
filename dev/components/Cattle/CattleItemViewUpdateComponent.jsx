@@ -1,6 +1,6 @@
 require('./CattleItemViewUpdateComponent.scss');
 
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 import {
@@ -26,30 +26,64 @@ class CattleItemViewUpdateComponent extends CattleItemComponent {
   static displayName = 'Cattle Update Component';
   static propTypes = {
     ...CattleItemComponent.propTypes,
+    handleUpdateCattle: PropTypes.func,
   };
   static defaultProps = {
     ...CattleItemComponent.defaultProps,
-
     left: {
       style: '',
-      text: 'Register',
-      func: () => { console.log('Update'); }
+      text: 'Update',
+      func: (refs, props) => {
+        var params = {
+          country_code: refs.country_code.value ? refs.country_code.value : props.country_code,
+          herdmark: refs.herdmark.value ? refs.herdmark.value : props.herdmark,
+          check_digit: refs.check_digit.value ? refs.check_digit.value : props.check_digit,
+          individual_number: refs.individual_number.value ? refs.individual_number.value : props.individual_number,
+        }
+        props.handleUpdateCattle(props.cattle.id, params);
+      }
     },
     right: {
       style: '',
       text: 'Cancel',
-      func: () => { console.log('Cancel'); }
+      func: (state) => { console.log("cancel"); state.cancel.func(); },
+    },
+  }
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      edit: false,
+      clickUpdate: {
+        style: 'cattle-update-delete-component-button-update',
+        text: 'Update',
+        func: () => {
+          this.setState( { edit: true, } );
+        }
+      },
+      cancel: {
+        style: 'cattle-update-delete-component-button-update',
+        text: 'Cancel',
+        func: () => {
+          this.setState( { edit: false, } );
+        }
+      }
     }
   }
 
-  // handleSubmit() {
-  //   this.props.handleUpdateCattle(this.props.cattle.id, {
-  //     country_code: this.refs.country_code.value,
-  //     herdmark: this.refs.herdmark.value,
-  //     check_digit: this.refs.check_digit.value,
-  //     individual_number: this.refs.individual_number.value,
-  //   });
-  // }
+  handleUpdate() {
+    var cc = this.refs.country_code.value ? this.refs.country_code.value : this.props.country_code;
+    var h = this.refs.herdmark.value ? this.refs.herdmark.value : this.props.herdmark;
+    var cd = this.refs.check_digit.value ? this.refs.check_digit.value : this.props.check_digit;
+    var idn = this.refs.individual_number.value ? this.refs.individual_number.value : this.props.individual_number;
+    this.props.handleUpdateCattle(this.props.cattle.id, {
+      country_code: cc,
+      herdmark: h,
+      check_digit: cd,
+      individual_number: idn,
+    });
+  }
+
   //
   // handleConfirmDelete() {
   //   this.props.handleDeleteCattle(this.props.cattle.id);

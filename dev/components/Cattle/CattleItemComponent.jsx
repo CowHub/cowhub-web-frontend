@@ -86,8 +86,8 @@ class CattleItemComponent extends Component {
         </div>
         { !this.props.onlyEdit &&
           <div className='col-lg-1 cattle-item-component-button-wrapper-vertical' >
-            <button className={this.state.update.style} onClick={this.state.update.func} >
-              {this.state.update.text}</button>
+            <button className={this.state.clickUpdate.style} onClick={this.state.clickUpdate.func} >
+              {this.state.clickUpdate.text}</button>
           </div>
         }
         { this.state.edit &&
@@ -99,7 +99,7 @@ class CattleItemComponent extends Component {
               </button>
             </div>
             <div className='col-lg-6' >
-              <button className={ this.props.right.style } onClick={ this.props.right.func } >
+              <button className={ this.props.right.style } onClick={ () => {this.props.right.func(this.state)} } >
                 { this.props.right.text }
               </button>
             </div>

@@ -29,12 +29,12 @@ class CattleRegistrationComponent extends CattleItemComponent {
     onlyEdit: true,
     left: {
       text: 'Register',
-      func: (ref, props) => {
+      func: (refs, props) => {
         var params = {
-          country_code: ref.country_code.value,
-          herdmark: ref.herdmark.value,
-          check_digit: ref.check_digit.value,
-          individual_number: ref.individual_number.value,
+          country_code: refs.country_code.value,
+          herdmark: refs.herdmark.value,
+          check_digit: refs.check_digit.value,
+          individual_number: refs.individual_number.value,
         };
         props.handleRegisterCattle(params);
       }
