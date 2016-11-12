@@ -3,6 +3,8 @@ version: '2'
 services:
   db:
     image: postgres
+    volumes:
+      - ./data:/var/lib/postgres/data
   api:
     image: cowhub/cowhub-server-api
     command: /bin/bash -c 'bundle exec rake db:setup && bundle exec rails server -b 0.0.0.0 -p 8080'
@@ -11,8 +13,6 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=
       - POSTGRES_HOST=db
-    links:
-      - db
     depends_on:
       - db
     ports:
@@ -24,5 +24,7 @@ services:
       - NODE_ENV=development
     volumes:
       - .:/app
+    depends_on:
+      - api
     ports:
       - "3000:3000"
