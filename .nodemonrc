@@ -1,0 +1,9 @@
+{
+  "verbose": true,
+  "ignore": [
+    "dev/**",
+    "public/**",
+    "Dockerfile*",
+    "docker-compose*"
+  ]
+}
