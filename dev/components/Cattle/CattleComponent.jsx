@@ -9,6 +9,7 @@ import {
 
 import CattleItemComponent from './CattleItemComponent';
 import CattleRegistrationComponent from './CattleRegistrationComponent';
+import CattleUpdateDeleteComponent from './CattleUpdateDeleteComponent';
 
 const mapStateToProps = (state) => {
   return {
@@ -26,10 +27,14 @@ class CattleComponent extends Component {
 
   static displayName = 'Cattle Component';
   static propTypes = {
+    addCattle: React.PropTypes.bool.isRequired,
     cattle: React.PropTypes.arrayOf(
       React.PropTypes.shape(CattleItemComponent.propTypes.cattle)
     ).isRequired,
     fetchCattle: React.PropTypes.func.isRequired,
+  };
+  static defaultProps = {
+    addCattle: true
   };
 
   componentWillMount() {
@@ -43,12 +48,12 @@ class CattleComponent extends Component {
 
     return (
       <div className='cattle-list-component-wrapper' >
-        <CattleRegistrationComponent/>
         <h2 className='cattle-list-component-title' >
-          Registered Cattle
+          Cattle
         </h2>
+        { this.props.addCattle && <CattleRegistrationComponent/> }
         { cattle.map((item) =>
-            <CattleItemComponent
+            <CattleUpdateDeleteComponent
               key={ item.cattle.id }
               { ...item } />
         )}

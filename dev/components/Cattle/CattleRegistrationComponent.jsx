@@ -27,6 +27,14 @@ class CattleRegistrationComponent extends CattleItemComponent {
   static defaultProps = {
     ...CattleItemComponent.defaultProps,
     onlyEdit: true,
+    left: {
+      text: 'Register',
+      func: () => { console.log('Register'); }
+    },
+    right: {
+      text: 'Cancel',
+      func: () => { console.log('Cancel'); }
+    }
   };
 
   constructor(props) {
