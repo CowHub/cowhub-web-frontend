@@ -1,5 +1,4 @@
 import {
-  EXPAND_CATTLE_TOGGLE,
   FETCH_CATTLE_PENDING,
   FETCH_CATTLE_SUCCESS,
   FETCH_CATTLE_ERROR,
@@ -47,8 +46,6 @@ const cattle = (state = initialState, action) => {
       return handleDeleteCattleSuccess(state, action.id);
     case DELETE_CATTLE_ERROR:
       return handleDeleteCattleError(state, action.error);
-    case EXPAND_CATTLE_TOGGLE:
-      return handleExpandCattleToggle(state, action.id);
     default:
       return state;
   }
@@ -158,18 +155,5 @@ export function handleDeleteCattleError(state, error) {
     error,
   };
 }
-
-export function handleExpandCattleToggle(state, id) {
-  let cattle = state.cattle;
-  for (let i in cattle) {
-    if (cattle[i].cattle.id === id) {
-      cattle[i].expanded = !cattle[i].expanded;
-    }
-  }
-  return {
-    ...state,
-    cattle
-  }
-};
 
 export default cattle;

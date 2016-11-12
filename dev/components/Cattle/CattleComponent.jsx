@@ -4,7 +4,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import {
-  expandCattleToggle,
   fetchCattle,
 } from '../../actions/index';
 
@@ -19,7 +18,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    expandCattleToggle: (id) => { dispatch(expandCattleToggle(id)); },
     fetchCattle: () => { dispatch(fetchCattle()); },
   };
 };
@@ -31,8 +29,7 @@ class CattleComponent extends Component {
     cattle: React.PropTypes.arrayOf(
       React.PropTypes.shape(CattleItemComponent.propTypes.cattle)
     ).isRequired,
-    fetchCattle: React.PropTypes.func,
-    expandCattleToggle: React.PropTypes.func,
+    fetchCattle: React.PropTypes.func.isRequired,
   };
 
   componentWillMount() {
@@ -42,7 +39,6 @@ class CattleComponent extends Component {
   render() {
     let {
       cattle,
-      expandCattleToggle,
     } = this.props;
 
     return (
@@ -54,7 +50,6 @@ class CattleComponent extends Component {
         { cattle.map((item) =>
             <CattleItemComponent
               key={ item.cattle.id }
-              expandCattleToggle={ () => expandCattleToggle(item.cattle.id) }
               { ...item } />
         )}
       </div>

@@ -1,16 +1,6 @@
 import $ from 'jquery';
 import store from '../store/store';
 
-// Cattle view management
-export let EXPAND_CATTLE_TOGGLE = 'EXPAND_CATTLE_TOGGLE';
-
-export function expandCattleToggle(id) {
-  return {
-    type: EXPAND_CATTLE_TOGGLE,
-    id,
-  };
-};
-
 // Cattle fetch
 export let FETCH_CATTLE_PENDING = 'FETCH_CATTLE_PENDING';
 export let FETCH_CATTLE_SUCCESS = 'FETCH_CATTLE_SUCCESS';
