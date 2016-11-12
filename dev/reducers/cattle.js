@@ -97,9 +97,9 @@ export function handleRegisterCattlePending(state) {
 
 export function handleRegisterCattleSuccess(state, cattleNew) {
   let cattle = state.cattle;
-  cattle.push(generateCattleObject(cattleNew))
+  cattle.push(generateCattleObject(cattleNew));
   return {
-    ...state,
+    ...state.authentication,
     cattle,
   };
 }

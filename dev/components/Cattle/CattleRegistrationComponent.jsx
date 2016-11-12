@@ -29,7 +29,15 @@ class CattleRegistrationComponent extends CattleItemComponent {
     onlyEdit: true,
     left: {
       text: 'Register',
-      func: () => { console.log('Register'); }
+      func: (ref, props) => {
+        var params = {
+          country_code: ref.country_code.value,
+          herdmark: ref.herdmark.value,
+          check_digit: ref.check_digit.value,
+          individual_number: ref.individual_number.value,
+        };
+        props.handleRegisterCattle(params);
+      }
     },
     right: {
       text: 'Cancel',
@@ -40,7 +48,7 @@ class CattleRegistrationComponent extends CattleItemComponent {
   constructor(props) {
     super(props);
     this.state = {
-      edit: true
+      edit: true,
     };
   }
 

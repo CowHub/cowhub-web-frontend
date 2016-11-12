@@ -42,6 +42,10 @@ class CattleItemComponent extends Component {
     super(props)
     this.state = {
       edit: false,
+      update: {
+        style: '',
+        text: '',
+        func: () => {}},
     };
   }
 
@@ -75,20 +79,22 @@ class CattleItemComponent extends Component {
     return (
       <div className='row cattle-item-component-wrapper'>
         <div className={ `${ styleClassName } row cattle-item-component-data-wrapper` } >
-          { this.renderRef(country_code, 'col-sm-6', 'country_code', 20, 'Country Code') }
-          { this.renderRef(herdmark, 'col-sm-6', 'herdmark', 20, 'Herdmark') }
-          { this.renderRef(check_digit, 'col-sm-6', 'check_digit', 20, 'Check Digit') }
-          { this.renderRef(individual_number, 'col-sm-6', 'individual_number', 20, 'Individual Number') }
+          { this.renderRef(country_code, 'col-sm-6', 'country_code', 2, 'Country Code') }
+          { this.renderRef(herdmark, 'col-sm-6', 'herdmark', 6, 'Herdmark') }
+          { this.renderRef(check_digit, 'col-sm-6', 'check_digit', 1, 'Check Digit') }
+          { this.renderRef(individual_number, 'col-sm-6', 'individual_number', 5, 'Individual Number') }
         </div>
         { !this.props.onlyEdit &&
           <div className='col-lg-1 cattle-item-component-button-wrapper-vertical' >
-            Buttons
+            <button className={this.state.update.style} onClick={this.state.update.func} >
+              {this.state.update.text}</button>
           </div>
         }
         { this.state.edit &&
           <div className='row' >
             <div className='col-lg-6' >
-              <button className={ this.props.left.style } onClick={ this.props.left.func } >
+              <button className={ this.props.left.style }
+                onClick={ () => {this.props.left.func(this.refs, this.props)} } >
                 { this.props.left.text }
               </button>
             </div>
