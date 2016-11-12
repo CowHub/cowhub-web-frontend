@@ -102,6 +102,7 @@ export function handleRegisterCattleSuccess(state, cattleNew) {
   let cattle = state.cattle;
   cattle.push(generateCattleObject(cattleNew))
   return {
+    ...state,
     cattle,
   };
 }
@@ -143,9 +144,10 @@ export function handleDeleteCattlePending(state) {
   };
 }
 
-export function handleDeleteCattleSuccess(state, deleteCattleId) {
-  let cattle = state.cattle.filter( (c) => c.cattle.id !== deleteCattleId);
+export function handleDeleteCattleSuccess(state, id) {
+  let cattle = state.cattle.filter( (c) => c.cattle.id !== id);
   return {
+    ...state,
     cattle,
   };
 }
