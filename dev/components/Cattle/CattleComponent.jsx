@@ -27,32 +27,49 @@ class CattleComponent extends Component {
 
   static displayName = 'Cattle Component';
   static propTypes = {
-    addCattle: React.PropTypes.bool.isRequired,
     cattle: React.PropTypes.arrayOf(
       React.PropTypes.shape(CattleItemComponent.propTypes.cattle)
     ).isRequired,
     fetchCattle: React.PropTypes.func.isRequired,
   };
-  static defaultProps = {
-    addCattle: true
-  };
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      registering: false,
+    };
+  }
 
   componentWillMount() {
     this.props.fetchCattle();
   }
 
-  render() {
-    let {
-      cattle,
-    } = this.props;
+  handleRegisterEnable() {
+    this.setState({
+      registering: true,
+    })
+  }
 
+  handleRegisterDisable() {
+    this.setState({
+      registering: false,
+    })
+  }
+
+  render() {
     return (
-      <div className='cattle-list-component-wrapper' >
-        <h2 className='cattle-list-component-title' >
-          Cattle
-        </h2>
-        { this.props.addCattle && <CattleRegistrationComponent/> }
-        { cattle.map((item) =>
+      <div className='cattle-component-wrapper' >
+        <div className='row' >
+          <div className='col-lg-11 cattle-component-title' >
+            Cattle
+          </div>
+          <button aria-hidden='true' className='col-lg-1 fa fa-2x fa-plus-square-o'
+            onClick={ () => { this.handleRegisterEnable(); }} />
+        </div>
+        { this.state.registering &&
+          <CattleRegistrationComponent cancel={ () => { this.handleRegisterDisable(); } } />
+        }
+        { this.props.cattle.map((item) =>
             <CattleItemViewUpdateComponent
               key={ item.cattle.id }
               { ...item } />

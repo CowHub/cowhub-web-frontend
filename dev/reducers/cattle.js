@@ -61,7 +61,7 @@ export function handleFetchCattlePending(state) {
 const generateCattleObject = (cattle) => {
   return {
     cattle,
-    expanded: false,
+    editing: false,
   }
 };
 

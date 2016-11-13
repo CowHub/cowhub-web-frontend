@@ -7,13 +7,15 @@ import CattleItemComponent from './CattleItemComponent';
 
 import { registerCattle } from '../../actions/index';
 
-const mapStateToProps = (state) => {
-  return {};
+const mapStateToProps = (state, ownProps) => {
+  return {
+    handleRegisterCattleDisable: ownProps.cancel,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleRegisterCattle: (c) => { dispatch(registerCattle(c)) }
+    handleRegisterCattle: (c) => { dispatch(registerCattle(c)) },
   };
 };
 
@@ -28,27 +30,33 @@ class CattleRegistrationComponent extends CattleItemComponent {
     ...CattleItemComponent.defaultProps,
     onlyEdit: true,
     left: {
-      text: 'Register',
-      func: (refs, props) => {
-        var params = {
-          country_code: refs.country_code.value,
-          herdmark: refs.herdmark.value,
-          check_digit: refs.check_digit.value,
-          individual_number: refs.individual_number.value,
-        };
-        props.handleRegisterCattle(params);
+      editing: {
+        text: 'Register',
+        func: (refs, props) => {
+          props.handleRegisterCattle({
+            country_code: refs.country_code.value,
+            herdmark: refs.herdmark.value,
+            check_digit: refs.check_digit.value,
+            individual_number: refs.individual_number.value,
+          });
+        }
       }
     },
     right: {
-      text: 'Cancel',
-      func: () => { console.log('Cancel'); }
+      editing: {
+        text: 'Cancel',
+        func: (refs, props) => {
+          props.handleRegisterCattleDisable();
+        }
+      }
     }
   };
 
   constructor(props) {
     super(props);
     this.state = {
-      edit: true,
+      editing: true,
+      deleting: false,
     };
   }
 
