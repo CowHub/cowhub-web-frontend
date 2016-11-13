@@ -123,7 +123,7 @@ export function handleUpdateCattleSuccess(state, cattleUpdated) {
   let index = cattle.findIndex( (c) => { return c.cattle.id === id } );
   cattle[index] = generateCattleObject(cattleUpdated)
   return {
-    ...state,
+    ...state.authentication,
     cattle,
   };
 }
