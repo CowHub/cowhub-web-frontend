@@ -121,7 +121,7 @@ class CattleItemComponent extends Component {
           <div className='row' >
             <div className='col-lg-6' >
               <button className={ this.props.left.editing.style }
-                onClick={ () => { this.props.left.editing.func(this.refs, this.props); } } >
+                onClick={ () => { this.props.left.editing.func(this.refs, this.props); this.handleNoEditingDeleting(); } } >
                 { this.props.left.editing.text }
               </button>
             </div>
