@@ -39,6 +39,7 @@ class CattleRegistrationComponent extends CattleItemComponent {
             check_digit: refs.check_digit.value,
             individual_number: refs.individual_number.value,
           });
+          props.handleRegisterCattleDisable();
         }
       }
     },
