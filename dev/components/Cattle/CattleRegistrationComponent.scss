@@ -14,3 +14,21 @@
   margin: 4px 0;
   padding: 2px;
 }
+
+.cattle-registration-component-button-register {
+  width: 100%;
+  margin-left: 2px;
+  margin-right: 2px;
+  padding: 6px 10px;
+  background-color: #1F45FC;
+  border-radius: 3px;
+}
+
+.cattle-registration-component-button-cancel {
+  width: 100%;
+  margin-left: 2px;
+  margin-right: 2px;
+  background-color: $background-colour-dark;
+  padding: 6px 10px;
+  border-radius: 3px;
+}

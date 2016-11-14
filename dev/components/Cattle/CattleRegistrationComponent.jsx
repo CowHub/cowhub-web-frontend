@@ -31,6 +31,7 @@ class CattleRegistrationComponent extends CattleItemComponent {
     onlyEdit: true,
     left: {
       editing: {
+        style: 'cattle-registration-component-button-register',
         text: 'Register',
         func: (refs, props) => {
           props.handleRegisterCattle({
@@ -44,6 +45,7 @@ class CattleRegistrationComponent extends CattleItemComponent {
       }
     },
     right: {
+      style: 'cattle-registration-component-button-cancel',
       text: 'Cancel',
       func: (c, props) => {
         props.handleRegisterCattleDisable();

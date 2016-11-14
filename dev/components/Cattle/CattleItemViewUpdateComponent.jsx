@@ -32,6 +32,7 @@ class CattleItemViewUpdateComponent extends CattleItemComponent {
     ...CattleItemComponent.defaultProps,
     left: {
       editing: {
+        style: 'cattle-update-delete-component-button-update',
         text: 'Update',
         func: (refs, props) => {
           var params = {
@@ -44,6 +45,7 @@ class CattleItemViewUpdateComponent extends CattleItemComponent {
         }
       },
       deleting: {
+        style: 'cattle-update-delete-component-button-delete',
         text: 'Confirm Delete',
         func: (refs, props) => {
           props.handleDeleteCattle(props.cattle.id);
@@ -51,6 +53,7 @@ class CattleItemViewUpdateComponent extends CattleItemComponent {
       },
     },
     right: {
+      style: 'cattle-update-delete-component-button-cancel',
       text: 'Cancel',
       func: (cancel, props) => { cancel() },
     },
