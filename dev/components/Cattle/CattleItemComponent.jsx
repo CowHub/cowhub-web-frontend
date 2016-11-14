@@ -126,9 +126,10 @@ class CattleItemComponent extends Component {
               </button>
             </div>
             <div className='col-lg-6' >
-              <button className={ this.props.right.editing.style }
-                onClick={ () => { this.props.right.editing.func(this.refs, this.props) } } >
-                { this.props.right.editing.text }
+              <button className={ this.props.right.style }
+                onClick={ () => { this.props.right.func(
+                  () => { this.handleNoEditingDeleting() }, this.props) } } >
+                { this.props.right.text }
               </button>
             </div>
           </div>
@@ -141,12 +142,11 @@ class CattleItemComponent extends Component {
                 { this.props.left.deleting.text }
               </button>
             </div>
-            <div className='col-lg-6' >
-              <button className={ this.props.right.deleting.style }
-                onClick={ () => { this.props.right.deleting.func(this.refs, this.props) } } >
-                { this.props.right.deleting.text }
-              </button>
-            </div>
+            <button className={ this.props.right.style }
+              onClick={ () => { this.props.right.func(
+                () => { this.handleNoEditingDeleting() }, this.props) } } >
+              { this.props.right.text }
+            </button>
           </div>
         }
       </div>

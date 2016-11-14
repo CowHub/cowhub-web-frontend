@@ -44,11 +44,9 @@ class CattleRegistrationComponent extends CattleItemComponent {
       }
     },
     right: {
-      editing: {
-        text: 'Cancel',
-        func: (refs, props) => {
-          props.handleRegisterCattleDisable();
-        }
+      text: 'Cancel',
+      func: (c, props) => {
+        props.handleRegisterCattleDisable();
       }
     }
   };

@@ -51,14 +51,8 @@ class CattleItemViewUpdateComponent extends CattleItemComponent {
       },
     },
     right: {
-      editing: {
-        text: 'Cancel',
-        func: (refs, props) => { props.cancel(); },
-      },
-      deleting: {
-        text: 'Cancel',
-        func: (refs, props) => { props.cancel(); },
-      }
+      text: 'Cancel',
+      func: (cancel, props) => { cancel() },
     },
   }
 
