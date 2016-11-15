@@ -56,10 +56,10 @@ class CattleComponent extends Component {
     return (
       <div className='cattle-component-wrapper' >
         <div className='row' >
-          <div className='col-lg-11 cattle-component-title' >
+          <div className='col-md-11 cattle-component-title' >
             Cattle
           </div>
-          <div className='col-lg-1 cattle-component-buttons' >
+          <div className='col-md-1 cattle-component-buttons' >
             <button aria-hidden='true' className='fa fa-2x fa-plus-square-o'
               onClick={ () => { this.props.handleRegisterEnable(); }} />
           </div>

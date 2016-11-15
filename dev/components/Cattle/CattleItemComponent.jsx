@@ -76,10 +76,10 @@ class CattleItemComponent extends Component {
                  maxLength={ length } placeholder={ placeholder } />
         </div>
       : <div className={ `row ${style}` }>
-          <div className='col-lg-4' >
+          <div className='col-xs-4 col-sm-5' >
             { placeholder }
           </div>
-          <div className='col-lg-8' >
+          <div className='col-xs-8 col-sm-7' >
             { value }
           </div>
         </div>
@@ -101,51 +101,60 @@ class CattleItemComponent extends Component {
       deleting,
     } = this.props;
 
-    const styleClassName = (this.props.onlyEdit) ? 'col-lg-12' : 'col-lg-11'
+    const showButtons = !onlyEdit && !onlyDelete && !editing && !deleting;
+    const styleClassName = showButtons ? 'col-xs-10 col-sm-11' : 'col-xs-12'
     return (
       <div className='row cattle-item-component-wrapper'>
         <div className={ `${ styleClassName } row cattle-item-component-data-wrapper` } >
-          { this.renderRef(country_code, 'col-sm-6', 'country_code', 2, 'Country Code') }
-          { this.renderRef(herdmark, 'col-sm-6', 'herdmark', 6, 'Herdmark') }
-          { this.renderRef(check_digit, 'col-sm-6', 'check_digit', 1, 'Check Digit') }
-          { this.renderRef(individual_number, 'col-sm-6', 'individual_number', 5, 'Individual Number') }
+          { this.renderRef(country_code, 'col-sm-6 cattle-item-component-data-value',
+                           'country_code', 2, 'Country Code')
+          }
+          { this.renderRef(herdmark, 'col-sm-6 cattle-item-component-data-value',
+                           'herdmark', 6, 'Herdmark')
+          }
+          { this.renderRef(check_digit, 'col-sm-6 cattle-item-component-data-value',
+                           'check_digit', 1, 'Check Digit')
+          }
+          { this.renderRef(individual_number, 'col-sm-6 cattle-item-component-data-value',
+                           'individual_number', 5, 'Individual Number')
+          }
         </div>
-        { !onlyEdit && !onlyDelete &&
-          <div className='col-lg-1 cattle-item-component-button-wrapper-vertical' >
+        { showButtons &&
+          <div className='col-xs-2 col-sm-1 cattle-item-component-button-wrapper-vertical' >
             <button className='fa fa-2x fa-pencil-square-o' onClick={ () => { this.props.handleEditCattleEnable(id); } } />
             <button className='fa fa-2x fa-trash-o' onClick={ () => { this.props.handleDeleteCattleEnable(id); } } />
           </div>
         }
         { (editing || onlyEdit) &&
-          <div className='row' >
-            <div className='col-lg-6 cattle-item-component-edit-delete' >
-              <button className={ this.props.left.editing.style }
-                onClick={ () => { this.props.left.editing.func(this.refs, this.props); } } >
-                { this.props.left.editing.text }
-              </button>
-            </div>
-            <div className='col-lg-6 cattle-item-component-edit-delete' >
-              <button className={ this.props.right.editing.style }
-                onClick={ () => { this.props.right.editing.func(this.refs, this.props) } } >
-                { this.props.right.editing.text }
-              </button>
-            </div>
+          <div className='col-xs-6 cattle-item-component-edit-delete' >
+            <button className={ this.props.left.editing.style }
+              onClick={ () => { this.props.left.editing.func(this.refs, this.props); } } >
+              { this.props.left.editing.text }
+            </button>
+          </div>
+        }
+        { (editing || onlyEdit) &&
+          <div className='col-xs-6 cattle-item-component-edit-delete' >
+            <button className={ this.props.right.editing.style }
+              onClick={ () => { this.props.right.editing.func(this.refs, this.props) } } >
+              { this.props.right.editing.text }
+            </button>
           </div>
         }
         { (deleting || onlyDelete) &&
-          <div className='row' >
-            <div className='col-lg-6 cattle-item-component-edit-delete' >
-              <button className={ this.props.left.deleting.style }
-                onClick={ () => { this.props.left.deleting.func(this.refs, this.props); } } >
-                { this.props.left.deleting.text }
-              </button>
-            </div>
-            <div className='col-lg-6 cattle-item-component-edit-delete' >
-              <button className={ this.props.right.deleting.style }
-                onClick={ () => { this.props.right.deleting.func(this.refs, this.props) } } >
-                { this.props.right.deleting.text }
-              </button>
-            </div>
+          <div className='col-xs-6 cattle-item-component-edit-delete' >
+            <button className={ this.props.left.deleting.style }
+              onClick={ () => { this.props.left.deleting.func(this.refs, this.props); } } >
+              { this.props.left.deleting.text }
+            </button>
+          </div>
+        }
+        { (deleting || onlyDelete) &&
+          <div className='col-xs-6 cattle-item-component-edit-delete' >
+            <button className={ this.props.right.deleting.style }
+              onClick={ () => { this.props.right.deleting.func(this.refs, this.props) } } >
+              { this.props.right.deleting.text }
+            </button>
           </div>
         }
       </div>
