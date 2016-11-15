@@ -35,8 +35,8 @@ class AppWrapper extends Component {
       </ul>
       :
       <ul className="nav navbar-nav navbar-right">
-        <li><Link to='/user/login' >Login</Link></li>
-        <li><Link to='/user/signup' >Sign Up</Link></li>
+        <li><Link to='/user/login' className='navbar-link' >Login</Link></li>
+        <li><Link to='/user/signup' className='navbar-link' >Sign Up</Link></li>
       </ul>
       ;
   }

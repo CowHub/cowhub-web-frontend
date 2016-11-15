@@ -21,18 +21,24 @@ class App extends Component {
 
   static displayName = 'CowHub';
 
+  handleAreLoggedIn() {
+    if (!store.getState().authentication.token) {
+      window.location = '/user/login';
+    };
+  }
+
   render() {
     return (
       <Provider store={store}>
         <Router history={browserHistory} >
           <Route path='/' component={AppWrapper} >
-            <IndexRoute component={CattleComponent} />
+            <IndexRoute onEnter={ () => { this.handleAreLoggedIn() } } component={CattleComponent} />
             <Route path='user'>
               <Route path='login' component={LoginComponent} />
               <Route path='signup' component={SignUpComponent} />
             </Route>
             <Route path='cattle'>
-              <IndexRoute component={CattleComponent} />
+              <IndexRoute onEnter={ () => { this.handleAreLoggedIn() } } component={CattleComponent} />
             </Route>
           </Route>
         </Router>
