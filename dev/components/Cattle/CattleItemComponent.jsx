@@ -76,10 +76,10 @@ class CattleItemComponent extends Component {
                  maxLength={ length } placeholder={ placeholder } />
         </div>
       : <div className={ `row ${style}` }>
-          <div className='col-xs-4 col-sm-5' >
+          <div className='col-xs-6 col-sm-5' >
             { placeholder }
           </div>
-          <div className='col-xs-8 col-sm-7' >
+          <div className='col-xs-6 col-sm-7' >
             { value }
           </div>
         </div>
@@ -121,12 +121,12 @@ class CattleItemComponent extends Component {
         </div>
         { showButtons &&
           <div className='col-xs-2 col-sm-1 cattle-item-component-button-wrapper-vertical' >
-            <button className='fa fa-2x fa-pencil-square-o' onClick={ () => { this.props.handleEditCattleEnable(id); } } />
-            <button className='fa fa-2x fa-trash-o' onClick={ () => { this.props.handleDeleteCattleEnable(id); } } />
+            <button className='cattle-item-component-button-item fa fa-2x fa-pencil-square-o' onClick={ () => { this.props.handleEditCattleEnable(id); } } />
+            <button className='cattle-item-component-button-item fa fa-2x fa-trash-o' onClick={ () => { this.props.handleDeleteCattleEnable(id); } } />
           </div>
         }
         { (editing || onlyEdit) &&
-          <div className='col-xs-6 cattle-item-component-edit-delete' >
+          <div className='col-xs-6' >
             <button className={ this.props.left.editing.style }
               onClick={ () => { this.props.left.editing.func(this.refs, this.props); } } >
               { this.props.left.editing.text }
@@ -134,7 +134,7 @@ class CattleItemComponent extends Component {
           </div>
         }
         { (editing || onlyEdit) &&
-          <div className='col-xs-6 cattle-item-component-edit-delete' >
+          <div className='col-xs-6' >
             <button className={ this.props.right.editing.style }
               onClick={ () => { this.props.right.editing.func(this.refs, this.props) } } >
               { this.props.right.editing.text }
@@ -142,7 +142,7 @@ class CattleItemComponent extends Component {
           </div>
         }
         { (deleting || onlyDelete) &&
-          <div className='col-xs-6 cattle-item-component-edit-delete' >
+          <div className='col-xs-6' >
             <button className={ this.props.left.deleting.style }
               onClick={ () => { this.props.left.deleting.func(this.refs, this.props); } } >
               { this.props.left.deleting.text }
@@ -150,7 +150,7 @@ class CattleItemComponent extends Component {
           </div>
         }
         { (deleting || onlyDelete) &&
-          <div className='col-xs-6 cattle-item-component-edit-delete' >
+          <div className='col-xs-6' >
             <button className={ this.props.right.deleting.style }
               onClick={ () => { this.props.right.deleting.func(this.refs, this.props) } } >
               { this.props.right.deleting.text }

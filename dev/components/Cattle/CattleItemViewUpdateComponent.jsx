@@ -36,7 +36,7 @@ class CattleItemViewUpdateComponent extends CattleItemComponent {
     ...CattleItemComponent.defaultProps,
     left: {
       editing: {
-        style: 'cattle-update-delete-component-button-update',
+        style: 'cattle-item-component-edit-submit',
         text: 'Update',
         func: (refs, props) => {
           props.handleUpdateCattle(props.cattle.id, {
@@ -48,19 +48,19 @@ class CattleItemViewUpdateComponent extends CattleItemComponent {
         }
       },
       deleting: {
-        style: 'cattle-update-delete-component-button-delete',
+        style: 'cattle-item-component-delete-submit',
         text: 'Confirm Delete',
         func: (refs, props) => { props.handleDeleteCattle(props.cattle.id); }
       },
     },
     right: {
       editing: {
-        style: 'cattle-update-delete-component-button-cancel',
+        style: 'cattle-item-component-edit-cancel',
         text: 'Cancel',
         func: (refs, props) => { props.handleEditCattleDisable(props.cattle.id); },
       },
       deleting: {
-        style: 'cattle-update-delete-component-button-cancel',
+        style: 'cattle-item-component-delete-cancel',
         text: 'Cancel',
         func: (refs, props) => { props.handleDeleteCattleDisable(props.cattle.id); },
       }

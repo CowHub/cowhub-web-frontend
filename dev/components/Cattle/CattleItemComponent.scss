@@ -2,6 +2,7 @@
 @import "../../style/fonts";
 
 .cattle-item-component-wrapper {
+  background-color: $background-colour-light;
   border: 2px solid black;
   box-shadow: 0 0 8px #aaa;
   margin: 10px 0;
@@ -21,6 +22,10 @@
 .cattle-item-component-data-value {
   line-height: 2em;
   margin: 4px 0;
+}
+
+.cattle-item-component-button-item {
+  background-color: inherit;
 }
 
 .cattle-item-component-edit-delete {
