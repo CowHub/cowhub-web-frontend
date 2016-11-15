@@ -1,7 +1,12 @@
 // Backgrounds
-$background-colour: #fff;
+$background-colour: #f6f6f6;
 $background-colour-light: lighten($background-colour, 10%);
 $background-colour-dark: darken($background-colour, 10%);
 
+// Navbar
+$navbar-colour-background: #444;
+$navbar-colour-text: #fff;
+
 // Text
 $text-colour-default: #000;
+$text-colour-light: #000;

@@ -29,7 +29,6 @@ if (module.hot) {
   module.hot.accept('../reducers', () => {
     const nextReducers = require('../reducers/index');
     store.replaceReducer(nextReducers);
-    console.clear()
   });
 }
 

@@ -5,8 +5,7 @@
   "scripts": {
     "build": "webpack --config webpack.prod.config.js",
     "dev": "nodemon --config .nodemonrc app-server.js",
-    "start": "node app-server.js",
-    "tar": "cp public/.* dist/; cp public/index.html dist/; tar -cvf dist.tar.gz dist app-server.js node_modules"
+    "start": "node app-server.js"
   },
   "dependencies": {
     "babel-core": "^6.17.0",
@@ -33,6 +32,7 @@
     "postcss-loader": "^1.0.0",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
+    "react-dropdown": "^1.1.0",
     "react-redux": "^4.4.5",
     "react-router": "^2.8.1",
     "react-router-redux": "^4.0.6",

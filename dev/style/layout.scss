@@ -21,12 +21,12 @@ button {
 body {
   margin: 0;
   min-height: calc(100vh);
-  padding-top: 60px;
+  padding-top: 50px;
   width: calc(100vw);
 }
 
 button {
-  border: 1px solid black;
+  border: 0;
   cursor: pointer;
   margin: auto;
   outline: none;
@@ -39,4 +39,9 @@ button {
 .btn:visited {
   box-shadow: none !important;
   outline: none !important;
+}
+
+.row {
+  margin-left: 0;
+  margin-right: 0;
 }

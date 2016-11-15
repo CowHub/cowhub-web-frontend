@@ -1,14 +1,24 @@
 @import "../style/colours.scss";
 
 .content-wrapper {
-  margin-top: 20px;
+  padding: 20px 0;
 }
 
-.navbar-link {
-  color: $text-colour-default !important;
+%navbar-text {
+  color: $navbar-colour-text !important;
 }
 
 .navbar-btn {
   background: inherit;
   border: none;
+}
+
+.app-nav,
+.navbar-link {
+  @extend %navbar-text;
+}
+
+.app-nav {
+  background-color: $navbar-colour-background !important;
+  border-color: $background-colour-light !important;
 }

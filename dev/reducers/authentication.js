@@ -1,5 +1,3 @@
-import * as Authentication from '../actions/authentication'
-
 import {
   LOAD_TOKEN,
   STORE_TOKEN,

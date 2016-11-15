@@ -30,14 +30,15 @@ class AppWrapper extends Component {
   renderUserLinks() {
     return this.props.token ?
       <ul className="nav navbar-nav navbar-right">
-        <li><Link className='navbar-link' to='/user/profile' >Profile</Link></li>
-        <li><button className='btn navbar-btn' onClick={ () => this.props.handleLogout() } >Logout</button></li>
+        {/* <li><Link className='navbar-link' to='/cattle' >Cattle</Link></li> */}
+        <li><button className='btn navbar-btn navbar-link' onClick={ () => this.props.handleLogout() } >Logout</button></li>
       </ul>
       :
       <ul className="nav navbar-nav navbar-right">
         <li><Link to='/user/login' >Login</Link></li>
         <li><Link to='/user/signup' >Sign Up</Link></li>
-      </ul>;
+      </ul>
+      ;
   }
 
   render() {
@@ -45,7 +46,7 @@ class AppWrapper extends Component {
       <div>
         {/* HEADER HERE */}
         {/* <!-- Fixed navbar --> */}
-        <nav className="navbar navbar-default navbar-fixed-top">
+        <nav className="app-nav navbar navbar-default navbar-fixed-top">
           <div className="container">
             <div className="navbar-header">
               <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -54,17 +55,17 @@ class AppWrapper extends Component {
                 <span className="icon-bar" />
                 <span className="icon-bar" />
               </button>
-              <Link className="navbar-brand" to='/' >CowHub</Link>
+              <Link className="navbar-brand navbar-link" to='/' >CowHub</Link>
             </div>
             <div id="navbar" className="navbar-collapse collapse">
-            { this.renderUserLinks() }
+              { this.renderUserLinks() }
             </div>
             {/* <!--/.nav-collapse --> */}
           </div>
         </nav>
 
         {/* CONTENT HERE */}
-        <div className="content-wrapper" >
+        <div className="container content-wrapper" >
           { this.props.children }
         </div>
 

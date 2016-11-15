@@ -1,0 +1,46 @@
+@import "../../style/colours";
+@import "../../style/fonts";
+
+.cattle-item-component-wrapper {
+  background-color: $background-colour-light;
+  border: 2px solid black;
+  box-shadow: 0 0 8px #aaa;
+  margin: 10px 0;
+  padding: 10px 0;
+
+
+  &:last-child {
+    border-bottom: 1px solid black;
+  }
+}
+
+.cattle-item-component-data-wrapper {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.cattle-item-component-data-value {
+  line-height: 2em;
+  margin: 4px 0;
+}
+
+.cattle-item-component-button-item {
+  background-color: inherit;
+}
+
+.cattle-item-component-edit-delete {
+  text-align: center;
+}
+
+.cattle-item-component-button-wrapper-vertical {
+}
+
+.cattle-item-component-input {
+  box-sizing: border-box;
+  border: 1px solid $background-colour-dark;
+  border-radius: 2px;
+  font-family: $font-family-default;
+  margin: 10px 0;
+  padding: 8px 6px;
+  width: 100%;
+}

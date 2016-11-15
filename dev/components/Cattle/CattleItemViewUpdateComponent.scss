@@ -1,0 +1,54 @@
+@import "../../style/colours.scss";
+@import "../../style/fonts.scss";
+
+.cattle-update-delete-component-wrapper {
+  margin: auto;
+  max-width: 800px;
+  text-align: center;
+}
+
+.cattle-update-delete-component-form {
+  border-color: black;
+  border-style: groove;
+  border-radius: 10px;
+  position:relative;
+}
+
+.update-component-input {
+}
+
+.active {
+  background: #0041C2;
+  color: #ffffff;
+}
+
+%cattle-item-component-button-submit {
+  width: 100%;
+  padding: 6px 8px;
+}
+
+.cattle-item-component-edit-submit {
+  @extend %cattle-item-component-button-submit;
+  background-color: #40bf40;
+  border-radius: 3px;
+  color: white;
+}
+
+.cattle-item-component-delete-submit {
+  @extend %cattle-item-component-button-submit;
+  background-color: #E50909;
+  border-radius: 3px;
+  color: white;
+}
+
+.cattle-item-component-edit-cancel,
+.cattle-item-component-delete-cancel {
+  @extend %cattle-item-component-button-submit;
+  background-color: $background-colour-dark;
+  border-radius: 3px;
+}
+
+.cattle-update-delete-component-data-label {
+  margin: 10px 5px;
+  padding:  9px 5px;
+}
