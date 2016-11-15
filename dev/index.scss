@@ -1,3 +1,7 @@
+// Font-awesome
+$fa-font-path: "../node_modules/font-awesome/fonts";
+@import "../node_modules/font-awesome/scss/font-awesome.scss";
+
 // Core site
 @import "./style/layout.scss";
 @import "./style/fonts.scss";
