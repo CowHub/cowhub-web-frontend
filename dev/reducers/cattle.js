@@ -24,6 +24,7 @@ const initialState = {
   error: null,
   fetching: false,
   fetched: false,
+  registering: false,
 };
 
 const cattle = (state = initialState, action) => {

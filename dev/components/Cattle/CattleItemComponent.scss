@@ -1,13 +1,10 @@
 @import "../../style/colours";
 @import "../../style/fonts";
 
-%cattle-item {
-  color: black;
-}
-
 .cattle-item-component-wrapper {
-  @extend %cattle-item;
-  border-top: 1px solid black;
+  border: 2px solid black;
+  box-shadow: 0 0 8px #aaa;
+  margin: 10px 0;
   padding: 10px 0;
 
 
@@ -34,12 +31,4 @@
   margin: 10px 5px;
   padding: 8px 6px;
   width: 100%;
-}
-
-.cattle-item-component-tag {
-  @extend %cattle-item;
-}
-
-.cattle-item-component-name {
-  @extend %cattle-item;
 }

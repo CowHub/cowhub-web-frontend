@@ -58,6 +58,8 @@ class CattleItemComponent extends Component {
   static defaultProps = {
     onlyEdit: false,
     onlyDelete: false,
+    editing: false,
+    deleting: false,
     cattle: {
       id: -1,
       check_digit: -1,
@@ -140,7 +142,7 @@ class CattleItemComponent extends Component {
             </div>
             <div className='col-lg-6 cattle-item-component-edit-delete' >
               <button className={ this.props.right.deleting.style }
-                onClick={ () => { this.props.right.func(this.refs, this.props) } } >
+                onClick={ () => { this.props.right.deleting.func(this.refs, this.props) } } >
                 { this.props.right.deleting.text }
               </button>
             </div>

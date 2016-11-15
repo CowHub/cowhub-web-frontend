@@ -14,7 +14,7 @@ import CattleItemViewUpdateComponent from './CattleItemViewUpdateComponent';
 
 const mapStateToProps = (state) => {
   return {
-    ids: state.cattle.cattle.map(c => c.cattle.id),
+    cattleSize: state.cattle.cattle.length,
     registering: state.cattle.registering,
   };
 };
@@ -30,7 +30,7 @@ class CattleComponent extends Component {
 
   static displayName = 'Cattle Component';
   static propTypes = {
-    ids: PropTypes.arrayOf(PropTypes.number).isRequired,
+    cattleSize: PropTypes.number.isRequired,
     registering: PropTypes.bool.isRequired,
     fetchCattle: PropTypes.func.isRequired,
     handleRegisterEnable: PropTypes.func.isRequired,
@@ -40,6 +40,18 @@ class CattleComponent extends Component {
     this.props.fetchCattle();
   }
 
+  renderCattle() {
+    let cattle = [];
+    if (this.props.cattleSize > 0) {
+      let counter = 0;
+      while (counter < this.props.cattleSize) {
+        cattle.push(<CattleItemViewUpdateComponent key={ counter } id={ counter } />);
+        counter += 1;
+      }
+    }
+    return cattle;
+  }
+
   render() {
     return (
       <div className='cattle-component-wrapper' >
@@ -47,12 +59,14 @@ class CattleComponent extends Component {
           <div className='col-lg-11 cattle-component-title' >
             Cattle
           </div>
-          <button aria-hidden='true' className='col-lg-1 fa fa-2x fa-plus-square-o'
-            onClick={ () => { this.props.handleRegisterEnable(); }} />
+          <div className='col-lg-1 cattle-component-buttons' >
+            <button aria-hidden='true' className='fa fa-2x fa-plus-square-o'
+              onClick={ () => { this.props.handleRegisterEnable(); }} />
+          </div>
         </div>
         { this.props.registering && <CattleRegistrationComponent /> }
         { this.props.registering && <hr /> }
-        { this.props.ids.map(id => <CattleItemViewUpdateComponent key={ id } id={ id } /> ) }
+        { this.renderCattle() }
       </div>
     )
   }
