@@ -118,15 +118,14 @@ class CattleItemComponent extends Component {
           <div className='row' >
             <div className='col-lg-6 cattle-item-component-edit-delete' >
               <button className={ this.props.left.editing.style }
-                onClick={ () => { this.props.left.editing.func(this.refs, this.props); this.handleNoEditingDeleting(); } } >
+                onClick={ () => { this.props.left.editing.func(this.refs, this.props); } } >
                 { this.props.left.editing.text }
               </button>
             </div>
             <div className='col-lg-6 cattle-item-component-edit-delete' >
-              <button className={ this.props.right.style }
-                onClick={ () => { this.props.right.func(
-                  () => { this.handleNoEditingDeleting() }, this.props) } } >
-                { this.props.right.text }
+              <button className={ this.props.right.editing.style }
+                onClick={ () => { this.props.right.func(this.refs, this.props) } } >
+                { this.props.right.editing.text }
               </button>
             </div>
           </div>
@@ -140,10 +139,9 @@ class CattleItemComponent extends Component {
               </button>
             </div>
             <div className='col-lg-6 cattle-item-component-edit-delete' >
-              <button className={ this.props.right.style }
-                onClick={ () => { this.props.right.func(
-                  () => { this.handleNoEditingDeleting() }, this.props) } } >
-                { this.props.right.text }
+              <button className={ this.props.right.deleting.style }
+                onClick={ () => { this.props.right.func(this.refs, this.props) } } >
+                { this.props.right.deleting.text }
               </button>
             </div>
           </div>

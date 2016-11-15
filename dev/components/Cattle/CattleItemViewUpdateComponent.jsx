@@ -39,21 +39,18 @@ class CattleItemViewUpdateComponent extends CattleItemComponent {
         style: 'cattle-update-delete-component-button-update',
         text: 'Update',
         func: (refs, props) => {
-          var params = {
-            country_code: refs.country_code.value ? refs.country_code.value : props.cattle.country_code,
-            herdmark: refs.herdmark.value ? refs.herdmark.value : props.cattle.herdmark,
-            check_digit: refs.check_digit.value ? refs.check_digit.value : props.cattle.check_digit,
-            individual_number: refs.individual_number.value ? refs.individual_number.value : props.cattle.individual_number,
-          }
-          props.handleUpdateCattle(props.cattle.id, params);
+          props.handleUpdateCattle(props.cattle.id, {
+            country_code: refs.country_code.value,
+            herdmark: refs.herdmark.value,
+            check_digit: refs.check_digit.value,
+            individual_number: refs.individual_number.value,
+          });
         }
       },
       deleting: {
         style: 'cattle-update-delete-component-button-delete',
         text: 'Confirm Delete',
-        func: (refs, props) => {
-          props.handleDeleteCattle(props.cattle.id);
-        }
+        func: (refs, props) => { props.handleDeleteCattle(props.cattle.id); }
       },
     },
     right: {
