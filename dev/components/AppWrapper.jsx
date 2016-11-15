@@ -27,11 +27,16 @@ class AppWrapper extends Component {
     handleLogout: React.PropTypes.func,
   };
 
+  handleLogout() {
+    this.props.handleLogout();
+    window.location = '/';
+  }
+
   renderUserLinks() {
     return this.props.token ?
       <ul className="nav navbar-nav navbar-right">
         {/* <li><Link className='navbar-link' to='/cattle' >Cattle</Link></li> */}
-        <li><button className='btn navbar-btn navbar-link' onClick={ () => this.props.handleLogout() } >Logout</button></li>
+        <li><button className='btn navbar-btn navbar-link' onClick={ () => this.handleLogout() } >Logout</button></li>
       </ul>
       :
       <ul className="nav navbar-nav navbar-right">
