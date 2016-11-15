@@ -6,18 +6,18 @@ import { connect } from 'react-redux';
 import CattleItemComponent from './CattleItemComponent';
 
 import {
-  registerCattle
+  registerCattle,
+  registerCattleDisable,
 } from '../../actions';
 
 const mapStateToProps = (state, ownProps) => {
-  return {
-    handleRegisterCattleDisable: ownProps.cancel,
-  };
+  return {};
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     handleRegisterCattle: (c) => { dispatch(registerCattle(c)) },
+    handleRegisterDisable: () => { dispatch(registerCattleDisable()) },
   };
 };
 
@@ -27,6 +27,7 @@ class CattleRegistrationComponent extends CattleItemComponent {
   static propTypes = {
     ...CattleItemComponent.propTypes,
     handleRegisterCattle: React.PropTypes.func,
+    handleRegisterDisable: React.PropTypes.func,
   };
   static defaultProps = {
     ...CattleItemComponent.defaultProps,
@@ -42,7 +43,6 @@ class CattleRegistrationComponent extends CattleItemComponent {
             check_digit: refs.check_digit.value,
             individual_number: refs.individual_number.value,
           });
-          props.handleRegisterCattleDisable();
         }
       }
     },
@@ -50,9 +50,7 @@ class CattleRegistrationComponent extends CattleItemComponent {
       editing: {
         style: 'cattle-registration-component-button-cancel',
         text: 'Cancel',
-        func: (refs, props) => {
-          props.handleRegisterCattleDisable();
-        }
+        func: (refs, props) => { props.handleRegisterDisable(); }
       }
     }
   };

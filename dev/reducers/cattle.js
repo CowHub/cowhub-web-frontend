@@ -1,4 +1,6 @@
 import {
+  REGISTER_CATTLE_ENABLE,
+  REGISTER_CATTLE_DISABLE,
   EDIT_CATTLE_ENABLE,
   EDIT_CATTLE_DISABLE,
   DELETE_CATTLE_ENABLE,
@@ -26,6 +28,10 @@ const initialState = {
 
 const cattle = (state = initialState, action) => {
   switch (action.type) {
+    case REGISTER_CATTLE_ENABLE:
+      return handleRegisterCattleEnable(state);
+    case REGISTER_CATTLE_DISABLE:
+      return handleRegisterCattleDisable(state);
     case EDIT_CATTLE_ENABLE:
       return handleEditCattleEnable(state, action.id);
     case EDIT_CATTLE_DISABLE:
@@ -62,6 +68,20 @@ const cattle = (state = initialState, action) => {
       return state;
   }
 };
+
+export function handleRegisterCattleEnable(state) {
+  return {
+    ...state,
+    registering: true,
+  }
+}
+
+export function handleRegisterCattleDisable(state) {
+  return {
+    ...state,
+    registering: false,
+  }
+}
 
 export function handleEditCattleEnable(state, id) {
   let cattle = state.cattle;

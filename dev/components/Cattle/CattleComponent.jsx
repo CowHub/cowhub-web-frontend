@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 
 import {
   fetchCattle,
+  registerCattleEnable,
 } from '../../actions/index';
 
 import CattleItemComponent from './CattleItemComponent';
@@ -14,12 +15,14 @@ import CattleItemViewUpdateComponent from './CattleItemViewUpdateComponent';
 const mapStateToProps = (state) => {
   return {
     ids: state.cattle.cattle.map(c => c.cattle.id),
+    registering: state.cattle.registering,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchCattle: () => { dispatch(fetchCattle()); },
+    handleRegisterEnable: () => { dispatch(registerCattleEnable()); },
   };
 };
 
@@ -28,30 +31,13 @@ class CattleComponent extends Component {
   static displayName = 'Cattle Component';
   static propTypes = {
     ids: PropTypes.arrayOf(PropTypes.number).isRequired,
+    registering: PropTypes.bool.isRequired,
     fetchCattle: PropTypes.func.isRequired,
+    handleRegisterEnable: PropTypes.func.isRequired,
   };
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      registering: false,
-    };
-  }
 
   componentWillMount() {
     this.props.fetchCattle();
-  }
-
-  handleRegisterEnable() {
-    this.setState({
-      registering: true,
-    })
-  }
-
-  handleRegisterDisable() {
-    this.setState({
-      registering: false,
-    })
   }
 
   render() {
@@ -62,16 +48,11 @@ class CattleComponent extends Component {
             Cattle
           </div>
           <button aria-hidden='true' className='col-lg-1 fa fa-2x fa-plus-square-o'
-            onClick={ () => { this.handleRegisterEnable(); }} />
+            onClick={ () => { this.props.handleRegisterEnable(); }} />
         </div>
-        { this.state.registering &&
-          <CattleRegistrationComponent cancel={ () => { this.handleRegisterDisable(); } } />
-        }
-        { this.props.ids.map((id) =>
-            <CattleItemViewUpdateComponent
-              key={ id }
-              id={ id } />
-        )}
+        { this.props.registering && <CattleRegistrationComponent /> }
+        { this.props.registering && <hr /> }
+        { this.props.ids.map(id => <CattleItemViewUpdateComponent key={ id } id={ id } /> ) }
       </div>
     )
   }

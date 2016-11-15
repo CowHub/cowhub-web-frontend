@@ -19,6 +19,22 @@ export function editCattleDisable(id) {
   };
 };
 
+// Cattle edit
+export let REGISTER_CATTLE_ENABLE = 'REGISTER_CATTLE_ENABLE';
+export let REGISTER_CATTLE_DISABLE = 'REGISTER_CATTLE_DISABLE';
+
+export function registerCattleEnable() {
+  return {
+    type: REGISTER_CATTLE_ENABLE,
+  };
+};
+
+export function registerCattleDisable() {
+  return {
+    type: REGISTER_CATTLE_DISABLE,
+  };
+};
+
 // Cattle delete
 export let DELETE_CATTLE_ENABLE = 'DELETE_CATTLE_ENABLE';
 export let DELETE_CATTLE_DISABLE = 'DELETE_CATTLE_DISABLE';
