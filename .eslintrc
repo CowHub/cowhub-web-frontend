@@ -35,7 +35,7 @@
     "indent": [2, 2, { "SwitchCase": 1 }],
     "max-depth": [1, 4],
     "max-statements": [1, 30],
-    "complexity": [1, 15],
+    "complexity": [1, 30],
     "quotes": 0,
     "eol-last": 1,
     "dot-notation": 0,

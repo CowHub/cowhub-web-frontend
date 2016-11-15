@@ -1,18 +1,34 @@
 require('./CattleItemComponent.scss');
 
 import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
 
-const buttonType = {
-  editing: {
-    style: PropTypes.string,
-    text: PropTypes.string.isRequired,
-    func: PropTypes.func.isRequired,
-  },
-  deleting: {
-    style: PropTypes.string,
-    text: PropTypes.string.isRequired,
-    func: PropTypes.func.isRequired,
-  },
+import {
+  editCattleEnable,
+  deleteCattleEnable,
+} from '../../actions'
+
+const buttonObject = {
+  style: PropTypes.string,
+  text: PropTypes.string.isRequired,
+  func: PropTypes.func.isRequired,
+};
+const buttonTypes = {
+  editing: buttonObject,
+  deleting: buttonObject,
+};
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    ...state.cattle.cattle[ownProps.id],
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    handleEditCattleEnable: (id) => { dispatch(editCattleEnable(id)); },
+    handleDeleteCattleEnable: (id) => { dispatch(deleteCattleEnable(id)); },
+  }
 };
 
 class CattleItemComponent extends Component {
@@ -21,8 +37,10 @@ class CattleItemComponent extends Component {
   static propTypes = {
     onlyEdit: PropTypes.bool.isRequired,
     onlyDelete: PropTypes.bool.isRequired,
-    left: PropTypes.shape(buttonType).isRequired,
-    right: PropTypes.shape(buttonType).isRequired,
+    editing: PropTypes.bool.isRequired,
+    deleting: PropTypes.bool.isRequired,
+    left: PropTypes.shape(buttonTypes).isRequired,
+    right: PropTypes.shape(buttonTypes).isRequired,
     cattle: PropTypes.shape({
       breed: PropTypes.string,
       check_digit: PropTypes.number.isRequired,
@@ -34,6 +52,8 @@ class CattleItemComponent extends Component {
       individual_number: PropTypes.number.isRequired,
       name: PropTypes.string,
     }).isRequired,
+    handleEditCattleEnable: PropTypes.func.isRequired,
+    handleDeleteCattleEnable: PropTypes.func.isRequired,
   };
   static defaultProps = {
     onlyEdit: false,
@@ -47,37 +67,8 @@ class CattleItemComponent extends Component {
     }
   };
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      editing: false,
-      deleting: false,
-    };
-  }
-
-  handleDeleting() {
-    this.setState({
-      editing: false,
-      deleting: true,
-    })
-  }
-
-  handleEditing() {
-    this.setState({
-      editing: true,
-      deleting: false,
-    })
-  }
-
-  handleNoEditingDeleting() {
-    this.setState({
-      editing: false,
-      deleting: false,
-    })
-  }
-
   renderRef(value, style = '', ref, length, placeholder) {
-    return (this.state.editing)
+    return (this.props.editing || this.props.onlyEdit)
       ? <div className={ style } >
           <input ref={ ref } className={ 'cattle-item-component-input' } type={ ref }
                  maxLength={ length } placeholder={ placeholder } />
@@ -93,7 +84,7 @@ class CattleItemComponent extends Component {
   }
 
   render() {
-    let {
+    const {
       country_code,
       herdmark,
       check_digit,
@@ -101,6 +92,12 @@ class CattleItemComponent extends Component {
       individual_number,
       name,
     } = this.props.cattle;
+    const {
+      onlyEdit,
+      onlyDelete,
+      editing,
+      deleting,
+    } = this.props;
 
     const styleClassName = (this.props.onlyEdit) ? 'col-lg-12' : 'col-lg-11'
     return (
@@ -111,13 +108,13 @@ class CattleItemComponent extends Component {
           { this.renderRef(check_digit, 'col-sm-6', 'check_digit', 1, 'Check Digit') }
           { this.renderRef(individual_number, 'col-sm-6', 'individual_number', 5, 'Individual Number') }
         </div>
-        { !this.props.onlyEdit && !this.props.onlyDelete &&
+        { !onlyEdit && !onlyDelete &&
           <div className='col-lg-1 cattle-item-component-button-wrapper-vertical' >
-            <button className='fa fa-2x fa-pencil-square-o' onClick={ () => { this.handleEditing(); } } />
-            <button className='fa fa-2x fa-trash-o' onClick={ () => { this.handleDeleting(); } } />
+            <button className='fa fa-2x fa-pencil-square-o' onClick={ () => { this.props.handleEditCattleEnable(id); } } />
+            <button className='fa fa-2x fa-trash-o' onClick={ () => { this.props.handleDeleteCattleEnable(id); } } />
           </div>
         }
-        { this.state.editing &&
+        { (editing || onlyEdit) &&
           <div className='row' >
             <div className='col-lg-6 cattle-item-component-edit-delete' >
               <button className={ this.props.left.editing.style }
@@ -134,7 +131,7 @@ class CattleItemComponent extends Component {
             </div>
           </div>
         }
-        { this.state.deleting &&
+        { (deleting || onlyDelete) &&
           <div className='row' >
             <div className='col-lg-6 cattle-item-component-edit-delete' >
               <button className={ this.props.left.deleting.style }
@@ -157,4 +154,4 @@ class CattleItemComponent extends Component {
 
 };
 
-export default CattleItemComponent;
+export default connect(mapStateToProps, mapDispatchToProps)(CattleItemComponent);

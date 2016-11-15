@@ -1,4 +1,8 @@
 import {
+  EDIT_CATTLE_ENABLE,
+  EDIT_CATTLE_DISABLE,
+  DELETE_CATTLE_ENABLE,
+  DELETE_CATTLE_DISABLE,
   FETCH_CATTLE_PENDING,
   FETCH_CATTLE_SUCCESS,
   FETCH_CATTLE_ERROR,
@@ -22,6 +26,14 @@ const initialState = {
 
 const cattle = (state = initialState, action) => {
   switch (action.type) {
+    case EDIT_CATTLE_ENABLE:
+      return handleEditCattleEnable(state, action.id);
+    case EDIT_CATTLE_DISABLE:
+      return handleEditCattleDisable(state, action.id);
+    case DELETE_CATTLE_ENABLE:
+      return handleDeleteCattleEnable(state, action.id);
+    case DELETE_CATTLE_DISABLE:
+      return handleDeleteCattleDisable(state, action.id);
     case FETCH_CATTLE_PENDING:
       return handleFetchCattlePending(state);
     case FETCH_CATTLE_SUCCESS:
@@ -51,6 +63,56 @@ const cattle = (state = initialState, action) => {
   }
 };
 
+export function handleEditCattleEnable(state, id) {
+  let cattle = state.cattle;
+  for (let i in cattle) {
+    if (cattle[i].cattle.id == id) {
+      cattle[i].editing = true;
+      cattle[i].deleting = false;
+    }
+  }
+  return {
+    ...state,
+    cattle,
+  }
+};
+
+export function handleEditCattleDisable(state, id) {
+  let cattle = state.cattle;
+  for (let i in cattle) {
+    if (cattle[i].cattle.id == id) { cattle[i].editing = false; }
+  }
+  return {
+    ...state,
+    cattle,
+  }
+};
+
+export function handleDeleteCattleEnable(state, id) {
+  let cattle = state.cattle;
+  for (let i in cattle) {
+    if (cattle[i].cattle.id == id) {
+      cattle[i].editing = false;
+      cattle[i].deleting = true;
+    }
+  }
+  return {
+    ...state,
+    cattle,
+  }
+};
+
+export function handleDeleteCattleDisable(state, id) {
+  let cattle = state.cattle;
+  for (let i in cattle) {
+    if (cattle[i].cattle.id == id) { cattle[i].deleting = false; }
+  }
+  return {
+    ...state,
+    cattle,
+  }
+};
+
 export function handleFetchCattlePending(state) {
   return {
     ...state,
@@ -62,6 +124,7 @@ const generateCattleObject = (cattle) => {
   return {
     cattle,
     editing: false,
+    deleting: false,
   }
 };
 
@@ -97,7 +160,7 @@ export function handleRegisterCattlePending(state) {
 
 export function handleRegisterCattleSuccess(state, cattleNew) {
   let cattle = state.cattle;
-  cattle.push(generateCattleObject(cattleNew));
+  cattle.unshift(generateCattleObject(cattleNew));
   return {
     ...state.authentication,
     cattle,

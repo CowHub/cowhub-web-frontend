@@ -1,6 +1,6 @@
 require('./CattleComponent.scss');
 
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 import {
@@ -13,7 +13,7 @@ import CattleItemViewUpdateComponent from './CattleItemViewUpdateComponent';
 
 const mapStateToProps = (state) => {
   return {
-    ...state.cattle
+    ids: state.cattle.cattle.map(c => c.cattle.id),
   };
 };
 
@@ -27,10 +27,8 @@ class CattleComponent extends Component {
 
   static displayName = 'Cattle Component';
   static propTypes = {
-    cattle: React.PropTypes.arrayOf(
-      React.PropTypes.shape(CattleItemComponent.propTypes.cattle)
-    ).isRequired,
-    fetchCattle: React.PropTypes.func.isRequired,
+    ids: PropTypes.arrayOf(PropTypes.number).isRequired,
+    fetchCattle: PropTypes.func.isRequired,
   };
 
   constructor(props) {
@@ -69,10 +67,10 @@ class CattleComponent extends Component {
         { this.state.registering &&
           <CattleRegistrationComponent cancel={ () => { this.handleRegisterDisable(); } } />
         }
-        { this.props.cattle.map((item) =>
+        { this.props.ids.map((id) =>
             <CattleItemViewUpdateComponent
-              key={ item.cattle.id }
-              { ...item } />
+              key={ id }
+              id={ id } />
         )}
       </div>
     )

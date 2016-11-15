@@ -1,6 +1,42 @@
 import $ from 'jquery';
 import store from '../store/store';
 
+// Cattle edit
+export let EDIT_CATTLE_ENABLE = 'EDIT_CATTLE_ENABLE';
+export let EDIT_CATTLE_DISABLE = 'EDIT_CATTLE_DISABLE';
+
+export function editCattleEnable(id) {
+  return {
+    type: EDIT_CATTLE_ENABLE,
+    id
+  };
+};
+
+export function editCattleDisable(id) {
+  return {
+    type: EDIT_CATTLE_DISABLE,
+    id
+  };
+};
+
+// Cattle delete
+export let DELETE_CATTLE_ENABLE = 'DELETE_CATTLE_ENABLE';
+export let DELETE_CATTLE_DISABLE = 'DELETE_CATTLE_DISABLE';
+
+export function deleteCattleEnable(id) {
+  return {
+    type: DELETE_CATTLE_ENABLE,
+    id
+  };
+};
+
+export function deleteCattleDisable(id) {
+  return {
+    type: DELETE_CATTLE_DISABLE,
+    id
+  };
+};
+
 // Cattle fetch
 export let FETCH_CATTLE_PENDING = 'FETCH_CATTLE_PENDING';
 export let FETCH_CATTLE_SUCCESS = 'FETCH_CATTLE_SUCCESS';

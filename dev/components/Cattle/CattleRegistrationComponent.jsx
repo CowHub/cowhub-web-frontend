@@ -5,7 +5,9 @@ import { connect } from 'react-redux';
 
 import CattleItemComponent from './CattleItemComponent';
 
-import { registerCattle } from '../../actions/index';
+import {
+  registerCattle
+} from '../../actions';
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -52,14 +54,6 @@ class CattleRegistrationComponent extends CattleItemComponent {
       }
     }
   };
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      editing: true,
-      deleting: false,
-    };
-  }
 
 };
 
