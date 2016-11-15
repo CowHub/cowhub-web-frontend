@@ -40,10 +40,18 @@ class CattleItemViewUpdateComponent extends CattleItemComponent {
         text: 'Update',
         func: (refs, props) => {
           props.handleUpdateCattle(props.cattle.id, {
-            country_code: refs.country_code.value,
-            herdmark: refs.herdmark.value,
-            check_digit: refs.check_digit.value,
-            individual_number: refs.individual_number.value,
+            country_code: refs.country_code.value
+                ? refs.country_code.value
+                : props.country_code,
+            herdmark: refs.herdmark.value
+                ? refs.herdmark.value
+                : props.herdmark,
+            check_digit: refs.check_digit.value
+                ? refs.check_digit.value
+                : props.check_digit,
+            individual_number: refs.individual_number.value
+                ? refs.individual_number.value
+                : props.individual_number,
           });
         }
       },
