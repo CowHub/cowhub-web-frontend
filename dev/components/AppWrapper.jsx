@@ -36,6 +36,7 @@ class AppWrapper extends Component {
     return this.props.token ?
       <ul className="nav navbar-nav navbar-right">
         {/* <li><Link className='navbar-link' to='/cattle' >Cattle</Link></li> */}
+        <li><Link to='/cattle/find' className='navbar-link' >Find</Link></li>
         <li><button className='btn navbar-btn navbar-link' onClick={ () => this.handleLogout() } >Logout</button></li>
       </ul>
       :
