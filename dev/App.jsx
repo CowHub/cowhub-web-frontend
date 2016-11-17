@@ -16,6 +16,7 @@ import SignUpComponent from './components/User/SignUpComponent'
 
 // Cattle
 import CattleComponent from './components/Cattle/CattleComponent'
+import CattleRecognitionComponent from './components/Cattle/CattleRecognitionComponent'
 
 class App extends Component {
 
@@ -39,6 +40,7 @@ class App extends Component {
             </Route>
             <Route path='cattle'>
               <IndexRoute onEnter={ this.handleAreLoggedIn } component={CattleComponent} />
+              <Route path='find' component={CattleRecognitionComponent} />
             </Route>
           </Route>
         </Router>
