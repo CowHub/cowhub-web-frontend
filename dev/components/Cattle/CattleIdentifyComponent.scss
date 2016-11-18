@@ -1,0 +1,25 @@
+@import "../../style/colours.scss";
+@import "../../style/fonts.scss";
+
+.cattle-recognition-component-wrapper {
+  margin: auto;
+  max-width: 600px;
+  text-align: center;
+}
+
+.cattle-recognition-component-title {
+  font-size: $font-size-bigger;
+}
+
+.cattle-recognition-component-dropzone {
+  margin: 20px auto;
+
+  div {
+    background-color: $background-colour-light;
+    width: 100% !important;
+
+    div {
+      margin: 50px auto;
+    }
+  }
+}
