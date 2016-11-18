@@ -219,7 +219,137 @@ export function deleteCattleSuccess(id) {
 
 export function deleteCattleError(error) {
   return {
-    type: DELETE_CATLEE_ERROR,
+    type: DELETE_CATTLE_ERROR,
     error,
   };
 }
+
+// Cattle image upload
+export let UPLOAD_CATTLE_IMAGE_PENDING = 'UPLOAD_CATTLE_IMAGE_PENDING';
+export let UPLOAD_CATTLE_IMAGE_SUCCESS = 'UPLOAD_CATTLE_IMAGE_SUCCESS';
+export let UPLOAD_CATTLE_IMAGE_ERROR = 'UPLOAD_CATTLE_IMAGE_ERROR';
+
+export function uploadCattleImage(id, params) {
+  let token = store.getState().authentication.token;
+  return (dispatch) => {
+    dispatch(uploadCattleImagePending());
+    $.ajax(`${process.env.API_ENDPOINT}/cattle/${id}/images`, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+      method: 'POST',
+      data: params
+    }).then((response) => {
+      dispatch(uploadCattleImageSuccess(response.image));
+    }).catch((error) => {
+      dispatch(uploadCattleImageError(error));
+    })
+  };
+};
+
+export function uploadCattleImagePending() {
+  return {
+    type: UPLOAD_CATTLE_IMAGE_PENDING,
+  };
+};
+
+export function uploadCattleImageSuccess(image) {
+  return {
+    type: UPLOAD_CATTLE_IMAGE_SUCCESS,
+    image,
+  };
+};
+
+export function uploadCattleImageError(error) {
+  return {
+    type: UPLOAD_CATTLE_IMAGE_ERROR,
+    error,
+  };
+};
+
+// Cattle image match
+export let MATCH_CATTLE_IMAGE_PENDING = 'MATCH_CATTLE_IMAGE_PENDING';
+export let MATCH_CATTLE_IMAGE_SUCCESS = 'MATCH_CATTLE_IMAGE_SUCCESS';
+export let MATCH_CATTLE_IMAGE_ERROR = 'MATCH_CATTLE_IMAGE_ERROR';
+
+export function matchCattleImage(params) {
+  let token = store.getState().authentication.token;
+  return (dispatch) => {
+    dispatch(matchCattleImagePending());
+    $.ajax(`${process.env.API_ENDPOINT}/image/verify`, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+      method: 'POST',
+      data: params
+    }).then((response) => {
+      dispatch(matchCattleImageSuccess(response.verificationID));
+    }).catch((error) => {
+      dispatch(matchCattleImageError(error));
+    })
+  };
+};
+
+export function matchCattleImagePending() {
+  return {
+    type: MATCH_CATTLE_IMAGE_PENDING,
+  };
+};
+
+export function matchCattleImageSuccess(id) {
+  return {
+    type: MATCH_CATTLE_IMAGE_SUCCESS,
+    id,
+  };
+};
+
+export function matchCattleImageError(error) {
+  return {
+    type: MATCH_CATTLE_IMAGE_ERROR,
+    error,
+  };
+};
+
+// Cattle image match
+export let FETCH_CATTLE_MATCH_PENDING = 'FETCH_CATTLE_MATCH_PENDING';
+export let FETCH_CATTLE_MATCH_SUCCESS = 'FETCH_CATTLE_MATCH_SUCCESS';
+export let FETCH_CATTLE_MATCH_ERROR = 'FETCH_CATTLE_MATCH_ERROR';
+
+export function fetchCattleMatch(id) {
+  let token = store.getState().authentication.token;
+  return (dispatch) => {
+    dispatch(fetchCattleMatchPending());
+    $.ajax(`${process.env.API_ENDPOINT}/image/verify/${id}`, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+      method: 'GET'
+    }).then((response) => {
+      if (!response.cattle)
+        return;
+      dispatch(fetchCattleMatchSuccess(response.cattle));
+    }).catch((error) => {
+      dispatch(fetchCattleMatchError(error));
+    })
+  };
+};
+
+export function fetchCattleMatchPending() {
+  return {
+    type: FETCH_CATTLE_MATCH_PENDING,
+  };
+};
+
+export function fetchCattleMatchSuccess(cattle) {
+  return {
+    type: FETCH_CATTLE_MATCH_SUCCESS,
+    cattle,
+  };
+};
+
+export function fetchCattleMatchError(error) {
+  return {
+    type: FETCH_CATTLE_MATCH_ERROR,
+    error,
+  };
+};

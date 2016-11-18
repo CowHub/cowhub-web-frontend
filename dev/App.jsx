@@ -15,8 +15,9 @@ import LoginComponent from './components/User/LoginComponent'
 import SignUpComponent from './components/User/SignUpComponent'
 
 // Cattle
-import CattleComponent from './components/Cattle/CattleComponent'
+import CattleIndexComponent from './components/Cattle/CattleIndexComponent'
 import CattleRecognitionComponent from './components/Cattle/CattleRecognitionComponent'
+import CattleIdentifyComponent from './components/Cattle/CattleIdentifyComponent'
 
 class App extends Component {
 
@@ -33,14 +34,15 @@ class App extends Component {
       <Provider store={store}>
         <Router history={browserHistory} >
           <Route path='/' component={AppWrapper} >
-            <IndexRoute onEnter={ this.handleAreLoggedIn } component={CattleComponent} />
+            <IndexRoute onEnter={ () => { this.handleAreLoggedIn() } } component={CattleIndexComponent} />
             <Route path='user'>
               <Route path='login' component={LoginComponent} />
               <Route path='signup' component={SignUpComponent} />
             </Route>
             <Route path='cattle'>
-              <IndexRoute onEnter={ this.handleAreLoggedIn } component={CattleComponent} />
               <Route path='find' component={CattleRecognitionComponent} />
+              <Route path='identify' component={CattleIdentifyComponent} />
+              <IndexRoute onEnter={ () => { this.handleAreLoggedIn() } } component={CattleIndexComponent} />
             </Route>
           </Route>
         </Router>
