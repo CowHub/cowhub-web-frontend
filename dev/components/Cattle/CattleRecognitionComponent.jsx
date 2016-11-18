@@ -10,6 +10,14 @@ import {
   fetchCattleMatchResult,
 } from '../../actions';
 
+const mapStateToProps = (state) => {
+  return {};
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {};
+}
+
 class CattleRecognitionComponent extends Component {
 
   static displayName = 'Cattle Recognition Component';
