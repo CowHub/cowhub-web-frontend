@@ -8,6 +8,9 @@ import {
   FETCH_CATTLE_PENDING,
   FETCH_CATTLE_SUCCESS,
   FETCH_CATTLE_ERROR,
+  FETCH_CATTLE_IMAGE_PENDING,
+  FETCH_CATTLE_IMAGE_SUCCESS,
+  FETCH_CATTLE_IMAGE_ERROR,
   REGISTER_CATTLE_PENDING,
   REGISTER_CATTLE_SUCCESS,
   REGISTER_CATTLE_ERROR,
@@ -47,6 +50,12 @@ const cattle = (state = initialState, action) => {
       return handleFetchCattleSuccess(state, action.cattle);
     case FETCH_CATTLE_ERROR:
       return handleFetchCattleError(state, action.error);
+    case FETCH_CATTLE_IMAGE_PENDING:
+      return handleFetchCattleImagePending(state);
+    case FETCH_CATTLE_IMAGE_SUCCESS:
+      return handleFetchCattleImageSuccess(state, action.images);
+    case FETCH_CATTLE_IMAGE_ERROR:
+      return handleFetchCattleImageError(state, action.error);
     case REGISTER_CATTLE_PENDING:
       return handleRegisterCattlePending(state);
     case REGISTER_CATTLE_SUCCESS:
@@ -170,6 +179,26 @@ export function handleFetchCattleError(state, error) {
     fetching: false,
     fetched: false,
     error,
+  };
+};
+
+export function handleFetchCattleImagePending(state) {
+  return {
+    ...state,
+  };
+};
+
+export function handleFetchCattleImageSuccess(state, images) {
+  console.log("handleFetchCattleImageSuccess");
+  console.log(images);
+  return {
+    ...state,
+  }
+}
+
+export function handleFetchCattleImageError(state, error) {
+  return {
+    ...state,
   };
 };
 

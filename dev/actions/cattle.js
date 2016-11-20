@@ -95,6 +95,48 @@ export function fetchCattleError(error) {
   };
 };
 
+// Cattle fetch
+export let FETCH_CATTLE_IMAGE_PENDING = 'FETCH_CATTLE_IMAGE_PENDING';
+export let FETCH_CATTLE_IMAGE_SUCCESS = 'FETCH_CATTLE_IMAGE_SUCCESS';
+export let FETCH_CATTLE_IMAGE_ERROR = 'FETCH_CATTLE_IMAGE_ERROR';
+
+export function fetchCattleImage(id) {
+  let token = store.getState().authentication.token;
+  return (dispatch) => {
+    dispatch(fetchCattleImagePending());
+    $.ajax(`${process.env.API_ENDPOINT}/cattle/${id}/image`, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+      method: 'GET'
+    }).then((response) => {
+      dispatch(fetchCattleImageSuccess(response.images));
+    }).catch((error) => {
+      dispatch(fetchCattleImageError(error));
+    })
+  };
+};
+
+export function fetchCattleImagePending() {
+  return {
+    type: FETCH_CATTLE_IMAGE_PENDING,
+  };
+};
+
+export function fetchCattleImageSuccess(images) {
+  return {
+    type: FETCH_CATTLE_IMAGE_SUCCESS,
+    images,
+  };
+};
+
+export function fetchCattleImageError(error) {
+  return {
+    type: FETCH_CATTLE_IMAGE_ERROR,
+    error,
+  };
+};
+
 // Cattle register
 export let REGISTER_CATTLE_PENDING = 'REGISTER_CATTLE_PENDING';
 export let REGISTER_CATTLE_SUCCESS = 'REGISTER_CATTLE_SUCCESS';

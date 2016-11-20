@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import {
   editCattleEnable,
   deleteCattleEnable,
+  fetchCattleImage,
 } from '../../actions'
 
 const buttonObject = {
@@ -28,6 +29,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     handleEditCattleEnable: (id) => { dispatch(editCattleEnable(id)); },
     handleDeleteCattleEnable: (id) => { dispatch(deleteCattleEnable(id)); },
+    fetchCattleImage: (id) => { dispatch(fetchCattleImage(id)); },
   }
 };
 
@@ -51,9 +53,11 @@ class CattleItemComponent extends Component {
       id: PropTypes.number.isRequired,
       individual_number: PropTypes.number.isRequired,
       name: PropTypes.string,
+      image: PropTypes.tring,
     }).isRequired,
     handleEditCattleEnable: PropTypes.func.isRequired,
     handleDeleteCattleEnable: PropTypes.func.isRequired,
+    fetchCattleImage: PropTypes.func.isRequired,
   };
   static defaultProps = {
     onlyEdit: false,
@@ -68,6 +72,10 @@ class CattleItemComponent extends Component {
       individual_number: -1,
     }
   };
+
+  componentWillMount() {
+    this.props.cattle.id !== -1 && this.props.fetchCattleImage(this.props.cattle.id);
+  }
 
   renderRef(value, style = '', ref, length, placeholder) {
     return (this.props.editing || this.props.onlyEdit)
