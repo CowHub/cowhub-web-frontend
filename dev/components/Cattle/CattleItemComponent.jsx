@@ -53,7 +53,7 @@ class CattleItemComponent extends Component {
       id: PropTypes.number.isRequired,
       individual_number: PropTypes.number.isRequired,
       name: PropTypes.string,
-      image: PropTypes.string,
+      images: PropTypes.arrayOf(PropTypes.string),
     }).isRequired,
     handleEditCattleEnable: PropTypes.func.isRequired,
     handleDeleteCattleEnable: PropTypes.func.isRequired,
