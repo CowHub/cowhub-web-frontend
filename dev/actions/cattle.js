@@ -104,7 +104,7 @@ export function fetchCattleImage(id) {
   let token = store.getState().authentication.token;
   return (dispatch) => {
     dispatch(fetchCattleImagePending());
-    $.ajax(`${process.env.API_ENDPOINT}/cattle/${id}/image`, {
+    $.ajax(`${process.env.API_ENDPOINT}/cattle/${id}/images`, {
       headers: {
         'Authorization': `Bearer ${token}`,
       },
