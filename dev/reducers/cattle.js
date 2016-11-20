@@ -53,7 +53,7 @@ const cattle = (state = initialState, action) => {
     case FETCH_CATTLE_IMAGE_PENDING:
       return handleFetchCattleImagePending(state);
     case FETCH_CATTLE_IMAGE_SUCCESS:
-      return handleFetchCattleImageSuccess(state, action.images);
+      return handleFetchCattleImageSuccess(state, action.id, action.images);
     case FETCH_CATTLE_IMAGE_ERROR:
       return handleFetchCattleImageError(state, action.error);
     case REGISTER_CATTLE_PENDING:
@@ -188,17 +188,21 @@ export function handleFetchCattleImagePending(state) {
   };
 };
 
-export function handleFetchCattleImageSuccess(state, images) {
-  console.log("handleFetchCattleImageSuccess");
-  console.log(images);
+export function handleFetchCattleImageSuccess(state, id, images) {
+  let cattle = state.cattle;
+  let index = cattle.findIndex( (c) => { return c.cattle.id === id } );
+  cattle[index].cattle.images = images.map((i) => { return i.image_uri });
+  cattle.unshift( cattle.pop() );
   return {
     ...state,
+    cattle
   }
 }
 
 export function handleFetchCattleImageError(state, error) {
   return {
     ...state,
+    error,
   };
 };
 
@@ -210,7 +214,7 @@ export function handleRegisterCattlePending(state) {
 
 export function handleRegisterCattleSuccess(state, cattleNew) {
   let cattle = state.cattle;
-  cattle.unshift(generateCattleObject(cattleNew));
+  cattle.push(generateCattleObject(cattleNew));
   return {
     ...state.authentication,
     cattle,
