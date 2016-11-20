@@ -110,7 +110,7 @@ export function fetchCattleImage(id) {
       },
       method: 'GET'
     }).then((response) => {
-      dispatch(fetchCattleImageSuccess(response.images));
+      dispatch(fetchCattleImageSuccess(id, response.images));
     }).catch((error) => {
       dispatch(fetchCattleImageError(error));
     })
@@ -123,9 +123,10 @@ export function fetchCattleImagePending() {
   };
 };
 
-export function fetchCattleImageSuccess(images) {
+export function fetchCattleImageSuccess(id, images) {
   return {
     type: FETCH_CATTLE_IMAGE_SUCCESS,
+    id,
     images,
   };
 };
