@@ -55,6 +55,7 @@ class CattleItemComponent extends Component {
       name: PropTypes.string,
       images: PropTypes.arrayOf(PropTypes.string),
     }).isRequired,
+    index: PropTypes.number.isRequired,
     handleEditCattleEnable: PropTypes.func.isRequired,
     handleDeleteCattleEnable: PropTypes.func.isRequired,
     fetchCattleImage: PropTypes.func.isRequired,
@@ -70,7 +71,8 @@ class CattleItemComponent extends Component {
       country_code: '',
       herdmark: '',
       individual_number: -1,
-    }
+    },
+    index: -1,
   };
 
   componentWillMount() {
@@ -95,9 +97,11 @@ class CattleItemComponent extends Component {
   }
 
   renderImage(style=''){
-    <div className={style}>
-      <Image source={{uri: cattle.images[0]}}/>
-    </div>
+    return (
+      <div className={style}>
+        <Image id="image" source={{uri: this.props.cattle.images[this.props.index]}}/>
+      </div>
+    )
   }
 
   render() {
@@ -121,7 +125,7 @@ class CattleItemComponent extends Component {
     const styleClassName = showButtons ? 'col-xsnull0 col-sm-11' : 'col-xs-12'
     const styleClassNameImage = images && images.length > 0 ? 'col-sm-2' : '';
     const styleClassNameRef = images && !images.length ? 'col-sm-6' : 'col-sm-5';
-    const styleClassNameButtons = showButtons ? 'col-xs-10 col-sm-11' : 'col-xs-12'
+    const styleClassNameButtons = showButtons ? 'col-xs-10 col-sm-11' : 'col-xs-12';
     return (
       <div className='row cattle-item-component-wrapper'>
         <div className={ `` } >

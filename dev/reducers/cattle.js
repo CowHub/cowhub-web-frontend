@@ -5,6 +5,7 @@ import {
   EDIT_CATTLE_DISABLE,
   DELETE_CATTLE_ENABLE,
   DELETE_CATTLE_DISABLE,
+  DISPLAY_NEXT_IMAGES,
   FETCH_CATTLE_PENDING,
   FETCH_CATTLE_SUCCESS,
   FETCH_CATTLE_ERROR,
@@ -44,6 +45,8 @@ const cattle = (state = initialState, action) => {
       return handleDeleteCattleEnable(state, action.id);
     case DELETE_CATTLE_DISABLE:
       return handleDeleteCattleDisable(state, action.id);
+    case DISPLAY_NEXT_IMAGES:
+      return handleDisplayNextImages(state);
     case FETCH_CATTLE_PENDING:
       return handleFetchCattlePending(state);
     case FETCH_CATTLE_SUCCESS:
@@ -142,6 +145,21 @@ export function handleDeleteCattleDisable(state, id) {
     cattle,
   }
 };
+
+export function handleDisplayNextImages(state) {
+  let cattle = state.cattle;
+  cattle.map((c) => {
+    let length = c.cattle.images.length;
+    if (!length) { return; }
+    let index = c.index;
+    index = index === length - 1 ? 0 : index + 1;
+    c.index = index
+  })
+  return {
+    ...state.authentication,
+    cattle,
+  }
+}
 
 export function handleFetchCattlePending(state) {
   return {

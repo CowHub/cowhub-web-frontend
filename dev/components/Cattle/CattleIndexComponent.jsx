@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import {
   fetchCattle,
   registerCattleEnable,
+  displayNextImages,
 } from '../../actions/index';
 
 import CattleItemComponent from './CattleItemComponent';
@@ -23,6 +24,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     fetchCattle: () => { dispatch(fetchCattle()); },
     handleRegisterEnable: () => { dispatch(registerCattleEnable()); },
+    handleDisplayNextImages: () => { dispatch(displayNextImages()); },
   };
 };
 
@@ -34,10 +36,16 @@ class CattleComponent extends Component {
     registering: PropTypes.bool.isRequired,
     fetchCattle: PropTypes.func.isRequired,
     handleRegisterEnable: PropTypes.func.isRequired,
+    handleDisplayNextImages: PropTypes.func.isRequired,
   };
 
   componentWillMount() {
     this.props.fetchCattle();
+    this.startTimer();
+  }
+
+  startTimer(){
+    setInterval(this.props.handleDisplayNextImages, 60000);
   }
 
   renderCattle() {

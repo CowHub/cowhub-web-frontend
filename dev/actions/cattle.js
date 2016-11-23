@@ -53,6 +53,14 @@ export function deleteCattleDisable(id) {
   };
 };
 
+export let DISPLAY_NEXT_IMAGES = 'DISPLAY_NEXT_IMAGES';
+// Cattle change image displayName
+export function displayNextImages() {
+  return {
+    type: DISPLAY_NEXT_IMAGES,
+  }
+}
+
 // Cattle fetch
 export let FETCH_CATTLE_PENDING = 'FETCH_CATTLE_PENDING';
 export let FETCH_CATTLE_SUCCESS = 'FETCH_CATTLE_SUCCESS';
