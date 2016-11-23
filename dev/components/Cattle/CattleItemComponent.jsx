@@ -29,7 +29,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     handleEditCattleEnable: (id) => { dispatch(editCattleEnable(id)); },
     handleDeleteCattleEnable: (id) => { dispatch(deleteCattleEnable(id)); },
-    fetchCattleImage: (id) => { dispatch(fetchCattleImage(id)); },
+    handleFetchCattleImage: (id) => { dispatch(fetchCattleImage(id)); },
   }
 };
 
@@ -58,7 +58,7 @@ class CattleItemComponent extends Component {
     index: PropTypes.number,
     handleEditCattleEnable: PropTypes.func.isRequired,
     handleDeleteCattleEnable: PropTypes.func.isRequired,
-    fetchCattleImage: PropTypes.func.isRequired,
+    handleFetchCattleImage: PropTypes.func.isRequired,
   };
   static defaultProps = {
     onlyEdit: false,
@@ -75,7 +75,7 @@ class CattleItemComponent extends Component {
   };
 
   componentWillMount() {
-    this.props.cattle.id !== -1 && this.props.fetchCattleImage(this.props.cattle.id);
+    this.props.cattle.id !== -1 && this.props.handleFetchCattleImage(this.props.cattle.id);
   }
 
   renderRef(value, style = '', ref, length, placeholder) {
