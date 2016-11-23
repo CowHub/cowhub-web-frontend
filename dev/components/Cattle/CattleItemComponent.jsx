@@ -55,7 +55,7 @@ class CattleItemComponent extends Component {
       name: PropTypes.string,
       images: PropTypes.arrayOf(PropTypes.string),
     }).isRequired,
-    index: PropTypes.number.isRequired,
+    index: PropTypes.number,
     handleEditCattleEnable: PropTypes.func.isRequired,
     handleDeleteCattleEnable: PropTypes.func.isRequired,
     fetchCattleImage: PropTypes.func.isRequired,
@@ -72,7 +72,6 @@ class CattleItemComponent extends Component {
       herdmark: '',
       individual_number: -1,
     },
-    index: -1,
   };
 
   componentWillMount() {
