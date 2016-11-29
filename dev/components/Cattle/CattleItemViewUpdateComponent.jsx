@@ -8,6 +8,8 @@ import {
   deleteCattle,
   editCattleDisable,
   deleteCattleDisable,
+  uploadImageCattleDisable,
+  uploadCattleImage,
 } from '../../actions';
 
 import CattleItemComponent from './CattleItemComponent';
@@ -20,8 +22,11 @@ const mapDispatchToProps = (dispatch) => {
   return {
     handleUpdateCattle: (id, p) => { dispatch(updateCattle(id, p)); },
     handleDeleteCattle: (id) => { dispatch(deleteCattle(id)); },
+    handleUploadCattleImage: (id, p) => { dispatch(uploadCattleImage(id, p)); },
+    handleDeleteCattle: (id) => { dispatch(deleteCattle(id)); },
     handleEditCattleDisable: (id) => { dispatch(editCattleDisable(id)); },
     handleDeleteCattleDisable: (id) => { dispatch(deleteCattleDisable(id)); },
+    handleUploadImageCattleDisable: (id) => { dispatch(uploadImageCattleDisable(id)); },
   };
 };
 
@@ -60,6 +65,12 @@ class CattleItemViewUpdateComponent extends CattleItemComponent {
         text: 'Confirm Delete',
         func: (refs, props) => { props.handleDeleteCattle(props.cattle.id); }
       },
+      uploading: {
+        style: 'cattle-item-component-uploading-submit',
+        text: 'Add Images',
+        func: (refs, props) => { console.log(props.toUpload); props.toUpload.map((f) =>
+          { console.log(f); console.log("here"); props.handleUploadCattleImage(props.cattle.id, {data: f}) }); }
+      },
     },
     right: {
       editing: {
@@ -71,6 +82,11 @@ class CattleItemViewUpdateComponent extends CattleItemComponent {
         style: 'cattle-item-component-delete-cancel',
         text: 'Cancel',
         func: (refs, props) => { props.handleDeleteCattleDisable(props.cattle.id); },
+      },
+      uploading: {
+        style: 'cattle-item-component-uploading-cancel',
+        text: 'Cancel',
+        func: (refs, props) => { props.handleUploadImageCattleDisable(props.cattle.id); },
       }
     },
   }

@@ -32,6 +32,24 @@
   text-align: center;
 }
 
+.cattle-item-component-dropzone-wrapper {
+  margin: auto;
+  text-align: center;
+}
+
+.cattle-item-component-dropzone {
+  margin: 20px auto;
+
+  div {
+    background-color: $background-colour-light;
+    width: 100% !important;
+
+    div {
+      margin: 50px auto;
+    }
+  }
+}
+
 .cattle-item-component-button-wrapper-vertical {
 }
 

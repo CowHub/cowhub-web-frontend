@@ -53,6 +53,23 @@ export function deleteCattleDisable(id) {
   };
 };
 
+// Cattle edit
+export let UPLOAD_CATTLE_IMAGE_ENABLE = 'UPLOAD_CATTLE_IMAGE_ENABLE';
+export let UPLOAD_CATTLE_IMAGE_DISABLE = 'UPLOAD_CATTLE_IMAGE_DISABLE';
+
+export function uploadImageCattleEnable(id) {
+  return {
+    type: UPLOAD_CATTLE_IMAGE_ENABLE,
+    id,
+  };
+};
+
+export function uploadImageCattleDisable(id) {
+  return {
+    type: UPLOAD_CATTLE_IMAGE_DISABLE,
+    id,
+  };
+};
 export let DISPLAY_NEXT_IMAGES = 'DISPLAY_NEXT_IMAGES';
 // Cattle change image displayName
 export function displayNextImages() {
@@ -289,9 +306,9 @@ export function uploadCattleImage(id, params) {
         'Authorization': `Bearer ${token}`,
       },
       method: 'POST',
-      data: params
+      data: params,
     }).then((response) => {
-      dispatch(uploadCattleImageSuccess(response.image));
+      dispatch(uploadCattleImageSuccess(id, response.image));
     }).catch((error) => {
       dispatch(uploadCattleImageError(error));
     })
@@ -304,9 +321,10 @@ export function uploadCattleImagePending() {
   };
 };
 
-export function uploadCattleImageSuccess(image) {
+export function uploadCattleImageSuccess(id, image) {
   return {
     type: UPLOAD_CATTLE_IMAGE_SUCCESS,
+    id,
     image,
   };
 };

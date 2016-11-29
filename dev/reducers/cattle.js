@@ -5,6 +5,8 @@ import {
   EDIT_CATTLE_DISABLE,
   DELETE_CATTLE_ENABLE,
   DELETE_CATTLE_DISABLE,
+  UPLOAD_CATTLE_IMAGE_ENABLE,
+  UPLOAD_CATTLE_IMAGE_DISABLE,
   DISPLAY_NEXT_IMAGES,
   FETCH_CATTLE_PENDING,
   FETCH_CATTLE_SUCCESS,
@@ -18,6 +20,9 @@ import {
   UPDATE_CATTLE_PENDING,
   UPDATE_CATTLE_SUCCESS,
   UPDATE_CATTLE_ERROR,
+  UPLOAD_CATTLE_IMAGE_PENDING,
+  UPLOAD_CATTLE_IMAGE_SUCCESS,
+  UPLOAD_CATTLE_IMAGE_ERROR,
   DELETE_CATTLE_PENDING,
   DELETE_CATTLE_SUCCESS,
   DELETE_CATTLE_ERROR,
@@ -45,6 +50,10 @@ const cattle = (state = initialState, action) => {
       return handleDeleteCattleEnable(state, action.id);
     case DELETE_CATTLE_DISABLE:
       return handleDeleteCattleDisable(state, action.id);
+    case UPLOAD_CATTLE_IMAGE_ENABLE:
+      return handleUploadCattleImageEnable(state, action.id);
+    case UPLOAD_CATTLE_IMAGE_DISABLE:
+      return handleUploadCattleImageDisable(state, action.id);
     case DISPLAY_NEXT_IMAGES:
       return handleDisplayNextImages(state);
     case FETCH_CATTLE_PENDING:
@@ -71,6 +80,12 @@ const cattle = (state = initialState, action) => {
       return handleUpdateCattleSuccess(state, action.cattle);
     case UPDATE_CATTLE_ERROR:
       return handleUpdateCattleError(state, action.error);
+    case UPLOAD_CATTLE_IMAGE_PENDING:
+      return handleUploadCattleImagePending(state);
+    case UPLOAD_CATTLE_IMAGE_SUCCESS:
+      return handleUploadCattleImageSuccess(state, action);
+    case UPLOAD_CATTLE_IMAGE_ERROR:
+      return handleUploadCattleImageError(state, action.error);
     case DELETE_CATTLE_PENDING:
       return handleDeleteCattlePending(state);
     case DELETE_CATTLE_SUCCESS:
@@ -102,6 +117,7 @@ export function handleEditCattleEnable(state, id) {
     if (cattle[i].cattle.id == id) {
       cattle[i].editing = true;
       cattle[i].deleting = false;
+      cattle[i].uploading = false;
     }
   }
   return {
@@ -127,6 +143,7 @@ export function handleDeleteCattleEnable(state, id) {
     if (cattle[i].cattle.id == id) {
       cattle[i].editing = false;
       cattle[i].deleting = true;
+      cattle[i].uploading = false;
     }
   }
   return {
@@ -146,12 +163,39 @@ export function handleDeleteCattleDisable(state, id) {
   }
 };
 
+export function handleUploadCattleImageEnable(state, id) {
+  let cattle = state.cattle;
+  for (let i in cattle) {
+    if (cattle[i].cattle.id == id) {
+      cattle[i].editing = false;
+      cattle[i].deleting = false;
+      cattle[i].uploading = true;
+    }
+  }
+  return {
+    ...state,
+    cattle,
+  }
+};
+
+export function handleUploadCattleImageDisable(state, id) {
+  let cattle = state.cattle;
+  for (let i in cattle) {
+    if (cattle[i].cattle.id == id) { cattle[i].uploading = false; cattle[i].toUpload = []; }
+  }
+  return {
+    ...state,
+    cattle,
+  }
+};
+
 export function handleDisplayNextImages(state) {
   let cattle = state.cattle;
   cattle.map((c) => {
     let length = c.cattle.images.length;
     if (!length) { return; }
-    let index = c.index;
+    let index = c.index ? c.index : -1;
+
     index = index === length - 1 ? 0 : index + 1;
     c.index = index
   })
@@ -173,6 +217,7 @@ const generateCattleObject = (cattle) => {
     cattle,
     editing: false,
     deleting: false,
+    uploading: false,
   }
 };
 
@@ -264,6 +309,34 @@ export function handleUpdateCattleSuccess(state, cattleUpdated) {
 }
 
 export function handleUpdateCattleError(state, error) {
+  return {
+    ...state,
+    error,
+  };
+}
+
+export function handleUploadCattleImagePending(state) {
+  return {
+    ...state,
+  };
+}
+
+export function handleUploadCattleImageSuccess(state, action) {
+  let id = action.id;
+  let image = action.image;
+  let cattle = state.cattle;
+  let index = cattle.findIndex( (c) => { return c.cattle.id === id } );
+  let images = cattle[index].cattle.images ? cattle[index].images : [];
+  console.log(cattle[index].cattle);
+  cattle[index].cattle.images.push(image);
+  cattle[index].uploading = false;
+  return {
+    ...state.authentication,
+    cattle,
+  }
+}
+
+export function handleUploadCattleImageError(state, error) {
   return {
     ...state,
     error,
