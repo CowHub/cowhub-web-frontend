@@ -146,11 +146,11 @@ class CattleItemComponent extends Component {
   }
 
   renderImage(style=''){
-    return (
-      <div className={style}>
-        <Image id="image" source={{uri: this.props.cattle.images[this.props.index]}}/>
-      </div>
-    )
+    // return (
+    //   <div className={style}>
+    //     <Image id="image" source={{uri: this.props.cattle.images[this.props.index]}}/>
+    //   </div>
+    // )
   }
 
   renderDisplay(style =''){
