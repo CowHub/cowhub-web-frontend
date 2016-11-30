@@ -16,3 +16,19 @@ const initialState = {
   fetching: false,
   fetched: false,
 };
+
+const identification = (state = initialState, action) => {
+  switch (action.type) {
+    case MATCH_CATTLE_IMAGE_SUCCESS:
+      return handleMatchCattleImageSuccess(state, action.cattle);
+    default:
+      return state;
+  }
+}
+
+const handleMatchCattleImageSuccess = (state, cattle) => {
+  return {
+    ...state,
+    cattle,
+  };
+}

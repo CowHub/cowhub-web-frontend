@@ -283,7 +283,7 @@ export function matchCattleImage(params) {
       method: 'POST',
       data: params
     }).then((response) => {
-      dispatch(matchCattleImageSuccess(response.verificationID));
+      dispatch(matchCattleImageSuccess(response.cattle));
     }).catch((error) => {
       dispatch(matchCattleImageError(error));
     })
@@ -296,10 +296,10 @@ export function matchCattleImagePending() {
   };
 };
 
-export function matchCattleImageSuccess(id) {
+export function matchCattleImageSuccess(cattle) {
   return {
     type: MATCH_CATTLE_IMAGE_SUCCESS,
-    id,
+    cattle,
   };
 };
 

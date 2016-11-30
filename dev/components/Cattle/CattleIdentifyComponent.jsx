@@ -18,7 +18,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     handleUploadImage: (image) => { dispatch(matchCattleImage(image)); },
-    handleGetMatch: () => { console.log('Retrieving match'); }
   };
 }
 
@@ -26,17 +25,22 @@ class CattleRecognitionComponent extends Component {
 
   static displayName = 'Cattle Recognition Component';
   static propTypes = {
-    match: PropTypes.object,
+    cattle: PropTypes.arrayOf(
+      PropTypes.shape({
+        breed: PropTypes.string,
+        check_digit: PropTypes.number.isRequired,
+        country_code: PropTypes.string.isRequired,
+        dob: PropTypes.string,
+        gender: PropTypes.string,
+        herdmark: PropTypes.string.isRequired,
+        id: PropTypes.number.isRequired,
+        individual_number: PropTypes.number.isRequired,
+        name: PropTypes.string,
+      }).isRequired
+    ),
     handleUploadImage: PropTypes.func.isRequired,
     handleGetMatch: PropTypes.func.isRequired,
   };
-
-  handleGetMatch() {
-    // while (!this.props.match) {
-    //
-    // }
-    this.props.handleGetMatch();
-  }
 
   render() {
     return (
@@ -46,7 +50,9 @@ class CattleRecognitionComponent extends Component {
         </div>
         <div className='cattle-recognition-component-dropzone' >
           <DropzoneComponent
-            onDrop={ (image) => this.handleUploadImage(image, this.handleGetMatch()) } >
+            onDrop={ (image) => this.props.handleUploadImage({
+              image
+            }) } >
             <div>
               Drop or click to browse for an image of a cattle muzzle
             </div>
