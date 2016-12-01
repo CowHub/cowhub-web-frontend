@@ -6,4 +6,8 @@
 
 .cattle-component-buttons {
   text-align: right;
+
+  button {
+    background-color: inherit;
+  }
 }
