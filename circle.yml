@@ -1,0 +1,11 @@
+dependencies:
+  post:
+    - pip install awsebcli
+
+test:
+  override:
+    - npm run build
+
+deployment:
+  production:
+    - aws s3 sync dist s3://cowhub-production/
