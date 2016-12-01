@@ -8,4 +8,6 @@ test:
 
 deployment:
   production:
-    - aws s3 sync dist s3://cowhub-production/
+    branch: master
+    commands:
+      - aws s3 sync dist s3://cowhub-production/
