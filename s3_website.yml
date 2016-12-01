@@ -1,0 +1,18 @@
+s3_id: <%= ENV['AWS_ACCESS_KEY'] %>
+s3_secret: <%= ENV['AWS_SECRET_KEY'] %>
+s3_bucket: <%= ENV['AWS_S3_BUCKET'] %>
+
+index_document: index.html
+error_document: index.html
+
+gzip:
+  - .html
+  - .css
+  - .js
+  - .png
+
+s3_endpoint: eu-west-1
+
+s3_reduced_redundancy: true
+
+cloudfront_distribution_id: <%= ENV['AWS_CLOUDFRONT_ID'] %>
