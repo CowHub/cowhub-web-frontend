@@ -45,7 +45,7 @@ class CattleComponent extends Component {
   }
 
   startTimer(){
-    setInterval(this.props.handleDisplayNextImages, 60000);
+    setInterval(this.props.handleDisplayNextImages, 15000);
   }
 
   renderCattle() {

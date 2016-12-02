@@ -57,7 +57,7 @@ class CattleItemViewUpdateComponent extends CattleItemComponent {
                 ? refs.individual_number.value
                 : props.individual_number,
           });
-          props.toUpload.map((f) =>
+          props.imagesToUpload.map((f) =>
             { props.handleUploadCattleImage(props.cattle.id, {data: f}) });
         }
       },

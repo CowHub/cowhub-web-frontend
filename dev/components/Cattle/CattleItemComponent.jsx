@@ -1,6 +1,6 @@
 require('./CattleItemComponent.scss');
 
-import React, { Component, PropTypes, Images } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import DropzoneComponent from 'react-dropzone';
 
@@ -43,7 +43,6 @@ class CattleItemComponent extends Component {
     onlyUpload: PropTypes.bool.isRequired,
     editing: PropTypes.bool.isRequired,
     deleting: PropTypes.bool.isRequired,
-    uploading: PropTypes.bool.isRequired,
     left: PropTypes.shape(buttonTypes).isRequired,
     right: PropTypes.shape(buttonTypes).isRequired,
     cattle: PropTypes.shape({
@@ -59,7 +58,7 @@ class CattleItemComponent extends Component {
       images: PropTypes.arrayOf(PropTypes.string),
     }).isRequired,
     index: PropTypes.number,
-    toUpload: PropTypes.arrayOf(PropTypes.object),
+    imagesToUpload: PropTypes.arrayOf(PropTypes.string),
     handleEditCattleEnable: PropTypes.func.isRequired,
     handleDeleteCattleEnable: PropTypes.func.isRequired,
     handleFetchCattleImage: PropTypes.func.isRequired,
@@ -70,7 +69,7 @@ class CattleItemComponent extends Component {
     editing: false,
     deleting: false,
     image: false,
-    toUpload: [],
+    imagesToUpload: [],
     cattle: {
       id: -1,
       check_digit: -1,
@@ -103,7 +102,7 @@ class CattleItemComponent extends Component {
 
       })
       promise.then(result => {
-        this.props.toUpload.push(result);
+        this.props.imagesToUpload.push(result);
       }, err => {
         console.log(err)
       })
@@ -146,15 +145,15 @@ class CattleItemComponent extends Component {
     } = this.props.cattle;
     let {
       index,
+      onlyEdit,
+      editing,
     } = this.props;
-    console.log("here");
-    console.log(images);
-    return <div/>
-    // return (images)?
-    //   <div className={style}>
-    //     <Image id="image" style={{width: 100, height: 50, borderWidth: 1}}
-    //         source={{uri: images[index]}}/>
-    //   </div> : <div/>;
+
+    const showImages = images && images.length && !onlyEdit && !editing;
+
+    return (showImages)?(<div className={style}>
+        <img id="image" src={images[index]} style={{width: '100%', height: '100%'}}/>
+      </div>):<div/>;
   }
 
   renderDisplay(style =''){
@@ -175,11 +174,8 @@ class CattleItemComponent extends Component {
     const styleClassNameImage = images && images.length > 0 ? 'col-sm-2' : '';
     const styleClassNameRef = images && !images.length || onlyEdit || editing ? 'col-sm-6' : 'col-sm-5';
 
-    console.log(images);
     return (<div className={ style }>
-        { images && images.length
-                 && this.renderImage(styleClassNameImage)
-        }
+        { this.renderImage(styleClassNameImage) }
         { this.renderRef(country_code, `${styleClassNameRef} cattle-item-component-data-value`,
                          'country_code', 2, 'Country Code')
         }
