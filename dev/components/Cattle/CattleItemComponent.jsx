@@ -73,7 +73,8 @@ class CattleItemComponent extends Component {
     return (this.props.editing || this.props.onlyEdit)
       ? <div className={ style } >
           <input ref={ ref } className={ 'cattle-item-component-input' } type={ ref }
-                 maxLength={ length } placeholder={ placeholder } defaultValue={ value } />
+                 maxLength={ length } placeholder={ placeholder }
+                 defaultValue={ value && value != -1 ? value : '' } />
         </div>
       : <div className={ `row ${style}` }>
           <div className='col-xs-6 col-sm-5' >
@@ -102,7 +103,7 @@ class CattleItemComponent extends Component {
     } = this.props;
 
     const showButtons = !onlyEdit && !onlyDelete && !editing && !deleting;
-    const styleClassName = showButtons ? 'col-xs-10 col-sm-11' : 'col-xs-12'
+    const styleClassName = showButtons ? 'col-xsnull0 col-sm-11' : 'col-xs-12'
     return (
       <div className='row cattle-item-component-wrapper'>
         <div className={ `${ styleClassName } row cattle-item-component-data-wrapper` } >
