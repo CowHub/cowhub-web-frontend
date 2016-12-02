@@ -111,7 +111,6 @@ export function handleEditCattleEnable(state, id) {
     if (cattle[i].cattle.id == id) {
       cattle[i].editing = true;
       cattle[i].deleting = false;
-      cattle[i].uploading = false;
     }
   }
   return {
@@ -137,7 +136,6 @@ export function handleDeleteCattleEnable(state, id) {
     if (cattle[i].cattle.id == id) {
       cattle[i].editing = false;
       cattle[i].deleting = true;
-      cattle[i].uploading = false;
     }
   }
   return {
