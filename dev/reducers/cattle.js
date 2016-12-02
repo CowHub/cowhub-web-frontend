@@ -294,8 +294,8 @@ export function handleUploadCattleImageSuccess(state, action) {
   let index = cattle.findIndex( (c) => { return c.cattle.id === id } );
   let images = cattle[index].cattle.images ? cattle[index].images : [];
   console.log(cattle[index].cattle);
-  cattle[index].cattle.images.push(image);
-  cattle[index].uploading = false;
+  images.push(image);
+  cattle[index].cattle.images = images;
   return {
     ...state.authentication,
     cattle,
