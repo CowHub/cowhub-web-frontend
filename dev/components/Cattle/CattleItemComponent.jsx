@@ -169,7 +169,6 @@ class CattleItemComponent extends Component {
         {/* { images && images.length > 0
                  && this.renderImage(styleClassNameImage)
         } */}
-        { this.props.editing && this.renderUpload() }
         { this.renderRef(country_code, `${styleClassNameRef} cattle-item-component-data-value`,
                          'country_code', 2, 'Country Code')
         }
@@ -182,6 +181,7 @@ class CattleItemComponent extends Component {
         { this.renderRef(individual_number, `${styleClassNameRef} cattle-item-component-data-value`,
                          'individual_number', 5, 'Individual Number')
         }
+        { this.props.editing && this.renderUpload() }
       </div>);
   }
 
