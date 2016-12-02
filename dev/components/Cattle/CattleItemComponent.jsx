@@ -73,7 +73,7 @@ class CattleItemComponent extends Component {
     return (this.props.editing || this.props.onlyEdit)
       ? <div className={ style } >
           <input ref={ ref } className={ 'cattle-item-component-input' } type={ ref }
-                 maxLength={ length } placeholder={ placeholder } />
+                 maxLength={ length } placeholder={ placeholder } defaultValue={ value } />
         </div>
       : <div className={ `row ${style}` }>
           <div className='col-xs-6 col-sm-5' >
