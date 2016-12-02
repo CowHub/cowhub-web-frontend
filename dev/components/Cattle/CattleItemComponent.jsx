@@ -141,11 +141,20 @@ class CattleItemComponent extends Component {
   }
 
   renderImage(style=''){
-    // return (
+    let {
+      images,
+    } = this.props.cattle;
+    let {
+      index,
+    } = this.props;
+    console.log("here");
+    console.log(images);
+    return <div/>
+    // return (images)?
     //   <div className={style}>
-    //     <Image id="image" source={{uri: this.props.cattle.images[this.props.index]}}/>
-    //   </div>
-    // )
+    //     <Image id="image" style={{width: 100, height: 50, borderWidth: 1}}
+    //         source={{uri: images[index]}}/>
+    //   </div> : <div/>;
   }
 
   renderDisplay(style =''){
@@ -159,16 +168,18 @@ class CattleItemComponent extends Component {
       images,
     } = this.props.cattle;
     const {
-      onlyEdit
+      onlyEdit,
+      editing,
     } = this.props;
 
     const styleClassNameImage = images && images.length > 0 ? 'col-sm-2' : '';
-    const styleClassNameRef = images && !images.length || onlyEdit ? 'col-sm-6' : 'col-sm-5';
+    const styleClassNameRef = images && !images.length || onlyEdit || editing ? 'col-sm-6' : 'col-sm-5';
 
+    console.log(images);
     return (<div className={ style }>
-        {/* { images && images.length > 0
+        { images && images.length
                  && this.renderImage(styleClassNameImage)
-        } */}
+        }
         { this.renderRef(country_code, `${styleClassNameRef} cattle-item-component-data-value`,
                          'country_code', 2, 'Country Code')
         }
@@ -205,7 +216,7 @@ class CattleItemComponent extends Component {
     const showButtons = !onlyEdit && !onlyDelete && !editing && !deleting;
     const styleClassName = showButtons ? 'col-xsnull0 col-sm-11' : 'col-xs-12'
     const styleClassNameImage = images && images.length > 0 ? 'col-sm-2' : '';
-    const styleClassNameRef = images && !images.length ? 'col-sm-6' : 'col-sm-5';
+    const styleClassNameRef = images && !images.length && onlyEdit && editing ? 'col-sm-6' : 'col-sm-5';
     const styleClassNameButtons = showButtons ? 'col-xs-10 col-sm-11' : 'col-xs-12';
     return (
       <div className='row cattle-item-component-wrapper'>
