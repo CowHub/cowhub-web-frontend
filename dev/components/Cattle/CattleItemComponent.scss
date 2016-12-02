@@ -17,6 +17,8 @@
 .cattle-item-component-data-wrapper {
   padding-left: 0 !important;
   padding-right: 0 !important;
+  margin: auto;
+  text-align: center;
 }
 
 .cattle-item-component-data-value {
@@ -39,7 +41,7 @@
 
 .cattle-item-component-dropzone {
   margin: 20px auto;
-
+  width: 80%;
   div {
     background-color: $background-colour-light;
     width: 100% !important;

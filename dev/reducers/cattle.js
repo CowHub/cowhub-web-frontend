@@ -5,8 +5,6 @@ import {
   EDIT_CATTLE_DISABLE,
   DELETE_CATTLE_ENABLE,
   DELETE_CATTLE_DISABLE,
-  UPLOAD_CATTLE_IMAGE_ENABLE,
-  UPLOAD_CATTLE_IMAGE_DISABLE,
   DISPLAY_NEXT_IMAGES,
   FETCH_CATTLE_PENDING,
   FETCH_CATTLE_SUCCESS,
@@ -50,10 +48,6 @@ const cattle = (state = initialState, action) => {
       return handleDeleteCattleEnable(state, action.id);
     case DELETE_CATTLE_DISABLE:
       return handleDeleteCattleDisable(state, action.id);
-    case UPLOAD_CATTLE_IMAGE_ENABLE:
-      return handleUploadCattleImageEnable(state, action.id);
-    case UPLOAD_CATTLE_IMAGE_DISABLE:
-      return handleUploadCattleImageDisable(state, action.id);
     case DISPLAY_NEXT_IMAGES:
       return handleDisplayNextImages(state);
     case FETCH_CATTLE_PENDING:
@@ -144,32 +138,6 @@ export function handleDeleteCattleEnable(state, id) {
       cattle[i].editing = false;
       cattle[i].deleting = true;
       cattle[i].uploading = false;
-    }
-  }
-  return {
-    ...state,
-    cattle,
-  }
-};
-
-export function handleDeleteCattleDisable(state, id) {
-  let cattle = state.cattle;
-  for (let i in cattle) {
-    if (cattle[i].cattle.id == id) { cattle[i].deleting = false; }
-  }
-  return {
-    ...state,
-    cattle,
-  }
-};
-
-export function handleUploadCattleImageEnable(state, id) {
-  let cattle = state.cattle;
-  for (let i in cattle) {
-    if (cattle[i].cattle.id == id) {
-      cattle[i].editing = false;
-      cattle[i].deleting = false;
-      cattle[i].uploading = true;
     }
   }
   return {

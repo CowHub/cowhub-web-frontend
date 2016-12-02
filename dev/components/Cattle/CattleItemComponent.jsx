@@ -8,7 +8,6 @@ import {
   editCattleEnable,
   deleteCattleEnable,
   fetchCattleImage,
-  uploadImageCattleEnable,
 } from '../../actions'
 
 const buttonObject = {
@@ -19,7 +18,6 @@ const buttonObject = {
 const buttonTypes = {
   editing: buttonObject,
   deleting: buttonObject,
-  uploading: buttonObject,
 };
 
 const mapStateToProps = (state, ownProps) => {
@@ -32,7 +30,6 @@ const mapDispatchToProps = (dispatch) => {
   return {
     handleEditCattleEnable: (id) => { dispatch(editCattleEnable(id)); },
     handleDeleteCattleEnable: (id) => { dispatch(deleteCattleEnable(id)); },
-    handleUploadImageCattleEnable: (id) => { dispatch(uploadImageCattleEnable(id)); },
     handleFetchCattleImage: (id) => { dispatch(fetchCattleImage(id)); },
   }
 };
@@ -65,13 +62,11 @@ class CattleItemComponent extends Component {
     toUpload: PropTypes.arrayOf(PropTypes.object),
     handleEditCattleEnable: PropTypes.func.isRequired,
     handleDeleteCattleEnable: PropTypes.func.isRequired,
-    handleUploadImageCattleEnable: PropTypes.func.isRequired,
     handleFetchCattleImage: PropTypes.func.isRequired,
   };
   static defaultProps = {
     onlyEdit: false,
     onlyDelete: false,
-    onlyUpload: false,
     editing: false,
     deleting: false,
     image: false,
@@ -170,12 +165,11 @@ class CattleItemComponent extends Component {
     const styleClassNameImage = images && images.length > 0 ? 'col-sm-2' : '';
     const styleClassNameRef = images && !images.length || onlyEdit ? 'col-sm-6' : 'col-sm-5';
 
-    console.log(images);
-    return (!this.props.uploading)
-      ? <div className={ style }>
-        { images && images.length > 0
+    return (<div className={ style }>
+        {/* { images && images.length > 0
                  && this.renderImage(styleClassNameImage)
-        }
+        } */}
+        { this.props.editing && this.renderUpload() }
         { this.renderRef(country_code, `${styleClassNameRef} cattle-item-component-data-value`,
                          'country_code', 2, 'Country Code')
         }
@@ -188,9 +182,7 @@ class CattleItemComponent extends Component {
         { this.renderRef(individual_number, `${styleClassNameRef} cattle-item-component-data-value`,
                          'individual_number', 5, 'Individual Number')
         }
-      </div> : <div className={ style }>
-        { this.renderUpload() }
-      </div>;
+      </div>);
   }
 
   render() {
@@ -206,28 +198,23 @@ class CattleItemComponent extends Component {
     const {
       onlyEdit,
       onlyDelete,
-      onlyUpload,
       editing,
       deleting,
-      uploading,
     } = this.props;
 
+    const showButtons = !onlyEdit && !onlyDelete && !editing && !deleting;
     const styleClassName = showButtons ? 'col-xsnull0 col-sm-11' : 'col-xs-12'
     const styleClassNameImage = images && images.length > 0 ? 'col-sm-2' : '';
     const styleClassNameRef = images && !images.length ? 'col-sm-6' : 'col-sm-5';
     const styleClassNameButtons = showButtons ? 'col-xs-10 col-sm-11' : 'col-xs-12';
-    const showButtons = !onlyEdit && !onlyDelete  && !onlyUpload
-                     && !editing && !deleting && !uploading;
-    const wrapper = !uploading ? 'cattle-item-component-data-wrapper' : 'cattle-item-component-dropzone-wrapper'
     return (
       <div className='row cattle-item-component-wrapper'>
-        { this.renderDisplay(`${styleClassNameButtons} row ${wrapper}`) }
+        { this.renderDisplay(`${styleClassNameButtons} row cattle-item-component-data-wrapper`) }
 
         { showButtons &&
           <div className='col-xs-2 col-sm-1 cattle-item-component-button-wrapper-vertical' >
             <button className='cattle-item-component-button-item fa fa-2x fa-pencil-square-o' onClick={ () => { this.props.handleEditCattleEnable(id); } } />
             <button className='cattle-item-component-button-item fa fa-2x fa-trash-o' onClick={ () => { this.props.handleDeleteCattleEnable(id); } } />
-            <button className='cattle-item-component-button-item fa fa-2x fa-picture-o' onClick={ () => { this.props.handleUploadImageCattleEnable(id); } } />
           </div>
         }
         { (editing || onlyEdit) &&
@@ -259,22 +246,6 @@ class CattleItemComponent extends Component {
             <button className={ this.props.right.deleting.style }
               onClick={ () => { this.props.right.deleting.func(this.refs, this.props) } } >
               { this.props.right.deleting.text }
-            </button>
-          </div>
-        }
-        { (uploading || onlyUpload) &&
-          <div className='col-xs-6' >
-            <button className={ this.props.left.uploading.style }
-              onClick={ () => { this.props.left.uploading.func(this.refs, this.props); } } >
-              { this.props.left.uploading.text }
-            </button>
-          </div>
-        }
-        { (uploading || onlyUpload) &&
-          <div className='col-xs-6' >
-            <button className={ this.props.right.uploading.style }
-              onClick={ () => { this.props.right.uploading.func(this.refs, this.props); } } >
-              { this.props.right.uploading.text }
             </button>
           </div>
         }
