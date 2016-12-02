@@ -218,7 +218,6 @@ class CattleItemComponent extends Component {
     const styleClassNameButtons = showButtons ? 'col-xs-10 col-sm-11' : 'col-xs-12';
     const showButtons = !onlyEdit && !onlyDelete  && !onlyUpload
                      && !editing && !deleting && !uploading;
-    const styleClassNameButtons = showButtons ? 'col-xs-10 col-sm-11' : 'col-xs-12';
     const wrapper = !uploading ? 'cattle-item-component-data-wrapper' : 'cattle-item-component-dropzone-wrapper'
     return (
       <div className='row cattle-item-component-wrapper'>
