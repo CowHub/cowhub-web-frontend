@@ -24,7 +24,5 @@ services:
       - NODE_ENV=development
     volumes:
       - .:/app
-    depends_on:
-      - api
     ports:
       - "3000:3000"
