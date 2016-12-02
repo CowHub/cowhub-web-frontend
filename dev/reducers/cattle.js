@@ -160,10 +160,10 @@ export function handleDisplayNextImages(state) {
   cattle.map((c) => {
     let length = c.cattle.images.length;
     if (!length) { return; }
-    let index = c.index ? c.index : -1;
-
+    let index = c.index;
     index = index === length - 1 ? 0 : index + 1;
     c.index = index
+
   })
   return {
     ...state.authentication,
@@ -221,6 +221,7 @@ export function handleFetchCattleImageSuccess(state, id, images) {
   let cattle = state.cattle;
   let index = cattle.findIndex( (c) => { return c.cattle.id === id } );
   cattle[index].cattle.images = images.map((i) => { return i.image_uri });
+  cattle[index].index = cattle[index].index ? cattle[index].index : 0;
   cattle.unshift( cattle.pop() );
   return {
     ...state,
@@ -267,7 +268,11 @@ export function handleUpdateCattleSuccess(state, cattleUpdated) {
   let id = cattleUpdated.id;
   let cattle = state.cattle
   let index = cattle.findIndex( (c) => { return c.cattle.id === id } );
+  let images = cattle[index].cattle.images;
+  let cattleIndex = cattle[index].index;
   cattle[index] = generateCattleObject(cattleUpdated)
+  cattle[index].cattle.images = images;
+  cattle[index].index = cattleIndex;
   return {
     ...state.authentication,
     cattle,
@@ -292,10 +297,13 @@ export function handleUploadCattleImageSuccess(state, action) {
   let image = action.image;
   let cattle = state.cattle;
   let index = cattle.findIndex( (c) => { return c.cattle.id === id } );
-  let images = cattle[index].cattle.images ? cattle[index].images : [];
+  let images = cattle[index].cattle.images ? cattle[index].cattle.images : [];
   console.log(cattle[index].cattle);
   images.push(image);
+
   cattle[index].cattle.images = images;
+  console.log(cattle[index].cattle);
+
   return {
     ...state.authentication,
     cattle,
