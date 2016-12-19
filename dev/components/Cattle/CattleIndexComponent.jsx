@@ -45,6 +45,10 @@ class CattleComponent extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
+    if (typeof nextProps.registering !== "undefined"){
+      return true;
+    }
+
     if (!this.props.registering){
       return true;
     }
