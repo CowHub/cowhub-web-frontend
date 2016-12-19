@@ -163,7 +163,6 @@ export function handleDisplayNextImages(state) {
     let index = c.index;
     index = index === length - 1 ? 0 : index + 1;
     c.index = index
-
   })
   return {
     ...state.authentication,

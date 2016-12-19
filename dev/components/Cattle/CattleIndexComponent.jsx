@@ -44,6 +44,14 @@ class CattleComponent extends Component {
     this.startTimer();
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    if (!this.props.registering){
+      return true;
+    }
+
+    return false;
+  }
+
   startTimer(){
     setInterval(this.props.handleDisplayNextImages, 15000);
   }
