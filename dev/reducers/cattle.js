@@ -144,6 +144,19 @@ export function handleDeleteCattleEnable(state, id) {
   }
 };
 
+export function handleDeleteCattleDisable(state, id) {
+  let cattle = state.cattle;
+  for (let i in cattle) {
+    if (cattle[i].cattle.id == id) {
+      cattle[i].deleting = false;
+    }
+  }
+  return {
+    ...state,
+    cattle,
+  }
+};
+
 export function handleUploadCattleImageDisable(state, id) {
   let cattle = state.cattle;
   for (let i in cattle) {
@@ -246,6 +259,7 @@ export function handleRegisterCattleSuccess(state, cattleNew) {
   cattle.push(generateCattleObject(cattleNew));
   return {
     ...state.authentication,
+    registering: false,
     cattle,
   };
 }
@@ -293,15 +307,16 @@ export function handleUploadCattleImagePending(state) {
 
 export function handleUploadCattleImageSuccess(state, action) {
   let id = action.id;
-  let image = action.image;
+  let image = action.image.image_uri;
   let cattle = state.cattle;
   let index = cattle.findIndex( (c) => { return c.cattle.id === id } );
-  let images = cattle[index].cattle.images ? cattle[index].cattle.images : [];
-  console.log(cattle[index].cattle);
+  let images = cattle[index].cattle.images;
+  let imageIndex = cattle[index].cattle.index;
   images.push(image);
 
+  cattle[index].cattle = generateCattleObject(cattle[index].cattle);
   cattle[index].cattle.images = images;
-  console.log(cattle[index].cattle);
+  cattle[index].cattle.index = imageIndex >= 0 ? imageIndex : 0;
 
   return {
     ...state.authentication,

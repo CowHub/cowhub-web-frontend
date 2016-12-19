@@ -84,7 +84,6 @@ class CattleItemComponent extends Component {
   }
 
   imagesToUpload(images) {
-    console.log(images);
     images.map((i) => {
       const promise = new Promise((resolve, reject) => {
         const reader = new FileReader()

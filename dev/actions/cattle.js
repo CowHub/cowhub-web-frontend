@@ -194,9 +194,8 @@ export let UPDATE_CATTLE_PENDING = 'UPDATE_CATTLE_PENDING';
 export let UPDATE_CATTLE_SUCCESS = 'UPDATE_CATTLE_SUCCESS';
 export let UPDATE_CATTLE_ERROR = 'UPDATE_CATTLE_ERROR';
 
-export function updateCattle(id, params) {
+export function updateCattle(id, params, images) {
   let token = store.getState().authentication.token;
-
   return (dispatch) => {
     dispatch(updateCattlePending());
     $.ajax(`${process.env.API_ENDPOINT}/cattle/${id}`, {
@@ -207,6 +206,10 @@ export function updateCattle(id, params) {
       data: params,
     }).then((response) => {
       dispatch(updateCattleSuccess(response.cattle));
+    }).then((response) => {
+      images.map( (i) => {
+        dispatch(uploadCattleImage(id, i));
+      })
     }).catch((error) => {
       dispatch(updateCattleError(error));
     })
@@ -289,7 +292,7 @@ export function uploadCattleImage(id, params) {
         'Authorization': `Bearer ${token}`,
       },
       method: 'POST',
-      data: params,
+      data: {data: params},
     }).then((response) => {
       dispatch(uploadCattleImageSuccess(id, response.image));
     }).catch((error) => {

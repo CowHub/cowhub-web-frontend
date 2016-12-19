@@ -20,9 +20,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleUpdateCattle: (id, p) => { dispatch(updateCattle(id, p)); },
+    handleUpdateCattle: (id, p, images) => { dispatch(updateCattle(id, p, images)); },
     handleDeleteCattle: (id) => { dispatch(deleteCattle(id)); },
-    handleUploadCattleImage: (id, p) => { dispatch(uploadCattleImage(id, p)); },
     handleDeleteCattle: (id) => { dispatch(deleteCattle(id)); },
     handleEditCattleDisable: (id) => { dispatch(editCattleDisable(id)); },
     handleDeleteCattleDisable: (id) => { dispatch(deleteCattleDisable(id)); },
@@ -56,9 +55,7 @@ class CattleItemViewUpdateComponent extends CattleItemComponent {
             individual_number: refs.individual_number.value
                 ? refs.individual_number.value
                 : props.individual_number,
-          });
-          props.imagesToUpload.map((f) =>
-            { props.handleUploadCattleImage(props.cattle.id, {data: f}) });
+          }, props.imagesToUpload);
         }
       },
       deleting: {
