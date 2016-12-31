@@ -1,9 +1,10 @@
-FROM node:6.9.1
+FROM node:7.2.1
 
 WORKDIR /app
 
 COPY package.json ./
-RUN npm install
+RUN wget https://yarnpkg.com/install.sh && chmod +x install.sh && ./install.sh
+RUN yarn install
 
 ENV SERVER_PORT 3000
 EXPOSE 3000

@@ -19,7 +19,7 @@ services:
       - "8080:8080"
   web:
     build: .
-    command: /bin/bash -c 'npm install && npm run dev'
+    command: /bin/bash -c 'yarn install && yarn run dev'
     environment:
       - NODE_ENV=development
     volumes:
