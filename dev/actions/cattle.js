@@ -294,7 +294,10 @@ export const matchCattleImage = (params) => {
     const data = { images: [] }
     for (const i in params.images) {
       const image = params.images[i]
-      const image_processed = {}
+      const image_processed = {
+        lastModified: image.lastModified,
+        name: image.name
+      }
 
       const reader = new FileReader()
       reader.onload = (e) => {
