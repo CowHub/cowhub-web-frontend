@@ -1,4 +1,6 @@
 machine:
+  environment:
+    NODE_ENV: production
   node:
     version: 7.2.1
 
