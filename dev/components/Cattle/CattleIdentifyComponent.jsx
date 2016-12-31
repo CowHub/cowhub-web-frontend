@@ -17,7 +17,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleUploadImage: (image) => { dispatch(matchCattleImage(image)); },
+    handleUploadImages: (image) => dispatch(matchCattleImage(image)),
+    handleGetMatch: (image) => console.dir(image)
   };
 }
 
@@ -38,7 +39,7 @@ class CattleRecognitionComponent extends Component {
         name: PropTypes.string,
       }).isRequired
     ),
-    handleUploadImage: PropTypes.func.isRequired,
+    handleUploadImages: PropTypes.func.isRequired,
     handleGetMatch: PropTypes.func.isRequired,
   };
 
@@ -50,9 +51,7 @@ class CattleRecognitionComponent extends Component {
         </div>
         <div className='cattle-recognition-component-dropzone' >
           <DropzoneComponent
-            onDrop={ (image) => this.props.handleUploadImage({
-              image
-            }) } >
+            onDrop={ (images) => this.props.handleUploadImages({images}) } >
             <div>
               Drop or click to browse for an image of a cattle muzzle
             </div>

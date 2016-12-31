@@ -272,21 +272,40 @@ export let MATCH_CATTLE_IMAGE_PENDING = 'MATCH_CATTLE_IMAGE_PENDING';
 export let MATCH_CATTLE_IMAGE_SUCCESS = 'MATCH_CATTLE_IMAGE_SUCCESS';
 export let MATCH_CATTLE_IMAGE_ERROR = 'MATCH_CATTLE_IMAGE_ERROR';
 
-export function matchCattleImage(params) {
+export const matchCattleImage = (params) => {
   let token = store.getState().authentication.token;
   return (dispatch) => {
     dispatch(matchCattleImagePending());
-    $.ajax(`${process.env.API_ENDPOINT}/image/verify`, {
-      headers: {
-        'Authorization': `Bearer ${token}`,
-      },
-      method: 'POST',
-      data: params
-    }).then((response) => {
-      dispatch(matchCattleImageSuccess(response.cattle));
-    }).catch((error) => {
-      dispatch(matchCattleImageError(error));
-    })
+
+    const sendImagesForVerification = (data) => {
+      $.ajax(`${process.env.API_ENDPOINT}/image/verify`, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+        method: 'POST',
+        data: data
+      }).then((response) => {
+        dispatch(matchCattleImageSuccess(response.cattle));
+      }).catch((error) => {
+        dispatch(matchCattleImageError(error));
+      })
+    }
+
+    const data = { images: [] }
+    for (const i in params.images) {
+      const image = params.images[i]
+      const image_processed = {}
+
+      const reader = new FileReader()
+      reader.onload = (e) => {
+        const base64URL = e.target.result
+        image_processed.dataUri = base64URL
+        data.images.push(image_processed)
+        if (data.images.length == params.images.length)
+          sendImagesForVerification(data)
+      }
+      reader.readAsDataURL(image)
+    }
   };
 };
 
