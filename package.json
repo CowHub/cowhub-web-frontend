@@ -5,7 +5,8 @@
   "scripts": {
     "build": "webpack --config webpack.prod.config.js",
     "dev": "nodemon --config .nodemonrc app-server.js",
-    "start": "node app-server.js"
+    "start": "node app-server.js",
+    "copy_for_dist": "cp -r public/* dist/"
   },
   "dependencies": {
     "babel-core": "^6.17.0",
