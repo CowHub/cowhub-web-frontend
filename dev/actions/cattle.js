@@ -277,8 +277,8 @@ export const matchCattleImage = (params) => {
   return (dispatch) => {
     dispatch(matchCattleImagePending());
 
-    const sendImagesForVerification = (data) => {
-      $.ajax(`${process.env.API_ENDPOINT}/image/verify`, {
+    const sendImageForVerification = (data) => {
+      $.ajax(`${process.env.API_ENDPOINT}/cattle/match`, {
         headers: {
           'Authorization': `Bearer ${token}`,
         },
@@ -294,18 +294,10 @@ export const matchCattleImage = (params) => {
     const data = { images: [] }
     for (const i in params.images) {
       const image = params.images[i]
-      const image_processed = {
-        lastModified: image.lastModified,
-        name: image.name
-      }
-
       const reader = new FileReader()
       reader.onload = (e) => {
         const base64URL = e.target.result
-        image_processed.dataUri = base64URL
-        data.images.push(image_processed)
-        if (data.images.length == params.images.length)
-          sendImagesForVerification(data)
+        sendImageForVerification({ data: base64URL })
       }
       reader.readAsDataURL(image)
     }
@@ -341,14 +333,12 @@ export function fetchCattleMatch(id) {
   let token = store.getState().authentication.token;
   return (dispatch) => {
     dispatch(fetchCattleMatchPending());
-    $.ajax(`${process.env.API_ENDPOINT}/image/verify/${id}`, {
+    $.ajax(`${process.env.API_ENDPOINT}/cattle/match/${id}`, {
       headers: {
         'Authorization': `Bearer ${token}`,
       },
       method: 'GET'
     }).then((response) => {
-      if (!response.cattle)
-        return;
       dispatch(fetchCattleMatchSuccess(response.cattle));
     }).catch((error) => {
       dispatch(fetchCattleMatchError(error));
