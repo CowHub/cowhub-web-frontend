@@ -99,20 +99,6 @@ class CattleItemComponent extends Component {
     })
   }
 
-  renderUpload(){
-    return (
-      <div className='cattle-item-component-dropzone' >
-        <DropzoneComponent
-          ref={'image'}
-          onDrop={ (images) => { this.handleImagesUpload(images) } }>
-          <div>
-            Click here or drop an image of a cattle muzzle to upload
-          </div>
-        </DropzoneComponent>
-      </div>
-    )
-  }
-
   renderRef(value, style = '', ref, length, placeholder) {
     return (this.props.editing || this.props.onlyEdit)
       ? <div className={ style } >
@@ -131,19 +117,8 @@ class CattleItemComponent extends Component {
   }
 
   renderImage (style = '') {
-    const {
-      cattle,
-      index,
-      onlyEdit,
-      editing
-    } = this.props
+    return
 
-    const showImages = cattle.images && cattle.images.length && !onlyEdit && !editing
-    return showImages
-      ? <div className={style}>
-          <img id="image" src={cattle.images[index]} style={{width: '100%', height: '100%'}}/>
-        </div>
-      : <div/>
   }
 
   renderDisplay (style = '') {
@@ -161,20 +136,33 @@ class CattleItemComponent extends Component {
       editing
     } = this.props
 
-    const styleClassNameImage = images && images.length > 0 ? 'col-sm-2' : ''
-    const styleClassNameRef = images && !images.length || onlyEdit || editing ? 'col-sm-6' : 'col-sm-5'
-
-    return (<div className={ style }>
-        { this.renderImage(styleClassNameImage) }
-        { this.renderRef(country_code, `${styleClassNameRef} cattle-item-component-data-value`,
+    return (
+      <div className={ style } >
+        { this.renderRef(country_code, 'col-sm-6 cattle-item-component-data-value',
                          'country_code', 2, 'Country Code') }
-        { this.renderRef(herdmark, `${styleClassNameRef} cattle-item-component-data-value`,
+        { this.renderRef(herdmark, 'col-sm-6 cattle-item-component-data-value',
                          'herdmark', 6, 'Herdmark') }
-        { this.renderRef(check_digit, `${styleClassNameRef} cattle-item-component-data-value`,
+        { this.renderRef(check_digit, 'col-sm-6 cattle-item-component-data-value',
                          'check_digit', 1, 'Check Digit') }
-        { this.renderRef(individual_number, `${styleClassNameRef} cattle-item-component-data-value`,
+        { this.renderRef(individual_number, 'col-sm-6 cattle-item-component-data-value',
                          'individual_number', 5, 'Individual Number') }
-        { this.props.editing && this.renderUpload() }
+        { !onlyEdit && !editing && images && images.length > 0 &&
+          <div >
+            { images.map((i) => {
+              return <img id="image" src={i} />
+            }) }
+          </div>
+        }
+        { this.props.editing &&
+          <div className='cattle-item-component-dropzone' >
+            <DropzoneComponent
+              ref={'image'}
+              onDrop={ (images) => { this.handleImagesUpload(images) } }>
+              <div>
+                Click here or drop an image of a cattle muzzle to upload
+              </div>
+            </DropzoneComponent>
+          </div> }
       </div>)
   }
 
@@ -196,14 +184,13 @@ class CattleItemComponent extends Component {
     } = this.props
 
     const showButtons = !onlyEdit && !onlyDelete && !editing && !deleting
-    const styleClassName = showButtons ? 'col-xsnull0 col-sm-11' : 'col-xs-12'
+    const styleClassName = showButtons ? 'col-xs-10 col-sm-11' : 'col-xs-12'
     const styleClassNameImage = images && images.length > 0 ? 'col-sm-2' : ''
     const styleClassNameRef = images && !images.length && onlyEdit && editing ? 'col-sm-6' : 'col-sm-5'
     const styleClassNameButtons = showButtons ? 'col-xs-10 col-sm-11' : 'col-xs-12'
     return (
       <div className='row cattle-item-component-wrapper'>
         { this.renderDisplay(`${styleClassNameButtons} row cattle-item-component-data-wrapper`) }
-
         { showButtons &&
           <div className='col-xs-2 col-sm-1 cattle-item-component-button-wrapper-vertical' >
             <button className='cattle-item-component-button-item fa fa-2x fa-pencil-square-o' onClick={ () => { this.props.handleEditCattleEnable(id) } } />
