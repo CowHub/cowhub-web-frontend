@@ -3,11 +3,12 @@ import { applyMiddleware, compose, createStore } from 'redux'
 import thunk from 'redux-thunk'
 import logger from 'redux-logger'
 
-import reducers from '../reducers/index'
+import reducers from '../reducers'
 import {
   fetchToken,
   removeToken,
-} from '../actions/index'
+  validateToken
+} from '../actions'
 
 const initialState = {}
 
@@ -23,7 +24,7 @@ const store = createStore(reducers, initialState, composeEnhancer(middleware))
 
 // Get token if one exists
 store.dispatch(fetchToken())
-// TODO: store.dispatch(validateToken())
+store.dispatch(validateToken())
 
 if (module.hot) {
   // Enable Webpack hot module replacement for reducers
