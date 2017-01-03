@@ -3,19 +3,29 @@ import store from '../store/store'
 
 // Token management
 export const LOAD_TOKEN = 'LOAD_TOKEN'
-export const VALIDATE_TOKEN = 'VALIDATE_TOKEN'
 export const STORE_TOKEN = 'STORE_TOKEN'
 export const REMOVE_TOKEN = 'REMOVE_TOKEN'
+
+export const validateToken = () => {
+  const token = store.getState().authentication.token
+  return (dispatch) => {
+    $.ajax(`${process.env.API_ENDPOINT}/user/validate`, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+      method: 'POST'
+    }).then((response) => {
+      console.log('Recovered valid session')
+    }).catch((err) => {
+      if (err.status == 401) dispatch(removeToken())
+      console.dir(err)
+    })
+  }
+}
 
 export const fetchToken = () => {
   return {
     type: LOAD_TOKEN
-  }
-}
-
-export const validateToken = () => {
-  return {
-    type: VALIDATE_TOKEN
   }
 }
 
