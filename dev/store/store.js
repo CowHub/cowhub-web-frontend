@@ -1,15 +1,16 @@
 // Redux store
-import { applyMiddleware, compose, createStore } from 'redux';
-import thunk from 'redux-thunk';
-import logger from 'redux-logger';
+import { applyMiddleware, compose, createStore } from 'redux'
+import thunk from 'redux-thunk'
+import logger from 'redux-logger'
 
-import reducers from '../reducers/index';
+import reducers from '../reducers'
 import {
   fetchToken,
   removeToken,
-} from '../actions/index';
+  validateToken
+} from '../actions'
 
-const initialState = {};
+const initialState = {}
 
 let middleware = (process.env.NODE_ENV !== 'production')
   ? applyMiddleware(thunk, logger())
@@ -19,17 +20,17 @@ const composeEnhancer = (process.env.NODE_ENV !== 'production')
   ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
   : compose
 
-const store = createStore(reducers, initialState, composeEnhancer(middleware));
+const store = createStore(reducers, initialState, composeEnhancer(middleware))
 
 // Get token if one exists
-store.dispatch(fetchToken());
+store.dispatch(fetchToken())
 
 if (module.hot) {
   // Enable Webpack hot module replacement for reducers
   module.hot.accept('../reducers', () => {
-    const nextReducers = require('../reducers/index');
-    store.replaceReducer(nextReducers);
-  });
+    const nextReducers = require('../reducers/index')
+    store.replaceReducer(nextReducers)
+  })
 }
 
-export default store;
+export default store

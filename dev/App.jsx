@@ -1,29 +1,29 @@
 import React, { Component } from 'react'
 import { Router, IndexRoute, DefaultRoute, Route, browserHistory } from 'react-router'
 
-import { Provider } from 'react-redux';
-import store from './store/store';
+import { Provider } from 'react-redux'
+import store from './store/store'
 
 // Wrapper
-import AppWrapper from './components/AppWrapper';
+import AppWrapper from './components/AppWrapper'
 
 // Home
-import HomeComponent from './components/HomeComponent';
+import HomeComponent from './components/HomeComponent'
 
 // User
-import LoginComponent from './components/User/LoginComponent';
-import SignUpComponent from './components/User/SignUpComponent';
+import LoginComponent from './components/User/LoginComponent'
+import SignUpComponent from './components/User/SignUpComponent'
 
 // Cattle
-import CattleComponent from './components/Cattle/CattleComponent';
+import CattleComponent from './components/Cattle/CattleComponent'
 
 class App extends Component {
 
-  static displayName = 'CowHub';
+  static displayName = 'CowHub'
 
-  handleAreLoggedIn() {
+  handleAreLoggedIn(next, replace) {
     if (!store.getState().authentication.token) {
-      window.location = '/user/login';
+      replace('/user/login', null, null)
     };
   }
 
@@ -32,18 +32,18 @@ class App extends Component {
       <Provider store={store}>
         <Router history={browserHistory} >
           <Route path='/' component={AppWrapper} >
-            <IndexRoute onEnter={ () => { this.handleAreLoggedIn() } } component={CattleComponent} />
+            <IndexRoute onEnter={ this.handleAreLoggedIn } component={CattleComponent} />
             <Route path='user'>
               <Route path='login' component={LoginComponent} />
               <Route path='signup' component={SignUpComponent} />
             </Route>
             <Route path='cattle'>
-              <IndexRoute onEnter={ () => { this.handleAreLoggedIn() } } component={CattleComponent} />
+              <IndexRoute onEnter={ this.handleAreLoggedIn } component={CattleComponent} />
             </Route>
           </Route>
         </Router>
       </Provider>
-    );
+    )
   }
 
 }
