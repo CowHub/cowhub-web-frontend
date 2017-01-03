@@ -146,13 +146,6 @@ class CattleItemComponent extends Component {
                          'check_digit', 1, 'Check Digit') }
         { this.renderRef(individual_number, 'col-sm-6 cattle-item-component-data-value',
                          'individual_number', 5, 'Individual Number') }
-        { !onlyEdit && !editing && images && images.length > 0 &&
-          <div >
-            { images.map((i) => {
-              return <img id="image" src={i} />
-            }) }
-          </div>
-        }
         { this.props.editing &&
           <div className='cattle-item-component-dropzone' >
             <DropzoneComponent
@@ -196,6 +189,13 @@ class CattleItemComponent extends Component {
             <button className='cattle-item-component-button-item fa fa-2x fa-pencil-square-o' onClick={ () => { this.props.handleEditCattleEnable(id) } } />
             <button className='cattle-item-component-button-item fa fa-2x fa-trash-o' onClick={ () => { this.props.handleDeleteCattleEnable(id) } } />
           </div> }
+        { !onlyEdit && !editing && images && images.length > 0 &&
+          <div className='col-xs-12 cattle-item-component-image-wrapper' >
+          { images.map((i) => {
+            return <img className='cattle-item-component-image' src={i.image} />
+          }) }
+          </div>
+        }
         { (editing || onlyEdit) &&
           <div className='col-xs-6' >
             <button className={ this.props.left.editing.style }
