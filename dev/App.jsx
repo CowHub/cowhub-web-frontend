@@ -15,16 +15,21 @@ import LoginComponent from './components/User/LoginComponent'
 import SignUpComponent from './components/User/SignUpComponent'
 
 // Cattle
-import CattleComponent from './components/Cattle/CattleComponent'
+import CattleIndexComponent from './components/Cattle/CattleIndexComponent'
+import CattleIdentifyComponent from './components/Cattle/CattleIdentifyComponent'
 
 class App extends Component {
 
   static displayName = 'CowHub'
 
+  handleHomeNotExists(next, replace) {
+    replace('/cattle', null, null)
+  }
+
   handleAreLoggedIn(next, replace) {
     if (!store.getState().authentication.token) {
       replace('/user/login', null, null)
-    };
+    }
   }
 
   render() {
@@ -32,13 +37,14 @@ class App extends Component {
       <Provider store={store}>
         <Router history={browserHistory} >
           <Route path='/' component={AppWrapper} >
-            <IndexRoute onEnter={ this.handleAreLoggedIn } component={CattleComponent} />
+            <IndexRoute component={HomeComponent} onEnter={ this.handleHomeNotExists } />
             <Route path='user'>
               <Route path='login' component={LoginComponent} />
               <Route path='signup' component={SignUpComponent} />
             </Route>
-            <Route path='cattle'>
-              <IndexRoute onEnter={ this.handleAreLoggedIn } component={CattleComponent} />
+            <Route path='cattle' onEnter={ this.handleAreLoggedIn } >
+              <IndexRoute component={CattleIndexComponent} />
+              <Route path='identify' component={CattleIdentifyComponent} />
             </Route>
           </Route>
         </Router>

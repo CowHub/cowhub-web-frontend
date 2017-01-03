@@ -27,7 +27,8 @@
   padding: 6px 8px;
 }
 
-.cattle-item-component-edit-submit {
+.cattle-item-component-edit-submit,
+.cattle-item-component-uploading-submit {
   @extend %cattle-item-component-button-submit;
   background-color: #40bf40;
   border-radius: 3px;
@@ -42,7 +43,8 @@
 }
 
 .cattle-item-component-edit-cancel,
-.cattle-item-component-delete-cancel {
+.cattle-item-component-delete-cancel,
+.cattle-item-component-uploading-cancel {
   @extend %cattle-item-component-button-submit;
   background-color: $background-colour-dark;
   border-radius: 3px;

@@ -17,6 +17,8 @@
 .cattle-item-component-data-wrapper {
   padding-left: 0 !important;
   padding-right: 0 !important;
+  margin: auto;
+  text-align: center;
 }
 
 .cattle-item-component-data-value {
@@ -32,6 +34,25 @@
   text-align: center;
 }
 
+.cattle-item-component-dropzone-wrapper {
+  margin: auto;
+  text-align: center;
+}
+
+.cattle-item-component-dropzone {
+  margin: 20px auto;
+  margin-top: 130px;
+  width: 80%;
+  div {
+    background-color: $background-colour-light;
+    width: 100% !important;
+
+    div {
+      margin: 50px auto;
+    }
+  }
+}
+
 .cattle-item-component-button-wrapper-vertical {
 }
 
@@ -43,4 +64,17 @@
   margin: 10px 0;
   padding: 8px 6px;
   width: 100%;
+}
+
+.cattle-item-component-image-wrapper {
+  border-top: 1px solid black;
+  padding: 10px 0 0;
+  margin: 5px 0 0;
+  text-align: center;
+  width: 100%;
+}
+
+.cattle-item-component-image {
+  width: 100px;
+  height: 100px;
 }

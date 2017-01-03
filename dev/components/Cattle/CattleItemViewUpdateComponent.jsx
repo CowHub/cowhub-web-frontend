@@ -8,6 +8,8 @@ import {
   deleteCattle,
   editCattleDisable,
   deleteCattleDisable,
+  uploadImageCattleDisable,
+  uploadCattleImage,
 } from '../../actions';
 
 import CattleItemComponent from './CattleItemComponent';
@@ -18,7 +20,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleUpdateCattle: (id, p) => { dispatch(updateCattle(id, p)); },
+    handleUpdateCattle: (id, p, images) => { dispatch(updateCattle(id, p, images)); },
+    handleDeleteCattle: (id) => { dispatch(deleteCattle(id)); },
     handleDeleteCattle: (id) => { dispatch(deleteCattle(id)); },
     handleEditCattleDisable: (id) => { dispatch(editCattleDisable(id)); },
     handleDeleteCattleDisable: (id) => { dispatch(deleteCattleDisable(id)); },
@@ -52,13 +55,13 @@ class CattleItemViewUpdateComponent extends CattleItemComponent {
             individual_number: refs.individual_number.value
                 ? refs.individual_number.value
                 : props.individual_number,
-          });
+          }, props.imagesToUpload);
         }
       },
       deleting: {
         style: 'cattle-item-component-delete-submit',
         text: 'Confirm Delete',
-        func: (refs, props) => { props.handleDeleteCattle(props.cattle.id); }
+        func: (refs, props) => { props.handleDeleteCattle(props.cattle.id);}
       },
     },
     right: {
@@ -71,7 +74,7 @@ class CattleItemViewUpdateComponent extends CattleItemComponent {
         style: 'cattle-item-component-delete-cancel',
         text: 'Cancel',
         func: (refs, props) => { props.handleDeleteCattleDisable(props.cattle.id); },
-      }
+      },
     },
   }
 

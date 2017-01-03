@@ -1,4 +1,4 @@
-require('./CattleComponent.scss');
+require('./CattleIndexComponent.scss');
 
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import {
   fetchCattle,
   registerCattleEnable,
-} from '../../actions/index';
+} from '../../actions';
 
 import CattleItemComponent from './CattleItemComponent';
 import CattleRegistrationComponent from './CattleRegistrationComponent';
@@ -21,19 +21,19 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchCattle: () => { dispatch(fetchCattle()); },
-    handleRegisterEnable: () => { dispatch(registerCattleEnable()); },
+    fetchCattle: () => dispatch(fetchCattle()),
+    handleRegisterEnable: () => dispatch(registerCattleEnable())
   };
 };
 
-class CattleComponent extends Component {
+class CattleIndexComponent extends Component {
 
   static displayName = 'Cattle Component';
   static propTypes = {
     cattleSize: PropTypes.number.isRequired,
     registering: PropTypes.bool.isRequired,
     fetchCattle: PropTypes.func.isRequired,
-    handleRegisterEnable: PropTypes.func.isRequired,
+    handleRegisterEnable: PropTypes.func.isRequired
   };
 
   componentWillMount() {
@@ -73,4 +73,4 @@ class CattleComponent extends Component {
 
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CattleComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(CattleIndexComponent);
