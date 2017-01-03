@@ -6,8 +6,7 @@ import { connect } from 'react-redux';
 import {
   fetchCattle,
   registerCattleEnable,
-  displayNextImages,
-} from '../../actions/index';
+} from '../../actions';
 
 import CattleItemComponent from './CattleItemComponent';
 import CattleRegistrationComponent from './CattleRegistrationComponent';
@@ -22,9 +21,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchCattle: () => { dispatch(fetchCattle()); },
-    handleRegisterEnable: () => { dispatch(registerCattleEnable()); },
-    handleDisplayNextImages: () => { dispatch(displayNextImages()); },
+    fetchCattle: () => dispatch(fetchCattle()),
+    handleRegisterEnable: () => dispatch(registerCattleEnable())
   };
 };
 
@@ -35,29 +33,11 @@ class CattleIndexComponent extends Component {
     cattleSize: PropTypes.number.isRequired,
     registering: PropTypes.bool.isRequired,
     fetchCattle: PropTypes.func.isRequired,
-    handleRegisterEnable: PropTypes.func.isRequired,
-    handleDisplayNextImages: PropTypes.func.isRequired,
+    handleRegisterEnable: PropTypes.func.isRequired
   };
 
   componentWillMount() {
     this.props.fetchCattle();
-    this.startTimer();
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    if (typeof nextProps.registering !== "undefined"){
-      return true;
-    }
-
-    if (!this.props.registering){
-      return true;
-    }
-
-    return false;
-  }
-
-  startTimer(){
-    setInterval(this.props.handleDisplayNextImages, 15000);
   }
 
   renderCattle() {
