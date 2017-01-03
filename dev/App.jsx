@@ -34,15 +34,15 @@ class App extends Component {
       <Provider store={store}>
         <Router history={browserHistory} >
           <Route path='/' component={AppWrapper} >
-            <IndexRoute onEnter={ () => { this.handleAreLoggedIn() } } component={CattleIndexComponent} />
+            <IndexRoute component={HomeComponent} />
             <Route path='user'>
               <Route path='login' component={LoginComponent} />
               <Route path='signup' component={SignUpComponent} />
             </Route>
-            <Route path='cattle'>
+            <Route path='cattle' onEnter={ this.handleAreLoggedIn } >
+              <IndexRoute component={CattleIndexComponent} />
               <Route path='find' component={CattleRecognitionComponent} />
               <Route path='identify' component={CattleIdentifyComponent} />
-              <IndexRoute onEnter={ () => { this.handleAreLoggedIn() } } component={CattleIndexComponent} />
             </Route>
           </Route>
         </Router>

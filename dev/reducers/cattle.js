@@ -169,12 +169,13 @@ export function handleUploadCattleImageDisable(state, id) {
 };
 
 export function handleDisplayNextImages(state) {
-  let cattle = state.cattle;
+  const cattle = state.cattle;
   cattle.map((c) => {
-    let length = c.cattle.images.length;
-    if (!length) { return; }
+    if (!c.cattle.images) return
+    const length = c.cattle.images.length;
+    if (!length) return
     let index = c.index;
-    index = index === length - 1 ? 0 : index + 1;
+    if (index === length - 1) index += 1;
     c.index = index
   })
   return {
