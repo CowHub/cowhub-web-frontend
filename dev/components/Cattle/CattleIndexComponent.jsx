@@ -28,7 +28,7 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-class CattleComponent extends Component {
+class CattleIndexComponent extends Component {
 
   static displayName = 'Cattle Component';
   static propTypes = {
@@ -93,4 +93,4 @@ class CattleComponent extends Component {
 
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CattleComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(CattleIndexComponent);

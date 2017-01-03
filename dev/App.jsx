@@ -26,7 +26,7 @@ class App extends Component {
   handleAreLoggedIn(next, replace) {
     if (!store.getState().authentication.token) {
       replace('/user/login', null, null)
-    };
+    }
   }
 
   render() {
