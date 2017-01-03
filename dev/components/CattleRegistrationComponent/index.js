@@ -1,9 +1,9 @@
-require('./CattleRegistrationComponent.scss');
+require('./index.scss');
 
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
-import CattleItemComponent from './CattleItemComponent';
+import CattleItemComponent from '../CattleItemComponent';
 
 import {
   registerCattle,

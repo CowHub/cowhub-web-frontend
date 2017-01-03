@@ -1,4 +1,4 @@
-require('./CattleIdentifyComponent.scss');
+require('./index.scss');
 
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
@@ -17,7 +17,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleUploadImages: (image) => dispatch(matchCattleImage(image)),
+    handleUploadImage: (image) => dispatch(matchCattleImage(image)),
     handleGetMatch: (image) => console.dir(image)
   };
 }
@@ -39,7 +39,7 @@ class CattleRecognitionComponent extends Component {
         name: PropTypes.string,
       }).isRequired
     ),
-    handleUploadImages: PropTypes.func.isRequired,
+    handleUploadImage: PropTypes.func.isRequired,
     handleGetMatch: PropTypes.func.isRequired,
   };
 
@@ -51,7 +51,10 @@ class CattleRecognitionComponent extends Component {
         </div>
         <div className='cattle-recognition-component-dropzone' >
           <DropzoneComponent
-            onDrop={ (images) => this.props.handleUploadImages({images}) } >
+            onDrop={ (images) => {
+              for (const i in images) {
+                this.props.handleUploadImage(image)
+              } } } >
             <div>
               Drop or click to browse for an image of a cattle muzzle
             </div>

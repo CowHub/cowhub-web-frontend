@@ -15,8 +15,8 @@ import LoginComponent from './components/User/LoginComponent';
 import SignUpComponent from './components/User/SignUpComponent';
 
 // Cattle
-import CattleIndexComponent from './components/Cattle/CattleIndexComponent';
-import CattleIdentifyComponent from './components/Cattle/CattleIdentifyComponent';
+import CattleIndexComponent from './components/CattleIndexComponent';
+import CattleIdentifyComponent from './components/CattleIdentifyComponent';
 
 class App extends Component {
 

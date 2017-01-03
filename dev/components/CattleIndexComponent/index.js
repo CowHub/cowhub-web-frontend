@@ -1,4 +1,4 @@
-require('./CattleIndexComponent.scss');
+require('./index.scss');
 
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
@@ -8,9 +8,9 @@ import {
   registerCattleEnable,
 } from '../../actions/index';
 
-import CattleItemComponent from './CattleItemComponent';
-import CattleRegistrationComponent from './CattleRegistrationComponent';
-import CattleItemViewUpdateComponent from './CattleItemViewUpdateComponent';
+import CattleItemComponent from '../CattleItemComponent';
+import CattleRegistrationComponent from '../CattleRegistrationComponent';
+import CattleItemViewUpdateComponent from '../CattleItemViewUpdateComponent';
 
 const mapStateToProps = (state) => {
   return {
