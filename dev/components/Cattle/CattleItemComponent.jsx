@@ -1,42 +1,44 @@
-require('./CattleItemComponent.scss');
+require('./CattleItemComponent.scss')
 
-import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
-import DropzoneComponent from 'react-dropzone';
+import React, { Component, PropTypes } from 'react'
+import { connect } from 'react-redux'
+import DropzoneComponent from 'react-dropzone'
 
 import {
   editCattleEnable,
   deleteCattleEnable,
   fetchCattleImage,
+  uploadCattleImage
 } from '../../actions'
 
 const buttonObject = {
   style: PropTypes.string,
   text: PropTypes.string.isRequired,
-  func: PropTypes.func.isRequired,
-};
+  func: PropTypes.func.isRequired
+}
 const buttonTypes = {
   editing: buttonObject,
-  deleting: buttonObject,
-};
+  deleting: buttonObject
+}
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    ...state.cattle.cattle[ownProps.id],
-  };
-};
+    ...state.cattle.cattle[ownProps.id]
+  }
+}
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleEditCattleEnable: (id) => { dispatch(editCattleEnable(id)); },
-    handleDeleteCattleEnable: (id) => { dispatch(deleteCattleEnable(id)); },
-    handleFetchCattleImage: (id) => { dispatch(fetchCattleImage(id)); },
+    handleEditCattleEnable: (id) => dispatch(editCattleEnable(id)),
+    handleDeleteCattleEnable: (id) => dispatch(deleteCattleEnable(id)),
+    handleFetchCattleImage: (id) => dispatch(fetchCattleImage(id)),
+    handleUploadCattleImage: (id, image) => dispatch(uploadCattleImage(id, image))
   }
-};
+}
 
 class CattleItemComponent extends Component {
 
-  static displayName = 'Cattle Item Component';
+  static displayName = 'Cattle Item Component'
   static propTypes = {
     onlyEdit: PropTypes.bool.isRequired,
     onlyDelete: PropTypes.bool.isRequired,
@@ -55,70 +57,60 @@ class CattleItemComponent extends Component {
       id: PropTypes.number.isRequired,
       individual_number: PropTypes.number.isRequired,
       name: PropTypes.string,
-      images: PropTypes.arrayOf(PropTypes.string),
+      images: PropTypes.arrayOf(PropTypes.string)
     }).isRequired,
     index: PropTypes.number,
-    imagesToUpload: PropTypes.arrayOf(PropTypes.string),
     handleEditCattleEnable: PropTypes.func.isRequired,
     handleDeleteCattleEnable: PropTypes.func.isRequired,
     handleFetchCattleImage: PropTypes.func.isRequired,
-  };
+    handleUploadCattleImage: PropTypes.func.isRequired
+  }
   static defaultProps = {
     onlyEdit: false,
     onlyDelete: false,
+    onlyUpload: false,
     editing: false,
     deleting: false,
     image: false,
-    imagesToUpload: [],
     cattle: {
       id: -1,
       check_digit: -1,
       country_code: '',
       herdmark: '',
-      individual_number: -1,
-    },
-  };
-
-  componentWillMount() {
-    this.props.cattle.id !== -1 && this.props.handleFetchCattleImage(this.props.cattle.id);
+      individual_number: -1
+    }
   }
 
-  imagesToUpload(images) {
+  componentWillMount() {
+    this.props.cattle.id !== -1 && this.props.handleFetchCattleImage(this.props.cattle.id)
+  }
+
+  handleImagesUpload(images) {
     images.map((i) => {
-      const promise = new Promise((resolve, reject) => {
-        const reader = new FileReader()
-
-        reader.readAsDataURL(i)
-
-        reader.onload = () => {
-          if (!!reader.result) {
-            resolve(reader.result)
-          }
-          else {
-            reject(Error("Failed converting to base64"))
-          }
+      const reader = new FileReader()
+      reader.onload = () => {
+        if (!!reader.result) {
+          this.props.handleUploadCattleImage(this.props.cattle.id, reader.result)
+        } else {
+          new Error("Failed converting to base64")
         }
-
-      })
-      promise.then(result => {
-        this.props.imagesToUpload.push(result);
-      }, err => {
-        console.log(err)
-      })
+      }
+      reader.readAsDataURL(i)
     })
-
   }
 
   renderUpload(){
-    return (<div className='cattle-item-component-dropzone' >
-      <DropzoneComponent
-        ref={'image'}
-        onDrop={ (images) => { this.imagesToUpload(images); } }>
-        <div>
-          Drop or click to upload for an image of a cattle muzzle
-        </div>
-      </DropzoneComponent>
-    </div>);
+    return (
+      <div className='cattle-item-component-dropzone' >
+        <DropzoneComponent
+          ref={'image'}
+          onDrop={ (images) => { this.handleImagesUpload(images) } }>
+          <div>
+            Click here or drop an image of a cattle muzzle to upload
+          </div>
+        </DropzoneComponent>
+      </div>
+    )
   }
 
   renderRef(value, style = '', ref, length, placeholder) {
@@ -135,27 +127,26 @@ class CattleItemComponent extends Component {
           <div className='col-xs-6 col-sm-7' >
             { value }
           </div>
-        </div>;
+        </div>
   }
 
-  renderImage(style=''){
-    let {
-      images,
-    } = this.props.cattle;
-    let {
+  renderImage (style = '') {
+    const {
+      cattle,
       index,
       onlyEdit,
-      editing,
-    } = this.props;
+      editing
+    } = this.props
 
-    const showImages = images && images.length && !onlyEdit && !editing;
-
-    return (showImages)?(<div className={style}>
-        <img id="image" src={images[index]} style={{width: '100%', height: '100%'}}/>
-      </div>):<div/>;
+    const showImages = cattle.images && cattle.images.length && !onlyEdit && !editing
+    return showImages
+      ? <div className={style}>
+          <img id="image" src={cattle.images[index]} style={{width: '100%', height: '100%'}}/>
+        </div>
+      : <div/>
   }
 
-  renderDisplay(style =''){
+  renderDisplay (style = '') {
     const {
       country_code,
       herdmark,
@@ -163,32 +154,28 @@ class CattleItemComponent extends Component {
       id,
       individual_number,
       name,
-      images,
-    } = this.props.cattle;
+      images
+    } = this.props.cattle
     const {
       onlyEdit,
-      editing,
-    } = this.props;
+      editing
+    } = this.props
 
-    const styleClassNameImage = images && images.length > 0 ? 'col-sm-2' : '';
-    const styleClassNameRef = images && !images.length || onlyEdit || editing ? 'col-sm-6' : 'col-sm-5';
+    const styleClassNameImage = images && images.length > 0 ? 'col-sm-2' : ''
+    const styleClassNameRef = images && !images.length || onlyEdit || editing ? 'col-sm-6' : 'col-sm-5'
 
     return (<div className={ style }>
         { this.renderImage(styleClassNameImage) }
         { this.renderRef(country_code, `${styleClassNameRef} cattle-item-component-data-value`,
-                         'country_code', 2, 'Country Code')
-        }
+                         'country_code', 2, 'Country Code') }
         { this.renderRef(herdmark, `${styleClassNameRef} cattle-item-component-data-value`,
-                         'herdmark', 6, 'Herdmark')
-        }
+                         'herdmark', 6, 'Herdmark') }
         { this.renderRef(check_digit, `${styleClassNameRef} cattle-item-component-data-value`,
-                         'check_digit', 1, 'Check Digit')
-        }
+                         'check_digit', 1, 'Check Digit') }
         { this.renderRef(individual_number, `${styleClassNameRef} cattle-item-component-data-value`,
-                         'individual_number', 5, 'Individual Number')
-        }
+                         'individual_number', 5, 'Individual Number') }
         { this.props.editing && this.renderUpload() }
-      </div>);
+      </div>)
   }
 
   render() {
@@ -199,66 +186,60 @@ class CattleItemComponent extends Component {
       id,
       individual_number,
       name,
-      images,
-    } = this.props.cattle;
+      images
+    } = this.props.cattle
     const {
       onlyEdit,
       onlyDelete,
       editing,
-      deleting,
-    } = this.props;
+      deleting
+    } = this.props
 
-    const showButtons = !onlyEdit && !onlyDelete && !editing && !deleting;
+    const showButtons = !onlyEdit && !onlyDelete && !editing && !deleting
     const styleClassName = showButtons ? 'col-xsnull0 col-sm-11' : 'col-xs-12'
-    const styleClassNameImage = images && images.length > 0 ? 'col-sm-2' : '';
-    const styleClassNameRef = images && !images.length && onlyEdit && editing ? 'col-sm-6' : 'col-sm-5';
-    const styleClassNameButtons = showButtons ? 'col-xs-10 col-sm-11' : 'col-xs-12';
+    const styleClassNameImage = images && images.length > 0 ? 'col-sm-2' : ''
+    const styleClassNameRef = images && !images.length && onlyEdit && editing ? 'col-sm-6' : 'col-sm-5'
+    const styleClassNameButtons = showButtons ? 'col-xs-10 col-sm-11' : 'col-xs-12'
     return (
       <div className='row cattle-item-component-wrapper'>
         { this.renderDisplay(`${styleClassNameButtons} row cattle-item-component-data-wrapper`) }
 
         { showButtons &&
           <div className='col-xs-2 col-sm-1 cattle-item-component-button-wrapper-vertical' >
-            <button className='cattle-item-component-button-item fa fa-2x fa-pencil-square-o' onClick={ () => { this.props.handleEditCattleEnable(id); } } />
-            <button className='cattle-item-component-button-item fa fa-2x fa-trash-o' onClick={ () => { this.props.handleDeleteCattleEnable(id); } } />
-          </div>
-        }
+            <button className='cattle-item-component-button-item fa fa-2x fa-pencil-square-o' onClick={ () => { this.props.handleEditCattleEnable(id) } } />
+            <button className='cattle-item-component-button-item fa fa-2x fa-trash-o' onClick={ () => { this.props.handleDeleteCattleEnable(id) } } />
+          </div> }
         { (editing || onlyEdit) &&
           <div className='col-xs-6' >
             <button className={ this.props.left.editing.style }
-              onClick={ () => { this.props.left.editing.func(this.refs, this.props); } } >
+              onClick={ () => { this.props.left.editing.func(this.refs, this.props) } } >
               { this.props.left.editing.text }
             </button>
-          </div>
-        }
+          </div> }
         { (editing || onlyEdit) &&
           <div className='col-xs-6' >
             <button className={ this.props.right.editing.style }
               onClick={ () => { this.props.right.editing.func(this.refs, this.props) } } >
               { this.props.right.editing.text }
             </button>
-          </div>
-        }
+          </div> }
         { (deleting || onlyDelete) &&
           <div className='col-xs-6' >
             <button className={ this.props.left.deleting.style }
-              onClick={ () => { this.props.left.deleting.func(this.refs, this.props); } } >
+              onClick={ () => { this.props.left.deleting.func(this.refs, this.props) } } >
               { this.props.left.deleting.text }
             </button>
-          </div>
-        }
+          </div> }
         { (deleting || onlyDelete) &&
           <div className='col-xs-6' >
             <button className={ this.props.right.deleting.style }
               onClick={ () => { this.props.right.deleting.func(this.refs, this.props) } } >
               { this.props.right.deleting.text }
             </button>
-          </div>
-        }
+          </div> }
       </div>
-    );
+    )
   }
+}
 
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(CattleItemComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(CattleItemComponent)

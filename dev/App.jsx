@@ -23,6 +23,10 @@ class App extends Component {
 
   static displayName = 'CowHub'
 
+  handleHomeNotExists(next, replace) {
+    replace('/cattle', null, null)
+  }
+
   handleAreLoggedIn(next, replace) {
     if (!store.getState().authentication.token) {
       replace('/user/login', null, null)
@@ -34,7 +38,7 @@ class App extends Component {
       <Provider store={store}>
         <Router history={browserHistory} >
           <Route path='/' component={AppWrapper} >
-            <IndexRoute component={HomeComponent} />
+            <IndexRoute component={HomeComponent} onEnter={ this.handleHomeNotExists } />
             <Route path='user'>
               <Route path='login' component={LoginComponent} />
               <Route path='signup' component={SignUpComponent} />
