@@ -24,7 +24,6 @@ const store = createStore(reducers, initialState, composeEnhancer(middleware))
 
 // Get token if one exists
 store.dispatch(fetchToken())
-store.dispatch(validateToken())
 
 if (module.hot) {
   // Enable Webpack hot module replacement for reducers

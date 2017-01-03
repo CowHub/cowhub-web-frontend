@@ -1,30 +1,30 @@
 import React, { Component } from 'react'
 import { Router, IndexRoute, DefaultRoute, Route, browserHistory } from 'react-router'
 
-import { Provider } from 'react-redux';
-import store from './store/store';
+import { Provider } from 'react-redux'
+import store from './store/store'
 
 // Wrapper
-import AppWrapper from './components/AppWrapper';
+import AppWrapper from './components/AppWrapper'
 
 // Home
-import HomeComponent from './components/HomeComponent';
+import HomeComponent from './components/HomeComponent'
 
 // User
-import LoginComponent from './components/User/LoginComponent';
-import SignUpComponent from './components/User/SignUpComponent';
+import LoginComponent from './components/User/LoginComponent'
+import SignUpComponent from './components/User/SignUpComponent'
 
 // Cattle
-import CattleComponent from './components/Cattle/CattleComponent';
+import CattleComponent from './components/Cattle/CattleComponent'
 
 class App extends Component {
 
-  static displayName = 'CowHub';
+  static displayName = 'CowHub'
 
   handleAreLoggedIn() {
     if (!store.getState().authentication.token) {
-      window.location = '/user/login';
-    };
+      window.location = '/user/login'
+    }
   }
 
   render() {
@@ -43,7 +43,7 @@ class App extends Component {
           </Route>
         </Router>
       </Provider>
-    );
+    )
   }
 
 }

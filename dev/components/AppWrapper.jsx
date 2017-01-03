@@ -1,10 +1,13 @@
 require('./AppWrapper.scss')
 
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 
-import { logoutUser } from '../actions/index';
+import {
+  logoutUser,
+  validateToken
+} from '../actions';
 
 const mapStateToProps = (state) => {
   return {
@@ -14,7 +17,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleLogout: () => { dispatch(logoutUser()) },
+    handleLogout: () => dispatch(logoutUser()),
+    handleValidateToken: () => dispatch(validateToken())
   };
 };
 
@@ -22,10 +26,15 @@ class AppWrapper extends Component {
 
   static displayName = 'CowHub Wrapper';
   static propTypes = {
-    token: React.PropTypes.string,
-    children: React.PropTypes.object,
-    handleLogout: React.PropTypes.func,
+    token: PropTypes.string,
+    children: PropTypes.object,
+    handleLogout: PropTypes.func.isRequired,
+    handleValidateToken: PropTypes.func.isRequired
   };
+
+  componentWillMount() {
+    this.props.handleValidateToken()
+  }
 
   handleLogout() {
     this.props.handleLogout();

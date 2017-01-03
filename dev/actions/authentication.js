@@ -18,7 +18,6 @@ export const validateToken = () => {
       console.log('Recovered valid session')
     }).catch((err) => {
       if (err.status == 401) dispatch(removeToken())
-      console.dir(err)
     })
   }
 }
@@ -128,7 +127,7 @@ export const LOGOUT_USER_SUCCESS = 'LOGOUT_USER_SUCCESS'
 export const LOGOUT_USER_ERROR = 'LOGOUT_USER_ERROR'
 
 export const logoutUser = () => {
-  let token = store.getState().authentication.token
+  const token = store.getState().authentication.token
   const logoutSuccess = (dispatch) => {
     dispatch(logoutUserSuccess())
     dispatch(removeToken())
