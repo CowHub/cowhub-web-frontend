@@ -219,7 +219,50 @@ export function deleteCattleSuccess(id) {
 
 export function deleteCattleError(error) {
   return {
-    type: DELETE_CATLEE_ERROR,
+    type: DELETE_CATTLE_ERROR,
     error,
   };
 }
+
+// Cattle image upload
+export let UPLOAD_CATTLE_IMAGE_PENDING = 'UPLOAD_CATTLE_IMAGE_PENDING';
+export let UPLOAD_CATTLE_IMAGE_SUCCESS = 'UPLOAD_CATTLE_IMAGE_SUCCESS';
+export let UPLOAD_CATTLE_IMAGE_ERROR = 'UPLOAD_CATTLE_IMAGE_ERROR';
+
+export function uploadCattleImage(id, params) {
+  let token = store.getState().authentication.token;
+  return (dispatch) => {
+    dispatch(uploadCattleImagePending());
+    $.ajax(`${process.env.API_ENDPOINT}/cattle/${id}/images`, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+      method: 'POST',
+      data: params
+    }).then((response) => {
+      dispatch(uploadCattleImageSuccess(response.image));
+    }).catch((error) => {
+      dispatch(uploadCattleImageError(error));
+    })
+  };
+};
+
+export function uploadCattleImagePending() {
+  return {
+    type: UPLOAD_CATTLE_IMAGE_PENDING,
+  };
+};
+
+export function uploadCattleImageSuccess(image) {
+  return {
+    type: UPLOAD_CATTLE_IMAGE_SUCCESS,
+    image,
+  };
+};
+
+export function uploadCattleImageError(error) {
+  return {
+    type: UPLOAD_CATTLE_IMAGE_ERROR,
+    error,
+  };
+};

@@ -1,9 +1,11 @@
-require('./SignUpComponent.scss');
+require('./index.scss');
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { registerUser } from '../../actions/index';
+import {
+  registerUser 
+} from '../../actions';
 
 const mapStateToProps = (state) => {
   return {

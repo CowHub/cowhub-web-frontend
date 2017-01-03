@@ -1,4 +1,4 @@
-require('./HomeComponent.scss')
+require('./index.scss')
 
 import React, { Component } from 'react'
 import { Link } from 'react-router'

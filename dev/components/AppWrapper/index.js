@@ -1,4 +1,4 @@
-require('./AppWrapper.scss')
+require('./index.scss')
 
 import React, { Component } from 'react';
 import { Link } from 'react-router';
@@ -36,6 +36,7 @@ class AppWrapper extends Component {
     return this.props.token ?
       <ul className="nav navbar-nav navbar-right">
         {/* <li><Link className='navbar-link' to='/cattle' >Cattle</Link></li> */}
+        <li><Link to='/cattle/identify' className='navbar-link' >Identify</Link></li>
         <li><button className='btn navbar-btn navbar-link' onClick={ () => this.handleLogout() } >Logout</button></li>
       </ul>
       :

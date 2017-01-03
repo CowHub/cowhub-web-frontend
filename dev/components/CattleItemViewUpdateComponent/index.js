@@ -1,4 +1,4 @@
-require('./CattleItemViewUpdateComponent.scss');
+require('./index.scss');
 
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
@@ -10,7 +10,7 @@ import {
   deleteCattleDisable,
 } from '../../actions';
 
-import CattleItemComponent from './CattleItemComponent';
+import CattleItemComponent from '../CattleItemComponent';
 
 const mapStateToProps = (state) => {
   return {};
