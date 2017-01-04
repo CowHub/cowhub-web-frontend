@@ -75,6 +75,9 @@
 }
 
 .cattle-item-component-image {
-  width: 100px;
+  border-radius: 8px;
+  box-shadow: 0 0 4px darken($background-colour-dark, 40%);
   height: 100px;
+  margin: 5px;
+  width: 100px;
 }
