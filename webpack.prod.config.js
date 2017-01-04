@@ -12,7 +12,7 @@ options.plugins = [
   new webpack.DefinePlugin({
     '__DEV__': false,
     'process.env': {
-      'API_ENDPOINT': JSON.stringify('http://cowhub-server-api-production.dn4hgmpsak.eu-west-1.elasticbeanstalk.com'),
+      'API_ENDPOINT': JSON.stringify('http://api.cowhub.co.uk'),
       'NODE_ENV': JSON.stringify('production')
     }
   }),
