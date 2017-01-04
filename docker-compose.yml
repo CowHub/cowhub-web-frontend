@@ -11,7 +11,7 @@ services:
       - ./s3:/fakes3_root
   api:
     image: cowhub/cowhub-server-api
-    command: /bin/bash -c 'bundle exec rake db:setup && bundle exec rails server -b 0.0.0.0 -p 8080'
+    command: /bin/bash -c 'sleep 10 && bundle exec rake db:setup && bundle exec rails server -b 0.0.0.0 -p 8080'
     environment:
       - RAILS_ENV=development
       - POSTGRES_USER=postgres
