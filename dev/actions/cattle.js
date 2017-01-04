@@ -53,6 +53,17 @@ export const deleteCattleDisable = (id) => {
   }
 }
 
+export const  IMAGES_TO_UPLOAD = 'IMAGES_TO_UPLOAD'
+export const imagesToUpload = (id, image) => {
+  console.log("in action");
+  console.log(image);
+  return {
+    type: IMAGES_TO_UPLOAD,
+    id,
+    image
+  }
+}
+
 // Cattle fetch
 export const FETCH_CATTLE_PENDING = 'FETCH_CATTLE_PENDING'
 export const FETCH_CATTLE_SUCCESS = 'FETCH_CATTLE_SUCCESS'

@@ -8,7 +8,8 @@ import {
   editCattleEnable,
   deleteCattleEnable,
   fetchCattleImage,
-  uploadCattleImage
+  uploadCattleImage,
+  imagesToUpload
 } from '../../actions'
 
 const buttonObject = {
@@ -32,7 +33,8 @@ const mapDispatchToProps = (dispatch) => {
     handleEditCattleEnable: (id) => dispatch(editCattleEnable(id)),
     handleDeleteCattleEnable: (id) => dispatch(deleteCattleEnable(id)),
     handleFetchCattleImage: (id) => dispatch(fetchCattleImage(id)),
-    handleUploadCattleImage: (id, image) => dispatch(uploadCattleImage(id, image))
+    handleUploadCattleImage: (id, image) => dispatch(uploadCattleImage(id, image)),
+    handleImagesToUpload: (id, images) => dispatch(imagesToUpload(id, images)),
   }
 }
 
@@ -63,7 +65,9 @@ class CattleItemComponent extends Component {
     handleEditCattleEnable: PropTypes.func.isRequired,
     handleDeleteCattleEnable: PropTypes.func.isRequired,
     handleFetchCattleImage: PropTypes.func.isRequired,
-    handleUploadCattleImage: PropTypes.func.isRequired
+    handleUploadCattleImage: PropTypes.func.isRequired,
+    handleImagesToUpload: PropTypes.func.isRequired,
+    imagesBeforeUpload: PropTypes.arrayOf(PropTypes.string),
   }
   static defaultProps = {
     onlyEdit: false,
@@ -87,6 +91,7 @@ class CattleItemComponent extends Component {
 
   handleImagesUpload(images) {
     images.map((i) => {
+      this.props.handleImagesToUpload(this.props.cattle.id, i);
       const reader = new FileReader()
       reader.onload = () => {
         if (!!reader.result) {
@@ -121,6 +126,21 @@ class CattleItemComponent extends Component {
 
   }
 
+  renderDropzoneContent() {
+    const { imagesBeforeUpload } = this.props
+    return (!imagesBeforeUpload ?
+      <div>
+        Click here or drop an image of a cattle muzzle to upload
+      </div> :
+      <div> { imagesBeforeUpload.map((i) => {
+        console.log("i");
+        console.log(i);
+        if (i)
+          return <img className='cattle-item-component-image' src={i} /> }) }
+      </div>
+    )
+  }
+
   renderDisplay (style = '') {
     const {
       country_code,
@@ -151,9 +171,7 @@ class CattleItemComponent extends Component {
             <DropzoneComponent
               ref={'image'}
               onDrop={ (images) => { this.handleImagesUpload(images) } }>
-              <div>
-                Click here or drop an image of a cattle muzzle to upload
-              </div>
+              { this.renderDropzoneContent() }
             </DropzoneComponent>
           </div> }
       </div>)

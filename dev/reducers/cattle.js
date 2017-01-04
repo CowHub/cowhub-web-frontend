@@ -5,6 +5,7 @@ import {
   EDIT_CATTLE_DISABLE,
   DELETE_CATTLE_ENABLE,
   DELETE_CATTLE_DISABLE,
+  IMAGES_TO_UPLOAD,
   FETCH_CATTLE_PENDING,
   FETCH_CATTLE_SUCCESS,
   FETCH_CATTLE_ERROR,
@@ -47,6 +48,8 @@ const cattle = (state = initialState, action) => {
       return handleDeleteCattleEnable(state, action.id)
     case DELETE_CATTLE_DISABLE:
       return handleDeleteCattleDisable(state, action.id)
+    case IMAGES_TO_UPLOAD:
+      return handleImagesToUpload(state, action.id, action.image)
     case FETCH_CATTLE_PENDING:
       return handleFetchCattlePending(state)
     case FETCH_CATTLE_SUCCESS:
@@ -148,6 +151,25 @@ export function handleDeleteCattleDisable(state, id) {
       cattle[i].deleting = false
     }
   }
+  return {
+    ...state,
+    cattle,
+  }
+}
+
+export function handleImagesToUpload(state, id, image) {
+  let cattle = state.cattle
+  console.log("in reducer");
+  for (let i in cattle) {
+    if (cattle[i].cattle.id == id) {
+      cattle[i].imagesBeforeUpload = cattle[i].imagesBeforeUpload ?
+                                          cattle[i].imagesBeforeUpload : [];
+      cattle[i].imagesBeforeUpload.push(image.preview);
+      console.log(cattle[i].imagesBeforeUpload);
+      break;
+    }
+  }
+
   return {
     ...state,
     cattle,
