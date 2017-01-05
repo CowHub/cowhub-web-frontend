@@ -57,7 +57,10 @@ class CattleItemComponent extends Component {
       id: PropTypes.number.isRequired,
       individual_number: PropTypes.number.isRequired,
       name: PropTypes.string,
-      images: PropTypes.arrayOf(PropTypes.string)
+      images: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        data: PropTypes.string.isRequired
+      }))
     }).isRequired,
     index: PropTypes.number,
     handleEditCattleEnable: PropTypes.func.isRequired,
@@ -192,7 +195,7 @@ class CattleItemComponent extends Component {
         { !onlyEdit && !editing && images && images.length > 0 &&
           <div className='col-xs-12 cattle-item-component-image-wrapper' >
           { images.map((i) => {
-            return <img className='cattle-item-component-image' src={i} />
+            return <img key={i.id} className='cattle-item-component-image' src={i.data} />
           }) }
           </div>
         }
