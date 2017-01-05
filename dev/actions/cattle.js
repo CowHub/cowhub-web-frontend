@@ -117,9 +117,10 @@ export const fetchCattleImage = (id) => {
   }
 }
 
-export const fetchCattleImagePending = () => {
+export const fetchCattleImagePending = (id) => {
   return {
     type: FETCH_CATTLE_IMAGE_PENDING,
+    id
   }
 }
 
@@ -127,14 +128,15 @@ export const fetchCattleImageSuccess = (id, images) => {
   return {
     type: FETCH_CATTLE_IMAGE_SUCCESS,
     id,
-    images,
+    images
   }
 }
 
-export const fetchCattleImageError = (error) => {
+export const fetchCattleImageError = (id, error) => {
   return {
     type: FETCH_CATTLE_IMAGE_ERROR,
-    error,
+    id,
+    error
   }
 }
 
@@ -262,7 +264,7 @@ export const deleteCattleSuccess = (id) => {
 export const deleteCattleError = (error) => {
   return {
     type: DELETE_CATTLE_ERROR,
-    error,
+    error
   }
 }
 
@@ -274,7 +276,7 @@ export const UPLOAD_CATTLE_IMAGE_ERROR = 'UPLOAD_CATTLE_IMAGE_ERROR'
 export const uploadCattleImage = (id, image) => {
   let token = store.getState().authentication.token
   return (dispatch) => {
-    dispatch(uploadCattleImagePending())
+    dispatch(uploadCattleImagePending(id))
     $.ajax(`${process.env.API_ENDPOINT}/cattle/${id}/images`, {
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -286,14 +288,15 @@ export const uploadCattleImage = (id, image) => {
     }).then((response) => {
       dispatch(uploadCattleImageSuccess(id, image))
     }).catch((error) => {
-      dispatch(uploadCattleImageError(error))
+      dispatch(uploadCattleImageError(id, error))
     })
   }
 }
 
-export const uploadCattleImagePending = () => {
+export const uploadCattleImagePending = (id) => {
   return {
     type: UPLOAD_CATTLE_IMAGE_PENDING,
+    id
   }
 }
 
@@ -301,14 +304,15 @@ export const uploadCattleImageSuccess = (id, image) => {
   return {
     type: UPLOAD_CATTLE_IMAGE_SUCCESS,
     id,
-    image,
+    image
   }
 }
 
-export const uploadCattleImageError = (error) => {
+export const uploadCattleImageError = (id, error) => {
   return {
     type: UPLOAD_CATTLE_IMAGE_ERROR,
-    error,
+    id,
+    error
   }
 }
 

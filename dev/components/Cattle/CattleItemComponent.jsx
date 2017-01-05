@@ -192,7 +192,7 @@ class CattleItemComponent extends Component {
         { !onlyEdit && !editing && images && images.length > 0 &&
           <div className='col-xs-12 cattle-item-component-image-wrapper' >
           { images.map((i) => {
-            if (i && i.image) return <img className='cattle-item-component-image' src={i.image} />
+            return <img className='cattle-item-component-image' src={i} />
           }) }
           </div>
         }
