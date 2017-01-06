@@ -117,10 +117,9 @@ export const fetchCattleImage = (id) => {
   }
 }
 
-export const fetchCattleImagePending = (id) => {
+export const fetchCattleImagePending = () => {
   return {
     type: FETCH_CATTLE_IMAGE_PENDING,
-    id
   }
 }
 
@@ -128,7 +127,7 @@ export const fetchCattleImageSuccess = (id, images) => {
   return {
     type: FETCH_CATTLE_IMAGE_SUCCESS,
     id,
-    images
+    images,
   }
 }
 
@@ -136,7 +135,7 @@ export const fetchCattleImageError = (id, error) => {
   return {
     type: FETCH_CATTLE_IMAGE_ERROR,
     id,
-    error
+    error,
   }
 }
 

@@ -45,6 +45,7 @@ class CattleItemComponent extends Component {
     onlyUpload: PropTypes.bool.isRequired,
     editing: PropTypes.bool.isRequired,
     deleting: PropTypes.bool.isRequired,
+    hasImages: PropTypes.bool.isRequired,
     left: PropTypes.shape(buttonTypes).isRequired,
     right: PropTypes.shape(buttonTypes).isRequired,
     cattle: PropTypes.shape({
@@ -60,7 +61,7 @@ class CattleItemComponent extends Component {
       images: PropTypes.arrayOf(PropTypes.shape({
         id: PropTypes.string.isRequired,
         data: PropTypes.string.isRequired
-      }))
+      })).isRequired,
     }).isRequired,
     index: PropTypes.number,
     handleEditCattleEnable: PropTypes.func.isRequired,
@@ -74,13 +75,14 @@ class CattleItemComponent extends Component {
     onlyUpload: false,
     editing: false,
     deleting: false,
-    image: false,
+    hasImages: false,
     cattle: {
       id: -1,
       check_digit: -1,
       country_code: '',
       herdmark: '',
-      individual_number: -1
+      individual_number: -1,
+      images: [],
     }
   }
 
@@ -170,13 +172,14 @@ class CattleItemComponent extends Component {
       id,
       individual_number,
       name,
-      images
+      images,
     } = this.props.cattle
     const {
       onlyEdit,
       onlyDelete,
       editing,
-      deleting
+      deleting,
+      hasImages,
     } = this.props
 
     const showButtons = !onlyEdit && !onlyDelete && !editing && !deleting
@@ -192,10 +195,11 @@ class CattleItemComponent extends Component {
             <button className='cattle-item-component-button-item fa fa-2x fa-pencil-square-o' onClick={ () => { this.props.handleEditCattleEnable(id) } } />
             <button className='cattle-item-component-button-item fa fa-2x fa-trash-o' onClick={ () => { this.props.handleDeleteCattleEnable(id) } } />
           </div> }
-        { !onlyEdit && !editing && images && images.length > 0 &&
+        { !onlyEdit && !editing && hasImages &&
           <div className='col-xs-12 cattle-item-component-image-wrapper' >
           { images.map((i) => {
-            return <img key={i.id} className='cattle-item-component-image' src={i.data} />
+            return <img className='cattle-item-component-image' src={i} />
+            //return <img key={i.id} className='cattle-item-component-image' src={i.data} />
           }) }
           </div>
         }
