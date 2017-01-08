@@ -187,7 +187,7 @@ export const UPDATE_CATTLE_PENDING = 'UPDATE_CATTLE_PENDING'
 export const UPDATE_CATTLE_SUCCESS = 'UPDATE_CATTLE_SUCCESS'
 export const UPDATE_CATTLE_ERROR = 'UPDATE_CATTLE_ERROR'
 
-export const updateCattle = (id, params) => {
+export const updateCattle = (id, params, images) => {
   let token = store.getState().authentication.token
   return (dispatch) => {
     dispatch(updateCattlePending())
@@ -199,6 +199,10 @@ export const updateCattle = (id, params) => {
       data: params,
     }).then((response) => {
       dispatch(updateCattleSuccess(response.cattle))
+    }).then((response) => {
+      images.map((i)=>{
+        dispatch(uploadCattleImage(id, i))
+      })
     }).catch((error) => {
       dispatch(updateCattleError(error))
     })

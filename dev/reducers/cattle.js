@@ -178,6 +178,7 @@ const generateCattleObject = (cattle) => {
     editing: false,
     deleting: false,
     uploading: false,
+    imagesToUpload: [],
   }
 }
 
@@ -293,6 +294,7 @@ export function handleUploadCattleImageSuccess(state, id, image) {
     id,
     image
   })
+  cattle[index].hasImages = true;
   return {
     ...state.authentication,
     cattle

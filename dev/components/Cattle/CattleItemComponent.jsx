@@ -64,6 +64,7 @@ class CattleItemComponent extends Component {
       })).isRequired,
     }).isRequired,
     index: PropTypes.number,
+    imagesToUpload: PropTypes.arrayOf(PropTypes.string),
     handleEditCattleEnable: PropTypes.func.isRequired,
     handleDeleteCattleEnable: PropTypes.func.isRequired,
     handleFetchCattleImage: PropTypes.func.isRequired,
@@ -95,7 +96,7 @@ class CattleItemComponent extends Component {
       const reader = new FileReader()
       reader.onload = () => {
         if (!!reader.result) {
-          this.props.handleUploadCattleImage(this.props.cattle.id, reader.result)
+          this.props.imagesToUpload.push(reader.result);
         } else {
           new Error("Failed converting to base64")
         }
@@ -198,8 +199,7 @@ class CattleItemComponent extends Component {
         { !onlyEdit && !editing && hasImages &&
           <div className='col-xs-12 cattle-item-component-image-wrapper' >
           { images.map((i) => {
-            return <img className='cattle-item-component-image' src={i} />
-            //return <img key={i.id} className='cattle-item-component-image' src={i.data} />
+            return <img key={i.id} className='cattle-item-component-image' src={i.data} />
           }) }
           </div>
         }
