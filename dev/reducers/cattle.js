@@ -173,7 +173,6 @@ export function handleFetchCattlePending(state) {
 }
 
 const generateCattleObject = (cattle) => {
-  cattle.images = []
   return {
     cattle,
     editing: false,
@@ -215,10 +214,8 @@ export function handleFetchCattleImagePending(state) {
 export function handleFetchCattleImageSuccess(state, id, images) {
   let cattle = state.cattle
   const index = cattle.findIndex( (c) => { return c.cattle.id === id } )
-  if (images) {
-    cattle[index].cattle.images = images;
-    cattle[index].hasImages = true
-  }
+  cattle[index].cattle.images = images;
+  cattle[index].hasImages = images.length ? true : false;
   return {
     ...state,
     cattle
