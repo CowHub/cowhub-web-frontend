@@ -47,20 +47,70 @@ class LoginComponent extends Component {
     });
   }
 
+  renderLogo() {
+    return (
+      <img
+        className='signin-logo'
+        src={ require('../../assets/images/CowHub-logo.png') }
+        onClick={ () => window.location.replace('/') }
+      />
+    );
+  };
+
+  renderEmailField() {
+    return (
+      <input
+        ref='email' className='signin-input'
+        type='email' placeholder='Email' />
+    );
+  };
+
+  renderPasswordField() {
+    return (
+      <input
+        ref='password' className='signin-input'
+        type='password' placeholder='Password' />
+    );
+  };
+
+  renderSignInButton() {
+    return (
+      <button className='signin-sign-in-button'
+        onClick={ () => this.handleSubmit() }>
+        SIGN IN
+      </button>
+    );
+  };
+
+  renderSignUpNotice() {
+    return (
+      <div className='signin-sign-up-title'>
+        NOT A MEMBER?
+      </div>
+    );
+  };
+
+  renderSignUpButton() {
+    return (
+      <button className='signin-sign-up-button'
+        onClick={ () => window.location.replace('/users/signup') }
+      >
+        SIGN UP
+      </button>
+    );
+  };
+
   render() {
     return (
-      <div className="login-component-wrapper" >
-        <div className="login-component-title" >Log in</div>
-        <input
-          ref="email" className="login-component-input"
-          type="email" placeholder="Email" />
-        <input
-          ref="password" className="login-component-input"
-          type="password" placeholder="Password" />
-        <button
-          onClick={ () => this.handleSubmit() } className="login-component-button-submit" >
-          Log In
-        </button>
+      <div className='signin-wrapper' >
+        <div className='signin-form-wrapper'>
+          { this.renderLogo() }
+          { this.renderEmailField() }
+          { this.renderPasswordField() }
+          { this.renderSignInButton() }
+          { this.renderSignUpNotice() }
+          { this.renderSignUpButton() }
+        </div>
       </div>
     );
   }

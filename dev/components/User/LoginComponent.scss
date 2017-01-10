@@ -1,26 +1,69 @@
-@import "../../style/colours.scss";
-@import "../../style/fonts.scss";
+@import "../../style/layout.scss";
 
-.login-component-wrapper {
-  margin: auto;
-  max-width: 600px;
-  text-align: center;
+.signin-wrapper {
+  align-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100vw;
+  margin-bottom: 50px;
 }
 
-.login-component-title {
-  font-size: $font-size-bigger;
+.signin-form-wrapper {
+  align-self: center;
+  background: $dark-blue;
+  width: 50%;
+  padding: $big-padding;
 }
 
-.login-component-input {
-  box-sizing: border-box;
-  border: 1px solid $background-colour-dark;
-  border-radius: 2px;
-  font-family: $font-family-default;
-  margin: 10px 20px;
-  padding: 8px 6px;
+.signin-logo {
+  padding-bottom: $big-padding;
   width: 100%;
 }
 
-.login-component-button-submit {
-  padding: 6px 10px;
+.signin-input {
+  height: 40px;
+  width: 100%;
+  font-size: 20px;
+  margin-bottom: 25px;
+  padding: 10px;
+}
+
+%signin-button {
+  border: 3px solid;
+  font-size: 16px;
+  height: 40px;
+  padding: 8px 5px;
+  width: 100%;
+}
+
+.signin-sign-in-button {
+  margin-bottom: $very-big-padding;
+}
+
+.signin-sign-in-button,
+.signin-sign-up-button {
+  @extend %signin-button;
+  background: transparent;
+  border-color: $dirty-white;
+  color: $dirty-white;
+}
+
+.signin-sign-in-button:hover,
+.signin-sign-up-button:hover {
+  background: $dirty-white;
+  border-color: $dirty-white;
+  color: $dark-blue;
+}
+
+.signin-sign-up-title {
+  color: $dirty-white;
+  font-size: 30px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  margin-bottom: 25px;
+}
+
+.signin-sign-up-button {
+  @extend %signin-button;
 }
