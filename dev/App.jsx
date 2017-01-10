@@ -23,7 +23,7 @@ class App extends Component {
   static displayName = 'CowHub'
 
   handleHomeNotExists(next, replace) {
-    replace('/cattle', null, null)
+    // replace('/cattle', null, null)
   }
 
   handleAreLoggedIn(next, replace) {

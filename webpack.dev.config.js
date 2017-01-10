@@ -46,6 +46,10 @@ module.exports = {
       {
         test: /\.(css|scss)$/,
         loader: 'style-loader!css-loader?sourceMap!sass-loader?sourceMap'
+      },
+      {
+        test: /\.(png|jpg)$/,
+        loader: 'url-loader?limit=8192'
       }
     ],
     noParse: /lie\.js|[\s\S]*.(svg|ttf|eot)/

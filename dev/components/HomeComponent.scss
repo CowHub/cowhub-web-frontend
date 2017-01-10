@@ -1,8 +1,158 @@
-.home-component-wrapper {
+@import "../style/layout.scss";
+
+// Content
+.homepage-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+%homepage-section {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: $very-big-padding;
+  padding-left: $big-padding;
+  padding-right: $big-padding;
+  padding-top: $very-big-padding;
+}
+
+%homepage-section-title {
+  font-size: 35px;
+  font-weight: 500;
+  padding-bottom: $big-padding;
+}
+
+// Intro Section
+.homepage-intro-section {
+  @extend %homepage-section;
+  background-image: url('http://localhost:3000/c868d4e4d88bc83a376a2927b28d9749.png');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.homepage-intro-background-image {
+  display: none;
+}
+
+.homepage-intro-logo {
+  padding-bottom: $big-padding;
+  max-width: 33vw;
+}
+
+.homepage-intro-tagline {
+  color: $dirty-white;
+  font-size: 40px;
+  font-weight: 400;
+  padding-bottom: $small-padding;
   text-align: center;
 }
 
-// TODO: Remove having written home component properly
-.home-component-link {
-  margin: auto 10px;
+.homepage-intro-subtagline {
+  color: $dirty-white;
+  font-size: 25px;
+  font-weight: 400;
+  padding-bottom: $small-padding;
+  text-align: center;
+}
+
+.homepage-intro-arrow {
+  color: $dirty-white;
+  font-size: 40px;
+}
+
+// Mission Section
+.homepage-mission-section {
+  @extend %homepage-section;
+}
+
+.homepage-mission-section-title {
+  @extend %homepage-section-title;
+}
+
+.homepage-mission-pitch {
+  font-size: 30px;
+  font-weight: 400;
+  text-align: center;
+}
+
+// Quote Section
+.homepage-quote-section {
+  @extend %homepage-section;
+  background: $blue;
+}
+
+.homepage-quote {
+  color: $dirty-white;
+  font-size: 30px;
+  font-weight: 400;
+  text-align: center;
+}
+
+// Tools Section
+.homepage-tools-section {
+  @extend %homepage-section;
+}
+
+.homepage-tools-section-title {
+  @extend %homepage-section-title;
+}
+
+.homepage-tools-list {
+  display: flex;
+  justify-content: space-between;
+}
+
+.homepage-tool-wrapper {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+}
+
+.homepage-tool-icon {
+  height: 10vw;
+  padding-bottom: $small-padding;
+  width: 10vw;
+}
+
+.homepage-tool-title {
+  color: $blue;
+  letter-spacing: .5vw;
+  font-size: 25px;
+  padding-bottom: $small-padding;
+}
+
+.homepage-tool-description {
+  font-size: 20px;
+  text-align: center;
+}
+
+// Join Section
+.homepage-join-section {
+  @extend %homepage-section;
+  background: $blue;
+}
+
+.homepage-join-button {
+  background: transparent;
+  border: 6px solid $dirty-white;
+  color: $dirty-white;
+  font-size: 60px;
+  font-weight: 500;
+  text-align: center;
+  padding: 2vw;
+  width: 60vw;
+}
+
+.homepage-join-button:hover {
+  background: $dirty-white;
+  border: 6px solid $dirty-white;
+  color: $blue;
+  font-size: 60px;
+  font-weight: 500;
+  text-align: center;
+  text-decoration: none;
+  padding: 2vw;
+  width: 60vw;
 }
