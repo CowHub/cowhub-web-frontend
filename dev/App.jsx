@@ -39,7 +39,7 @@ class App extends Component {
           <Route path='/' component={AppWrapper} >
             <IndexRoute component={HomeComponent} onEnter={ this.handleHomeNotExists } />
             <Route path='user'>
-              <Route path='login' component={LoginComponent} />
+              <Route path='signin' component={LoginComponent} />
               <Route path='signup' component={SignUpComponent} />
             </Route>
             <Route path='cattle' onEnter={ this.handleAreLoggedIn } >

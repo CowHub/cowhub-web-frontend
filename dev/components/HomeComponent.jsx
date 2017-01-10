@@ -1,8 +1,10 @@
 require('./HomeComponent.scss')
 
-import React, { Component } from 'react'
-import { Link } from 'react-router'
+import React, { Component } from 'react';
+import { Link } from 'react-router';
 import { connect } from 'react-redux';
+
+import HeaderComponent from './Header/HeaderComponent';
 
 const mapStateToProps = (state) => {
   return {};
@@ -15,6 +17,17 @@ const mapDispatchToProps = (dispatch) => {
 class HomeComponent extends Component {
 
   static displayName = 'Home Component';
+
+  static links = [
+    {
+      title: 'Sign In',
+      method: () => window.location = '/user/signin'
+    },
+    {
+      title: 'Sign Up',
+      method: () => window.location = '/user/signup'
+    }
+  ];
 
   static tools = [
     {
@@ -33,6 +46,14 @@ class HomeComponent extends Component {
       description: 'Identify your cattle with a simple picture.',
     }
   ];
+
+  renderHeader() {
+    return (
+      <HeaderComponent
+        links={ HomeComponent.links }
+      />
+    );
+  };
 
   renderIntro() {
     return (
@@ -108,12 +129,15 @@ class HomeComponent extends Component {
 
   render() {
     return (
-      <div className="homepage-wrapper" >
-        { this.renderIntro() }
-        { this.renderMission() }
-        { this.renderQuote() }
-        { this.renderTools() }
-        { this.renderJoin() }
+      <div>
+        { this.renderHeader() }
+        <div className="homepage-wrapper" >
+          { this.renderIntro() }
+          { this.renderMission() }
+          { this.renderQuote() }
+          { this.renderTools() }
+          { this.renderJoin() }
+        </div>
       </div>
     );
   };
