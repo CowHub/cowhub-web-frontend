@@ -1,83 +1,23 @@
 @import "../../style/colours";
 @import "../../style/fonts";
 
-.cattle-item-component-wrapper {
-  background-color: $background-colour-light;
-  border: 2px solid black;
-  box-shadow: 0 0 8px #aaa;
-  margin: 10px 0;
-  padding: 10px 0;
-
-
-  &:last-child {
-    border-bottom: 1px solid black;
-  }
+.cattleitem-image-wrapper {
+  display: flex;
+  justify-content: space-between;
 }
 
-.cattle-item-component-data-wrapper {
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-  margin: auto;
-  text-align: center;
+.cattleitem-image-wrapper {
+  width: 35%
 }
 
-.cattle-item-component-data-value {
-  line-height: 2em;
-  margin: 4px 0;
+.cattleitem-image {
 }
 
-.cattle-item-component-button-item {
-  background-color: inherit;
+.cattleitem-detail {
+  display: flex;
+  flex-direction: column;
+  width: 60%
 }
 
-.cattle-item-component-edit-delete {
-  text-align: center;
-}
-
-.cattle-item-component-dropzone-wrapper {
-  margin: auto;
-  text-align: center;
-}
-
-.cattle-item-component-dropzone {
-  margin: 20px auto;
-  margin-top: 130px;
-  width: 80%;
-  div {
-    background-color: $background-colour-light;
-    width: 100% !important;
-
-    div {
-      margin: 50px auto;
-    }
-  }
-}
-
-.cattle-item-component-button-wrapper-vertical {
-}
-
-.cattle-item-component-input {
-  box-sizing: border-box;
-  border: 1px solid $background-colour-dark;
-  border-radius: 2px;
-  font-family: $font-family-default;
-  margin: 10px 0;
-  padding: 8px 6px;
-  width: 100%;
-}
-
-.cattle-item-component-image-wrapper {
-  border-top: 1px solid black;
-  padding: 10px 0 0;
-  margin: 5px 0 0;
-  text-align: center;
-  width: 100%;
-}
-
-.cattle-item-component-image {
-  border-radius: 8px;
-  box-shadow: 0 0 4px darken($background-colour-dark, 40%);
-  height: 100px;
-  margin: 5px;
-  width: 100px;
+.cattleitem-field {
 }
