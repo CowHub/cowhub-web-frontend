@@ -56,6 +56,7 @@ export const loginUser = (params) => {
     }).then((response) => {
       dispatch(loginUserSuccess())
       dispatch(storeToken(response.auth_token))
+      window.location = '/cattle'
     }).catch((error) => {
       dispatch(loginUserError(error))
     })
@@ -96,6 +97,7 @@ export const registerUser = (params) => {
     }).then((response) => {
       dispatch(registerUserSuccess())
       dispatch(storeToken(response.auth_token))
+      window.location = '/cattle'
     }).catch((error) => {
       dispatch(registerUserError(error))
     })
@@ -141,6 +143,7 @@ export const logoutUser = () => {
       method: 'DELETE',
     }).then((response) => {
       logoutSuccess(dispatch)
+      window.location = '/'
     }).catch((error) => {
       if (error.status === 401) {
         logoutSuccess(dispatch)
