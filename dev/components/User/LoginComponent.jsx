@@ -1,4 +1,4 @@
-require('./LoginComponent.scss');
+require('./UserAuthenticationComponent.scss');
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
@@ -50,7 +50,7 @@ class LoginComponent extends Component {
   renderLogo() {
     return (
       <img
-        className='signin-logo'
+        className='uauth-logo'
         src={ require('../../assets/images/CowHub-logo.png') }
         onClick={ () => window.location.replace('/') }
       />
@@ -60,7 +60,7 @@ class LoginComponent extends Component {
   renderEmailField() {
     return (
       <input
-        ref='email' className='signin-input'
+        ref='email' className='uauth-input'
         type='email' placeholder='Email' />
     );
   };
@@ -68,14 +68,14 @@ class LoginComponent extends Component {
   renderPasswordField() {
     return (
       <input
-        ref='password' className='signin-input'
+        ref='password' className='uauth-input'
         type='password' placeholder='Password' />
     );
   };
 
   renderSignInButton() {
     return (
-      <button className='signin-sign-in-button'
+      <button className='uauth-submit-button'
         onClick={ () => this.handleSubmit() }>
         SIGN IN
       </button>
@@ -84,7 +84,7 @@ class LoginComponent extends Component {
 
   renderSignUpNotice() {
     return (
-      <div className='signin-sign-up-title'>
+      <div className='uauth-redirect-notice'>
         NOT A MEMBER?
       </div>
     );
@@ -92,8 +92,8 @@ class LoginComponent extends Component {
 
   renderSignUpButton() {
     return (
-      <button className='signin-sign-up-button'
-        onClick={ () => window.location.replace('/users/signup') }
+      <button className='uauth-redirect-button'
+        onClick={ () => window.location.replace('/user/signup') }
       >
         SIGN UP
       </button>
@@ -102,8 +102,8 @@ class LoginComponent extends Component {
 
   render() {
     return (
-      <div className='signin-wrapper' >
-        <div className='signin-form-wrapper'>
+      <div className='uauth-wrapper' >
+        <div className='uauth-form-wrapper'>
           { this.renderLogo() }
           { this.renderEmailField() }
           { this.renderPasswordField() }

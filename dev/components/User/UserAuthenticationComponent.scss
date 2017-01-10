@@ -1,6 +1,6 @@
 @import "../../style/layout.scss";
 
-.signin-wrapper {
+.uauth-wrapper {
   align-content: center;
   display: flex;
   flex-direction: column;
@@ -9,19 +9,19 @@
   margin-bottom: 50px;
 }
 
-.signin-form-wrapper {
+.uauth-form-wrapper {
   align-self: center;
   background: $dark-blue;
   width: 50%;
   padding: $big-padding;
 }
 
-.signin-logo {
+.uauth-logo {
   padding-bottom: $big-padding;
   width: 100%;
 }
 
-.signin-input {
+.uauth-input {
   height: 40px;
   width: 100%;
   font-size: 20px;
@@ -29,41 +29,33 @@
   padding: 10px;
 }
 
-%signin-button {
+.uauth-submit-button {
+  margin-bottom: $very-big-padding;
+}
+
+.uauth-submit-button,
+.uauth-redirect-button {
   border: 3px solid;
   font-size: 16px;
   height: 40px;
   padding: 8px 5px;
   width: 100%;
-}
-
-.signin-sign-in-button {
-  margin-bottom: $very-big-padding;
-}
-
-.signin-sign-in-button,
-.signin-sign-up-button {
-  @extend %signin-button;
   background: transparent;
   border-color: $dirty-white;
   color: $dirty-white;
 }
 
-.signin-sign-in-button:hover,
-.signin-sign-up-button:hover {
+.uauth-submit-button:hover,
+.uauth-redirect-button:hover {
   background: $dirty-white;
   border-color: $dirty-white;
   color: $dark-blue;
 }
 
-.signin-sign-up-title {
+.uauth-redirect-notice {
   color: $dirty-white;
   font-size: 30px;
   font-weight: 500;
   letter-spacing: 2px;
   margin-bottom: 25px;
-}
-
-.signin-sign-up-button {
-  @extend %signin-button;
 }
