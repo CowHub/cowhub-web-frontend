@@ -122,7 +122,7 @@ class HomeComponent extends Component {
   renderJoin() {
     return (
       <div className='homepage-join-section'>
-        <Link to='/user/login' className='homepage-join-button' >SIGN UP</Link>
+        <Link to='/user/signup' className='homepage-join-button' >SIGN UP</Link>
       </div>
     );
   };

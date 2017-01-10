@@ -16,19 +16,19 @@ import SignUpComponent from './components/User/SignUpComponent'
 
 // Cattle
 import CattleIndexComponent from './components/Cattle/CattleIndexComponent'
-import CattleIdentifyComponent from './components/Cattle/CattleIdentifyComponent'
 
 class App extends Component {
 
   static displayName = 'CowHub'
 
-  handleHomeNotExists(next, replace) {
-    // replace('/cattle', null, null)
+  handleUserAlreadySignedIn(next, replace) {
+    if (store.getState().authentication.token)
+      replace('/cattle', null, null)
   }
 
   handleAreLoggedIn(next, replace) {
     if (!store.getState().authentication.token) {
-      replace('/user/login', null, null)
+      replace('/user/signin', null, null)
     }
   }
 
@@ -37,21 +37,19 @@ class App extends Component {
       <Provider store={store}>
         <Router history={browserHistory} >
           <Route path='/' component={AppWrapper} >
-            <IndexRoute component={HomeComponent} onEnter={ this.handleHomeNotExists } />
-            <Route path='user'>
+            <IndexRoute component={HomeComponent} onEnter={ this.handleUserAlreadySignedIn } />
+            <Route path='user' onEnter={ this.handleUserAlreadySignedIn }>
               <Route path='signin' component={LoginComponent} />
               <Route path='signup' component={SignUpComponent} />
             </Route>
             <Route path='cattle' onEnter={ this.handleAreLoggedIn } >
               <IndexRoute component={CattleIndexComponent} />
-              <Route path='identify' component={CattleIdentifyComponent} />
             </Route>
           </Route>
         </Router>
       </Provider>
     )
   }
-
 }
 
 export default App

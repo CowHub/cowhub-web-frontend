@@ -6,9 +6,7 @@ import { connect } from 'react-redux';
 import { registerUser } from '../../actions/index';
 
 const mapStateToProps = (state) => {
-  return {
-    ...state.authentication
-  };
+  return {};
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -21,24 +19,8 @@ class SignUpComponent extends Component {
 
   static displayName = 'Signup Component';
   static propTypes = {
-    token: React.PropTypes.string,
-    handleRegister: React.PropTypes.func,
+    handleRegister: React.PropTypes.func
   };
-
-  componentWillMount() {
-    this.handleAuthenticated(this.props);
-  }
-
-  componentWillReceiveProps(props) {
-    this.handleAuthenticated(props);
-  }
-
-  handleAuthenticated(props) {
-    if (props.token) {
-      console.log('Redirecting... you are authenticated already.')
-      window.location = '/';
-    }
-  }
 
   handleSubmit() {
     this.props.handleRegister({
@@ -46,7 +28,7 @@ class SignUpComponent extends Component {
       password: this.refs.password.value,
       password_confirmation: this.refs.password_confirmation.value
     })
-  }
+  };
 
   renderLogo() {
     return (
@@ -77,7 +59,7 @@ class SignUpComponent extends Component {
   renderPasswordConfirmationField() {
     return (
       <input
-        ref='password' className='uauth-input'
+        ref='password_confirmation' className='uauth-input'
         type='password' placeholder='Password Confirmation' />
     );
   };

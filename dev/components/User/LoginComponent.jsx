@@ -6,9 +6,7 @@ import { connect } from 'react-redux';
 import { loginUser } from '../../actions/index';
 
 const mapStateToProps = (state) => {
-  return {
-    ...state.authentication
-  };
+  return {};
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -21,31 +19,15 @@ class LoginComponent extends Component {
 
   static displayName = 'Login Component';
   static propTypes = {
-    token: React.PropTypes.string,
-    handleLogin: React.PropTypes.func,
+    handleLogin: React.PropTypes.func
   };
-
-  componentWillMount() {
-    this.handleAuthenticated(this.props);
-  }
-
-  componentWillReceiveProps(props) {
-    this.handleAuthenticated(props);
-  }
-
-  handleAuthenticated(props) {
-    if (props.token) {
-      console.log('Redirecting... you are authenticated already.')
-      window.location = '/';
-    }
-  }
 
   handleSubmit() {
     this.props.handleLogin({
       email: this.refs.email.value,
       password: this.refs.password.value
     });
-  }
+  };
 
   renderLogo() {
     return (
@@ -113,8 +95,7 @@ class LoginComponent extends Component {
         </div>
       </div>
     );
-  }
-
+  };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginComponent);
