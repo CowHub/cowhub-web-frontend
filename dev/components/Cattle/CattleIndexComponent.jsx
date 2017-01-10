@@ -40,17 +40,16 @@ class CattleIndexComponent extends Component {
     this.props.fetchCattle();
   }
 
-  static links = [
-    {
-      title: 'Sign Out',
-      method: () => handleLogout()
-    }
-  ];
-
   renderHeader() {
+    let links = [
+      {
+        title: 'Sign Out',
+        method: () => this.props.handleLogout()
+      }
+    ];
     return (
       <HeaderComponent
-        links={ CattleIndexComponent.links }
+        links={ links }
       />
     );
   };

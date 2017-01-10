@@ -44,7 +44,7 @@ class CattleItemComponent extends Component {
 
   render() {
     return (
-      <div className='cattleitem-image-wrapper'
+      <div className='cattleitem-wrapper'
         onClick={ () => this.props.handleSelect() }>
         { this.renderImage() }
         { this.renderDetails() }
