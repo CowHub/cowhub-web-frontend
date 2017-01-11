@@ -13,7 +13,6 @@
 .uauth-form-wrapper {
   align-self: center;
   background: $dark-blue;
-  width: 40%;
   padding: $big-padding;
 }
 
@@ -59,4 +58,25 @@
   font-weight: 500;
   letter-spacing: 2px;
   margin-bottom: 25px;
+}
+
+@media screen and (max-width: $tablet) {
+  body {
+    padding-top: 0 !important;
+  }
+
+  .uauth-wrapper {
+    margin: 0;
+  }
+
+  .uauth-form-wrapper {
+    min-height: 100vh;
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: $tablet) {
+  .uauth-form-wrapper {
+    width: 40%;
+  }
 }
