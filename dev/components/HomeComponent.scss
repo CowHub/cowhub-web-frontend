@@ -1,4 +1,5 @@
-@import "../style/layout.scss";
+@import "../style/colours";
+@import "../style/variables";
 
 // Content
 .homepage-wrapper {
@@ -17,7 +18,6 @@
 }
 
 %homepage-section-title {
-  font-size: 35px;
   font-weight: 500;
   padding-bottom: $big-padding;
 }
@@ -42,15 +42,6 @@
 
 .homepage-intro-tagline {
   color: $dirty-white;
-  font-size: 40px;
-  font-weight: 400;
-  padding-bottom: $small-padding;
-  text-align: center;
-}
-
-.homepage-intro-subtagline {
-  color: $dirty-white;
-  font-size: 25px;
   font-weight: 400;
   padding-bottom: $small-padding;
   text-align: center;
@@ -58,7 +49,6 @@
 
 .homepage-intro-arrow {
   color: $dirty-white;
-  font-size: 40px;
 }
 
 // Mission Section
@@ -71,7 +61,6 @@
 }
 
 .homepage-mission-pitch {
-  font-size: 30px;
   font-weight: 400;
   text-align: center;
 }
@@ -84,7 +73,6 @@
 
 .homepage-quote {
   color: $dirty-white;
-  font-size: 30px;
   font-weight: 400;
   text-align: center;
 }
@@ -100,14 +88,13 @@
 
 .homepage-tools-list {
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .homepage-tool-wrapper {
   align-items: center;
   display: flex;
   flex-direction: column;
-  width: 30%;
 }
 
 .homepage-tool-icon {
@@ -119,12 +106,10 @@
 .homepage-tool-title {
   color: $blue;
   letter-spacing: .5vw;
-  font-size: 25px;
   padding-bottom: $small-padding;
 }
 
 .homepage-tool-description {
-  font-size: 20px;
   text-align: center;
 }
 
@@ -138,7 +123,6 @@
   background: transparent;
   border: 6px solid $dirty-white;
   color: $dirty-white;
-  font-size: 60px;
   font-weight: 500;
   text-align: center;
   padding: 2vw;
@@ -149,10 +133,59 @@
   background: $dirty-white;
   border: 6px solid $dirty-white;
   color: $blue;
-  font-size: 60px;
-  font-weight: 500;
-  text-align: center;
   text-decoration: none;
-  padding: 2vw;
-  width: 60vw;
+}
+
+@media screen and (max-width: $tablet) {
+
+  .homepage-tools-list {
+    justify-content: center;
+  }
+
+  .homepage-tool-wrapper {
+    width: 60%;
+    margin-bottom: 20px;
+  }
+}
+
+@media screen and (min-width: $tablet) {
+  %homepage-section-title {
+    font-size: 35px;
+  }
+
+  .homepage-intro-tagline {
+    font-size: 40px;
+  }
+
+  .homepage-intro-arrow {
+    font-size: 40px;
+  }
+
+  .homepage-mission-pitch {
+    font-size: 30px;
+  }
+
+  .homepage-quote {
+    font-size: 30px;
+  }
+
+  .homepage-tools-list {
+    justify-content: space-between;
+  }
+
+  .homepage-tool-wrapper {
+    width: 30%;
+  }
+
+  .homepage-tool-title {
+    font-size: 25px;
+  }
+
+  .homepage-tool-description {
+    font-size: 20px;
+  }
+
+  .homepage-join-button {
+    font-size: 60px;
+  }
 }

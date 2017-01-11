@@ -1,10 +1,6 @@
 @import "./colours.scss";
 @import "./fonts.scss";
-
-// Padding sizes
-$small-padding: 2vw;
-$big-padding: 5vw;
-$very-big-padding: 10vw;
+@import "./variables.scss";
 
 // Font defaults
 a,
