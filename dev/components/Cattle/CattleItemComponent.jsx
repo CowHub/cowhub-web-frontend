@@ -62,6 +62,7 @@ class CattleItemComponent extends Component {
       <FieldComponent
         placeholder='Herdmark'
         value={ this.state.cattle.herdmark }
+        type='tel'
         disabled={ !this.state.editing }
         maxLength={ 6 } minLength={ 6 }
         handleChange={ (value) => this.handleChange('herdmark', value) }
@@ -74,6 +75,7 @@ class CattleItemComponent extends Component {
       <FieldComponent
         placeholder='Check Digit'
         value={ this.state.cattle.check_digit }
+        type='tel'
         disabled={ !this.state.editing }
         maxLength={ 1 } minLength={ 1 }
         handleChange={ (value) => this.handleChange('check_digit', value) }
@@ -86,9 +88,23 @@ class CattleItemComponent extends Component {
       <FieldComponent
         placeholder='Individual Number'
         value={ this.state.cattle.individual_number }
+        type='tel'
         disabled={ !this.state.editing }
         maxLength={ 5 } minLength={ 1 }
         handleChange={ (value) => this.handleChange('individual_number', value) }
+      />
+    );
+  };
+
+  renderDOB() {
+    return (
+      <FieldComponent
+        placeholder='Date of Birth'
+        value={ this.state.cattle.dob }
+        hidden={ !this.state.expanded }
+        disabled={ !this.state.editing }
+        type='date'
+        handleChange={ (value) => this.handleChange('dob', value) }
       />
     );
   };
@@ -167,6 +183,7 @@ class CattleItemComponent extends Component {
         { this.renderHerdmark() }
         { this.renderCheckDigit() }
         { this.renderIndividualNumber() }
+        { this.renderDOB() }
         { this.renderBreed() }
         { this.renderGender() }
         { this.renderGeneticDam() }

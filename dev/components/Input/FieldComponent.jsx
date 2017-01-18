@@ -7,6 +7,7 @@ class FieldComponent extends Component {
   static propTypes = {
     placeholder: PropTypes.string,
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    type: PropTypes.string,
     hidden: PropTypes.bool,
     disabled: PropTypes.bool,
     maxLength: PropTypes.number,
@@ -16,6 +17,7 @@ class FieldComponent extends Component {
 
   static defaultProps = {
     value: '',
+    type: 'text',
     hidden: false,
     disabled: true,
     maxLength: 0,
@@ -31,10 +33,10 @@ class FieldComponent extends Component {
       <div className='inputcomponent-input-wrapper'>
         <div className='inputcomponent-input-title'>{ this.props.placeholder }</div>
         <input className='inputcomponent-input-field'
-          maxLength={ this.props.maxLength } minLength={ this.props.minLength }
           value={ this.props.value ? this.props.value : '' }
+          type={ this.props.type } disabled={ this.props.disabled }
           onChange={ (e) => this.props.handleChange(e.target.value) }
-          disabled={ this.props.disabled }
+          maxLength={ this.props.maxLength } minLength={ this.props.minLength }
         />
       </div>
     );
