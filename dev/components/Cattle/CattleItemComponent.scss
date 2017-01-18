@@ -4,17 +4,19 @@
 
 .cattleitem-wrapper {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: space-around;
   border: 2px solid black;
-  padding-bottom: 10px;
-  padding-top: 10px;
+  padding: 2%;
   margin-bottom: 40px;
 }
 
 .cattleitem-image-wrapper {
   display: flex;
   align-items: center;
-  width: 35%;
+  align-self: center;
+  width: 75%;
+  margin-bottom: 20px;
 }
 
 .cattleitem-image {
@@ -24,7 +26,45 @@
 .cattleitem-detail {
   display: flex;
   flex-direction: column;
-  width: 60%;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.cattleitem-show-button-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.cattleitem-show-button {
+}
+
+
+.cattleitem-edit-button-wrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.cattleitem-edit-button {
+}
+
+.cattleitem-buttons-wrapper {
+  display: flex;
+  justify-content: space-around;
+}
+
+.cattleitem-save-button,
+.cattleitem-cancel-button,
+.cattleitem-remove-button {
+}
+
+@media screen and (max-width: $desktop) {
+  .cattleitem-wrapper {
+    width: 45%;
+  }
+
+  .cattleitem-field {
+    font-size: 20px;
+  }
 }
 
 @media screen and (max-width: $tablet) {
@@ -37,9 +77,9 @@
   }
 }
 
-@media screen and (min-width: $tablet) {
+@media screen and (min-width: $desktop) {
   .cattleitem-wrapper {
-    width: 45%;
+    width: 31%;
   }
 
   .cattleitem-field {

@@ -1,0 +1,55 @@
+@import "../../style/colours";
+@import "../../style/fonts";
+@import "../../style/variables";
+
+.inputcomponent-input-wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.inputcomponent-input-title {
+  line-height: 2;
+}
+
+.inputcomponent-input-field {
+  border: 1px solid $gray;
+  font-size: 20px;
+  height: 30px;
+  width: 50%;
+  padding-left: 10px;
+  padding-right: 35px;
+}
+
+@media screen and (max-width: $tablet) {
+  .inputcomponent-wrapper {
+    width: 100%;
+  }
+
+  .inputcomponent-input-title {
+    font-size: 20px;
+    line-height: 2;
+  }
+
+  .inputcomponent-input-title {
+    font-size: 15px;
+  }
+
+  .inputcomponent-input-field {
+    font-size: 15px;
+  }
+}
+
+@media screen and (min-width: $tablet) {
+  .inputcomponent-wrapper {
+    width: 45%;
+  }
+
+  .inputcomponent-input-title {
+    font-size: 20px;
+  }
+
+  .inputcomponent-input-field {
+    font-size: 20px;
+  }
+}

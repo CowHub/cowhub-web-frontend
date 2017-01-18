@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 
 import {
   fetchCattle,
+  updateCattle,
+  deleteCattle,
   logoutUser,
 } from '../../actions';
 
@@ -21,6 +23,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchCattle: () => dispatch(fetchCattle()),
+    updateCattle: (id, params) => dispatch(updateCattle(id, params)),
+    deleteCattle: (id) => dispatch(deleteCattle(id)),
     handleLogout: () => dispatch(logoutUser())
   };
 };
@@ -33,6 +37,8 @@ class CattleIndexComponent extends Component {
     isFetching: PropTypes.bool,
     isImageFetching: PropTypes.bool,
     fetchCattle: PropTypes.func.isRequired,
+    updateCattle: PropTypes.func.isRequired,
+    deleteCattle: PropTypes.func.isRequired,
     handleLogout: PropTypes.func.isRequired
   };
 
@@ -57,12 +63,13 @@ class CattleIndexComponent extends Component {
   renderCattle() {
     return (
       <div className='herdpage-cattle-wrapper'>
-        { this.props.cattle.map((c, i) => {
+        { this.props.cattle.map((cattle, i) => {
           return (
-            <CattleItemComponent key={ i } cattle={ c }
+            <CattleItemComponent key={ i }
+              cattle={ cattle }
               isImageFetching={ this.props.isImageFetching }
-              handleSelect={ () => console.log(c) }
-                //this.props.handleShow(i) }
+              handleSave={ (params) => this.props.updateCattle(params.id, params) }
+              handleDelete={ (id) => this.props.deleteCattle(id) }
             />
           );
         })}
