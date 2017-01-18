@@ -1,4 +1,4 @@
-require('./LoginComponent.scss');
+require('./UserAuthenticationComponent.scss');
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
@@ -6,9 +6,7 @@ import { connect } from 'react-redux';
 import { loginUser } from '../../actions/index';
 
 const mapStateToProps = (state) => {
-  return {
-    ...state.authentication
-  };
+  return {};
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -21,50 +19,83 @@ class LoginComponent extends Component {
 
   static displayName = 'Login Component';
   static propTypes = {
-    token: React.PropTypes.string,
-    handleLogin: React.PropTypes.func,
+    handleLogin: React.PropTypes.func
   };
-
-  componentWillMount() {
-    this.handleAuthenticated(this.props);
-  }
-
-  componentWillReceiveProps(props) {
-    this.handleAuthenticated(props);
-  }
-
-  handleAuthenticated(props) {
-    if (props.token) {
-      console.log('Redirecting... you are authenticated already.')
-      window.location = '/';
-    }
-  }
 
   handleSubmit() {
     this.props.handleLogin({
       email: this.refs.email.value,
       password: this.refs.password.value
     });
-  }
+  };
+
+  renderLogo() {
+    return (
+      <img
+        className='uauth-logo'
+        src={ require('../../assets/images/CowHub-logo.png') }
+        onClick={ () => window.location.replace('/') }
+      />
+    );
+  };
+
+  renderEmailField() {
+    return (
+      <input
+        ref='email' className='uauth-input'
+        type='email' placeholder='Email' />
+    );
+  };
+
+  renderPasswordField() {
+    return (
+      <input
+        ref='password' className='uauth-input'
+        type='password' placeholder='Password' />
+    );
+  };
+
+  renderSignInButton() {
+    return (
+      <button className='uauth-submit-button'
+        onClick={ () => this.handleSubmit() }>
+        SIGN IN
+      </button>
+    );
+  };
+
+  renderSignUpNotice() {
+    return (
+      <div className='uauth-redirect-notice'>
+        NOT A MEMBER?
+      </div>
+    );
+  };
+
+  renderSignUpButton() {
+    return (
+      <button className='uauth-redirect-button'
+        onClick={ () => window.location.replace('/user/signup') }
+      >
+        SIGN UP
+      </button>
+    );
+  };
 
   render() {
     return (
-      <div className="login-component-wrapper" >
-        <div className="login-component-title" >Log in</div>
-        <input
-          ref="email" className="login-component-input"
-          type="email" placeholder="Email" />
-        <input
-          ref="password" className="login-component-input"
-          type="password" placeholder="Password" />
-        <button
-          onClick={ () => this.handleSubmit() } className="login-component-button-submit" >
-          Log In
-        </button>
+      <div className='uauth-wrapper' >
+        <div className='uauth-form-wrapper'>
+          { this.renderLogo() }
+          { this.renderEmailField() }
+          { this.renderPasswordField() }
+          { this.renderSignInButton() }
+          { this.renderSignUpNotice() }
+          { this.renderSignUpButton() }
+        </div>
       </div>
     );
-  }
-
+  };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginComponent);

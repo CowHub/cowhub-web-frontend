@@ -25,7 +25,7 @@ options.plugins = [
   })
 ];
 
-options.module.loaders[options.module.loaders.length - 1] = {
+options.module.loaders[options.module.loaders.length - 2] = {
   test: /\.(s?)css$/,
   loader: ExtractTextPlugin.extract('style', 'css!postcss!sass')
 }

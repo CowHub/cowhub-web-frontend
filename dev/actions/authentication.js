@@ -1,5 +1,9 @@
 import $ from 'jquery'
 import store from '../store/store'
+import {
+  indexRedirect,
+  cattleIndexRedirect
+} from './navigation';
 
 // Token management
 export const LOAD_TOKEN = 'LOAD_TOKEN'
@@ -56,6 +60,7 @@ export const loginUser = (params) => {
     }).then((response) => {
       dispatch(loginUserSuccess())
       dispatch(storeToken(response.auth_token))
+      dispatch(cattleIndexRedirect());
     }).catch((error) => {
       dispatch(loginUserError(error))
     })
@@ -96,6 +101,7 @@ export const registerUser = (params) => {
     }).then((response) => {
       dispatch(registerUserSuccess())
       dispatch(storeToken(response.auth_token))
+      dispatch(cattleIndexRedirect());
     }).catch((error) => {
       dispatch(registerUserError(error))
     })
@@ -141,6 +147,7 @@ export const logoutUser = () => {
       method: 'DELETE',
     }).then((response) => {
       logoutSuccess(dispatch)
+      dispatch(indexRedirect());
     }).catch((error) => {
       if (error.status === 401) {
         logoutSuccess(dispatch)
