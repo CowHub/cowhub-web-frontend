@@ -16,7 +16,9 @@ import CattleItemComponent from './CattleItemComponent';
 
 const mapStateToProps = (state) => {
   return {
-    cattle: state.cattle.cattle
+    cattle: state.cattle.cattle,
+    isFetching: state.cattle.fetching,
+    imageFetchingCount: state.cattle.imageFetchingCount
   };
 };
 
@@ -35,7 +37,7 @@ class CattleIndexComponent extends Component {
   static propTypes = {
     cattle: PropTypes.arrayOf(PropTypes.object),
     isFetching: PropTypes.bool,
-    isImageFetching: PropTypes.bool,
+    imageFetchingCount: PropTypes.number,
     fetchCattle: PropTypes.func.isRequired,
     updateCattle: PropTypes.func.isRequired,
     deleteCattle: PropTypes.func.isRequired,
@@ -67,7 +69,7 @@ class CattleIndexComponent extends Component {
           return (
             <CattleItemComponent key={ i }
               cattle={ cattle }
-              isImageFetching={ this.props.isImageFetching }
+              isImageFetching={ this.props.imageFetchingCount > 0 }
               handleSave={ (params) => this.props.updateCattle(params.id, params) }
               handleDelete={ (id) => this.props.deleteCattle(id) }
             />

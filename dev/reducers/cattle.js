@@ -19,6 +19,7 @@ const initialState = {
   error: null,
   fetching: false,
   fetched: false,
+  imageFetchingCount: 0
 }
 
 const cattle = (state = initialState, action) => {
@@ -42,11 +43,11 @@ const cattle = (state = initialState, action) => {
     case DELETE_CATTLE_ERROR:
       return handleDeleteCattleError(state, action.error);
     case FETCH_CATTLE_IMAGE_PENDING:
-      return handleFetchCattleImagePending(state)
+      return handleFetchCattleImagePending(state, action.id);
     case FETCH_CATTLE_IMAGE_SUCCESS:
-      return handleFetchCattleImageSuccess(state, action.id, action.images)
+      return handleFetchCattleImageSuccess(state, action.id, action.image, action.image_id);
     case FETCH_CATTLE_IMAGE_ERROR:
-      return handleFetchCattleImageError(state, action.error)
+      return handleFetchCattleImageError(state, action.error);
     default:
       return state
   }
@@ -131,18 +132,28 @@ export function handleDeleteCattleError(state, error) {
 export function handleFetchCattleImagePending(state) {
   return {
     ...state,
-  }
+    imageFetchingCount: state.imageFetchingCount+1
+  };
 }
 
-export function handleFetchCattleImageSuccess(state, id, images) {
+export function handleFetchCattleImageSuccess(state, id, image, image_id) {
   let cattle = state.cattle
-  let index = cattle.findIndex( (c) => { return c.id === id } )
-  cattle[index].cattle.images = images.map((i) => { return i.image_uri })
-  cattle[index].index = cattle[index].index ? cattle[index].index : 0
-  cattle.unshift( cattle.pop() )
+  const index = cattle.findIndex((c) => c.id === id);
+  let img_obj = {
+    image_id: image_id,
+    data: image
+  };
+  if (cattle[index].images)  {
+    cattle[index].images.push(img_obj)
+  } else {
+    let cattle_imgs = [];
+    cattle_imgs.push(img_obj);
+    cattle[index].images = cattle_imgs;
+  }
   return {
     ...state,
-    cattle
+    cattle,
+    imageFetchingCount: state.imageFetchingCount-1
   }
 }
 
@@ -150,7 +161,8 @@ export function handleFetchCattleImageError(state, error) {
   return {
     ...state,
     error,
-  }
-}
+    imageFetchingCount: state.imageFetchingCount-1
+  };
+};
 
 export default cattle

@@ -35,12 +35,11 @@ class CattleItemComponent extends Component {
   renderImage() {
     let img = this.props.cattle.images;
     let src = img ? (img[0] ? img[0].data : null) : null;
-    src = require('../../assets/images/CowHub-logo.png');
     return (
       <div className='cattleitem-image-wrapper'>
-        { this.props.isImageFetching
-          ? null //<ProgressCircular indeterminate/>
-          : <img className='cattleitem-image' src={ src }/>
+        { this.props.isImageFetching ? null : src
+          ? <img className='cattleitem-image' src={ src }/>
+          : <img className='cattleitem-default-image' src={ require('../../assets/images/CowHub-logo.png') }/>
         }
       </div>
     );

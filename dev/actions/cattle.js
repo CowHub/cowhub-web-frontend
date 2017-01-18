@@ -16,6 +16,11 @@ export const fetchCattle = () => {
       },
       method: 'GET'
     }).then((response) => {
+      for (let cattle of response.cattle) {
+        for (let image_id of cattle.image_ids) {
+          dispatch(fetchCattleImage(cattle.id, image_id));
+        }
+      }
       dispatch(fetchCattleSuccess(response.cattle))
     }).catch((error) => {
       dispatch(fetchCattleError(error))
@@ -44,47 +49,49 @@ export const fetchCattleError = (error) => {
 }
 
 // Cattle fetch image
-export const FETCH_CATTLE_IMAGE_PENDING = 'FETCH_CATTLE_IMAGE_PENDING'
-export const FETCH_CATTLE_IMAGE_SUCCESS = 'FETCH_CATTLE_IMAGE_SUCCESS'
-export const FETCH_CATTLE_IMAGE_ERROR = 'FETCH_CATTLE_IMAGE_ERROR'
+export let FETCH_CATTLE_IMAGE_PENDING = 'FETCH_CATTLE_IMAGE_PENDING';
+export let FETCH_CATTLE_IMAGE_SUCCESS = 'FETCH_CATTLE_IMAGE_SUCCESS';
+export let FETCH_CATTLE_IMAGE_ERROR = 'FETCH_CATTLE_IMAGE_ERROR';
 
-export const fetchCattleImage = (id) => {
-  let token = store.getState().authentication.token
+export function fetchCattleImage(id, image_id) {
+  let token = store.getState().authentication.token;
   return (dispatch) => {
-    dispatch(fetchCattleImagePending())
-    $.ajax(`${process.env.API_ENDPOINT}/cattle/${id}/images`, {
+    dispatch(fetchCattleImagePending(id));
+    $.ajax(`${process.env.API_ENDPOINT}/cattle/${id}/image/${image_id}`, {
       headers: {
         'Authorization': `Bearer ${token}`,
       },
       method: 'GET'
     }).then((response) => {
-      dispatch(fetchCattleImageSuccess(id, response.images))
+      dispatch(fetchCattleImageSuccess(id, response.image.data, image_id));
     }).catch((error) => {
-      dispatch(fetchCattleImageError(error))
+      dispatch(fetchCattleImageError(error));
     })
-  }
-}
+  };
+};
 
-export const fetchCattleImagePending = () => {
+export function fetchCattleImagePending(id) {
   return {
     type: FETCH_CATTLE_IMAGE_PENDING,
-  }
-}
+    id
+  };
+};
 
-export const fetchCattleImageSuccess = (id, images) => {
+export function fetchCattleImageSuccess(id, image ,image_id) {
   return {
     type: FETCH_CATTLE_IMAGE_SUCCESS,
     id,
-    images,
-  }
-}
+    image,
+    image_id
+  };
+};
 
-export const fetchCattleImageError = (error) => {
+export function fetchCattleImageError(error) {
   return {
     type: FETCH_CATTLE_IMAGE_ERROR,
     error,
-  }
-}
+  };
+};
 
 // Cattle update
 export let UPDATE_CATTLE_PENDING = 'UPDATE_CATTLE_PENDING';
